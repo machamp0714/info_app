@@ -21,6 +21,23 @@ RSpec.describe User, type: :model do
         create :user, email: user.email
         expect(user).to be_invalid
       end
+
+      it "emailのフォーマットが間違っている時無効であること" do
+        email_list = [
+          "123#4@gmail.com",
+          "abcfga$@gmail.com",
+          "abcdefg.gmail.com"
+        ]
+        email_list.each do |email|
+          user.email = email
+          expect(user).to be_invalid
+        end
+      end
+
+      it "emailは大文字と小文字を区別しないこと" do
+        create :user, email: user.email.upcase
+        expect(user).to be_invalid
+      end
     end
 
     describe "#password" do
