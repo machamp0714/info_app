@@ -1,0 +1,56 @@
+# The behavior of RuboCop can be controlled via the .rubocop.yml
+# configuration file. It makes it possible to enable/disable
+# certain cops (checks) and to alter their behavior if they accept
+# any parameters. The file can be placed either in your home
+# directory or in some project directory.
+#
+# RuboCop will start looking for the configuration file in the directory
+# where the inspected file is and continue its way up to the root directory.
+#
+# See https://github.com/rubocop-hq/rubocop/blob/master/manual/configuration.md
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.6
+  # 自動生成されるものは除外する
+  Exclude:
+    - "node_modules/**/*"
+    - "db/*schema.rb"
+    - "bin/*"
+
+# Hashの書き方はtableを許可
+Layout/HashAlignment:
+  EnforcedHashRocketStyle:
+    - key
+    - table
+  EnforcedColonStyle:
+    - key
+    - table
+
+Metrics/AbcSize:
+  Max: 18
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Exclude:
+    - "db/migrate/*.rb" # migrateは長くても許容する
+
+# 日本語のコメントを許可する
+Style/AsciiComments:
+  Enabled: false
+
+# namespaceを作ると階層が深くなるのでfalseにする
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+# lambda は -> にする
+Style/Lambda:
+  EnforcedStyle: literal

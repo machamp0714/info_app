@@ -27,8 +27,8 @@ services:
   data:
     image: busybox
     volumes:
-      - ./mysql-data:/var/lib/mysql
-      - ./bundle:/usr/local/bundle
+      - ./server/mysql-data:/var/lib/mysql
+      - ./server/bundle:/usr/local/bundle
 volumes:
   mysql-data:
     driver: local
