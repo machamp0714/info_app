@@ -11,10 +11,10 @@ RSpec.describe User, type: :model do
       expect(user).to be_invalid
     end
 
-    describe "#email" do
+    context "#email" do
       it "emailが空の時無効であること" do
         user.email = nil
-        expeect(user).to be_invalid
+        expect(user).to be_invalid
       end
 
       it "emailが一意でないとき無効であること" do
@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe "#password" do
+    context "#password" do
       it "passwordが空の時無効であること" do
         user.password = nil
         expect(user).to be_invalid
