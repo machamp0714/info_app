@@ -1,5 +1,38 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { build :user }
+
+  describe "#validates" do
+    it "nameが空の時無効であること" do
+      user.name = nil
+      expect(user).to be_invalid
+    end
+
+    describe "#email" do
+      it "emailが空の時無効であること" do
+        user.email = nil
+        expeect(user).to be_invalid
+      end
+
+      it "emailが一意でないとき無効であること" do
+        create :user, email: user.email
+        expect(user).to be_invalid
+      end
+    end
+
+    describe "#password" do
+      it "passwordが空の時無効であること" do
+        user.password = nil
+        expect(user).to be_invalid
+      end
+
+      it "passwordの長さが8文字以下の時無効であること" do
+        user.password = "a" * 7
+        expect(user).to be_invalid
+      end
+    end
+  end
 end
