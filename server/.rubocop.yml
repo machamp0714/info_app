@@ -43,6 +43,9 @@ Metrics/MethodLength:
   Exclude:
     - "db/migrate/*.rb" # migrateは長くても許容する
 
+RSpec/ExampleLength:
+  Enabled: false
+
 # 日本語のコメントを許可する
 Style/AsciiComments:
   Enabled: false
