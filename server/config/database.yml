@@ -13,10 +13,11 @@ development:
 test:
   <<: *default
   database: server_test
-  host: db
+  host: <%= ENV["DB_HOST"] %>
+  socket: /tmp/mysql.sock
 
 production:
   <<: *default
   database: server_production
   username: server
-  password: <%= ENV['SERVER_DATABASE_PASSWORD'] %>
+  password: <%= ENV["SERVER_DATABASE_PASSWORD"] %>

@@ -9,6 +9,7 @@ services:
       - "3000:3000"
   server:
     build: ./server
+    env_file: .env
     command: rails server -p 3001 -b 0.0.0.0
     volumes:
       - ./server:/app/server
