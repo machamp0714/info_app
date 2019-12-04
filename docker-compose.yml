@@ -1,0 +1,37 @@
+version: "3"
+services:
+  client:
+    build: ./client
+    command: "yarn start"
+    volumes:
+      - ./client:/app/client
+    ports:
+      - "3000:3000"
+  server:
+    build: ./server
+    env_file: .env
+    command: rails server -p 3001 -b 0.0.0.0
+    volumes:
+      - ./server:/app/server
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "3306:3306"
+  data:
+    image: busybox
+    volumes:
+      - ./server/mysql-data:/var/lib/mysql
+      - ./server/bundle:/usr/local/bundle
+volumes:
+  mysql-data:
+    driver: local
+  bundle:
+    driver: local
