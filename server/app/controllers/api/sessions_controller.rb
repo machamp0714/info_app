@@ -2,8 +2,8 @@ class Api::SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email])
     if user&.authenticate(params[:session][:password])
-      session[:user_id] = user.id
-      render status: :ok
+      login user
+      render json: { token: user.access_token.token }, status: :ok
     else
       error = {
         status: 401,
