@@ -6,6 +6,12 @@ class AccessToken < ApplicationRecord
   private
 
   def generate_token
-    self.token = SecureRandom.hex(20)
+    new_token = SecureRandom.hex(40)
+
+    loop do
+      break if token.present? && !AccessToken.exists?(token: new_token)
+
+      self.token = new_token
+    end
   end
 end
