@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  after_create { create_access_token }
+
   has_secure_password
 
   has_one :access_token, dependent: :destroy

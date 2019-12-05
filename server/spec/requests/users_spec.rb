@@ -73,6 +73,10 @@ RSpec.describe "Users", type: :request do
       it "create a new user" do
         expect { post_users_path }.to change(User, :count).by(1)
       end
+
+      it "create a access_token" do
+        expect { post_users_path }.to change(AccessToken, :count).by(1)
+      end
     end
   end
 end
