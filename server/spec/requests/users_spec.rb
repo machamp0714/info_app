@@ -5,15 +5,13 @@ require "rails_helper"
 RSpec.describe "Users", type: :request do
   describe "POST /users" do
     context "when params invalid" do
-      subject(:post_users_path) { post api_users_path, params: invalid_params }
+      subject(:post_users_path) { post api_user_registration_path, params: invalid_params }
 
       let(:invalid_params) do
         {
-          user: {
-            name: "",
-            email: "",
-            password: ""
-          }
+          name: "",
+          email: "",
+          password: ""
         }
       end
 
@@ -23,7 +21,9 @@ RSpec.describe "Users", type: :request do
       end
 
       it "returns errors json" do
-        errors = {
+        post_users_path
+
+        expect(json).to eq({
           "errors" => {
             "password" => [
               "can't be blank",
@@ -33,27 +33,22 @@ RSpec.describe "Users", type: :request do
               "can't be blank"
             ],
             "email" => [
-              "can't be blank",
-              "is invalid"
+              "can't be blank"
             ]
           }
-        }
-        post_users_path
-        expect(json).to eq errors
+        })
       end
     end
 
     context "when valid params" do
-      subject(:post_users_path) { post api_users_path, params: valid_params }
+      subject(:post_users_path) { post api_user_registration_path, params: valid_params }
 
       let(:user) { build :user }
       let(:valid_params) do
         {
-          user: {
-            name: user.name,
-            email: user.email,
-            password: user.password
-          }
+          name: user.name,
+          email: user.email,
+          password: user.password
         }
       end
 
@@ -72,10 +67,6 @@ RSpec.describe "Users", type: :request do
 
       it "create a new user" do
         expect { post_users_path }.to change(User, :count).by(1)
-      end
-
-      it "create a access_token" do
-        expect { post_users_path }.to change(AccessToken, :count).by(1)
       end
     end
   end
