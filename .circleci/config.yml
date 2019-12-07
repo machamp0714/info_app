@@ -1,0 +1,99 @@
+executors:
+  client_default:
+    docker:
+      - image: circleci/node:12.1.0
+    working_directory: ~/repo
+  server_default:
+    docker:
+      - image: circleci/ruby:2.6.5
+        environment:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    working_directory: ~/repo
+
+version: 2.1
+jobs:
+  checkout_client:
+    executor: client_default
+    steps:
+      - checkout
+
+      - save_cache:
+          key: v1-client-{{ .Environment.CIRCLE_SHA1 } }
+          paths:
+            - client
+  node_dependencies:
+    executor: client_default
+    steps:
+      - restore_cache:
+          key: v1-client-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-yarn-{{ checksum "client/yarn.lock" }}
+      - restore_cache:
+          key: v1-node-{{ checksum "client/package.json" }}
+      - run:
+          name: yarn install
+          command: |
+            cd client
+            yarn install
+      - save_cache:
+          key: v1-yarn-{{ checksum "client/yarn.lock" }}
+          paths:
+            - client/.cache/yarn
+      - save_cache:
+          key: v1-node-{{ checksum "client/package.json" }}
+          paths:
+            - client/node_modules
+  checkout_server:
+    executor: server_default
+    steps:
+      - save_cache:
+          key: v1-server-{{ Environment.CIRCLE_TAG }}
+          paths:
+            - server
+  build_server:
+    executor: server_default
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-server-{{ Environment.CIRCLE_TAG }}
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "server/Gemfile.lock" }}
+            - v1-dependencies-
+      - run:
+          name: bundle install
+          command: |
+            cd server
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          key: v1-dependencies-{{ checksum "server/Gemfile.lock" }}
+          paths:
+            - server/vendor/bundle
+      - run:
+          name: setup db
+          command: |
+            cd server
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
+      - run:
+          name: run tests
+          command: |
+            cd server
+            bundle exec rspec
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - checkout_client
+      - node_dependencies:
+          requires:
+            - checkout_client
+      - checkout_server
+      - build_server:
+          requires:
+            - checkout_server
