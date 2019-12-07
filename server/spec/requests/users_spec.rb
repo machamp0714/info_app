@@ -26,13 +26,13 @@ RSpec.describe "Users", type: :request do
         expect(json).to eq(
           "errors" => {
             "password" => [
-              "パスワードを入力して下さい"
+              "を入力してください"
             ],
             "name" => [
-              "ユーザー名を入力して下さい"
+              "を入力してください"
             ],
             "email" => [
-              "メールアドレスを入力して下さい"
+              "を入力してください"
             ]
           }
         )
