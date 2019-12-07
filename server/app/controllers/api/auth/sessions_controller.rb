@@ -1,10 +1,4 @@
 class Api::Auth::SessionsController < DeviseTokenAuth::SessionsController
-  private
-
-  def resource_params
-    params.permit(:email, :password)
-  end
-
   protected
 
   def render_create_success
