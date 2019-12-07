@@ -23,16 +23,21 @@ RSpec.describe "Users", type: :request do
       it "returns errors json" do
         post_users_path
 
-        expect(json).to eq(
-          "errors" => {
-            "password" => [
-              "を入力してください"
-            ],
-            "name" => [
-              "を入力してください"
-            ],
-            "email" => [
-              "を入力してください"
+        expect(json).to include(
+          {
+            "errors" => [
+              {
+                "source" => "password",
+                "message" => "を入力してください"
+              },
+              {
+                "source" => "email",
+                "message" => "を入力してください"
+              },
+              {
+                "source" => "name",
+                "message" => "を入力してください"
+              }
             ]
           }
         )
