@@ -42,6 +42,7 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - "db/migrate/*.rb" # migrateは長くても許容する
+    - "spec/*/*.rb"
 
 RSpec/ExampleLength:
   Enabled: false
@@ -63,3 +64,7 @@ Style/Lambda:
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+# 一旦無視
+Rails/BulkChangeTable:
+  Enabled: false

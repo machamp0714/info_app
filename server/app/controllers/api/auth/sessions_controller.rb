@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Auth::SessionsController < DeviseTokenAuth::SessionsController
   protected
 

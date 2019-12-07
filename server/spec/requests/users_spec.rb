@@ -23,7 +23,7 @@ RSpec.describe "Users", type: :request do
       it "returns errors json" do
         post_users_path
 
-        expect(json).to eq({
+        expect(json).to eq(
           "errors" => {
             "password" => [
               "can't be blank"
@@ -35,7 +35,7 @@ RSpec.describe "Users", type: :request do
               "can't be blank"
             ]
           }
-        })
+        )
       end
     end
 
