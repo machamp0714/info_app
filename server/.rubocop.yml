@@ -36,9 +36,16 @@ Metrics/AbcSize:
 Metrics/LineLength:
   Max: 120
 
+Metrics/BlockLength:
+  Enabled: false
+
 Metrics/MethodLength:
   Exclude:
     - "db/migrate/*.rb" # migrateは長くても許容する
+    - "spec/*/*.rb"
+
+RSpec/ExampleLength:
+  Enabled: false
 
 # 日本語のコメントを許可する
 Style/AsciiComments:
@@ -54,3 +61,10 @@ Style/Documentation:
 # lambda は -> にする
 Style/Lambda:
   EnforcedStyle: literal
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# 一旦無視
+Rails/BulkChangeTable:
+  Enabled: false
