@@ -2,7 +2,7 @@ executors:
   client_default:
     docker:
       - image: circleci/node:12.1.0
-    working_directory: ~/repo
+    working_directory: ~/front
   server_default:
     docker:
       - image: circleci/ruby:2.6.5
@@ -13,7 +13,7 @@ executors:
         environment:
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-    working_directory: ~/repo
+    working_directory: ~/backend
 
 version: 2.1
 jobs:
@@ -29,6 +29,8 @@ jobs:
   node_dependencies:
     executor: client_default
     steps:
+      - checkout
+
       - restore_cache:
           key: v1-client-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
@@ -51,6 +53,8 @@ jobs:
   checkout_server:
     executor: server_default
     steps:
+      - checkout
+
       - save_cache:
           key: v1-server-{{ Environment.CIRCLE_TAG }}
           paths:
@@ -59,6 +63,7 @@ jobs:
     executor: server_default
     steps:
       - checkout
+
       - restore_cache:
           key: v1-server-{{ Environment.CIRCLE_TAG }}
       - restore_cache:
