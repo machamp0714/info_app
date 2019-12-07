@@ -47,12 +47,20 @@ RSpec.describe "Sessions", type: :request do
     subject(:login_path) { post api_user_session_path, params: valid_params }
 
     context "when token is valid" do
-      it "should return 204" do
+      it "should return 204 status code" do
         login_path
         auth_params = get_auth_params_from_login_response(response)
         delete destroy_api_user_session_path, headers: auth_params
 
         expect(response).to have_http_status :no_content
+      end
+    end
+
+    context "when token is invalid" do
+      it "sould return 404 status code" do
+        delete destroy_api_user_session_path
+
+        expect(response).to have_http_status :not_found
       end
     end
   end
