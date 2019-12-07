@@ -6,7 +6,7 @@ RSpec.describe "Sessions", type: :request do
 
     context "when invalid params" do
       let(:invalid_params) { { session: { email: "", password: "" } } }
-      subject(:login_path) { post api_login_path, params: invalid_params }
+      subject(:login_path) { post api_user_sessions_path, params: invalid_params }
 
       it "should return 401 status code" do
         login_path
@@ -26,12 +26,12 @@ RSpec.describe "Sessions", type: :request do
 
     context "when valid params" do
       let(:valid_params) { { session: { email: user.email, password: user.password } } }
-      subject(:login_path) { post api_login_path, params: valid_params }
+      subject(:login_path) { post api_user_session_path, params: valid_params }
 
-      it "should return 200 status code" do
+      it "should return 201 status code" do
         login_path
 
-        expect(response).to have_http_status :ok
+        expect(response).to have_http_status :created
       end
     end
   end
