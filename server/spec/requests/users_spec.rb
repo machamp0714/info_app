@@ -26,8 +26,7 @@ RSpec.describe "Users", type: :request do
         expect(json).to eq({
           "errors" => {
             "password" => [
-              "can't be blank",
-              "is too short (minimum is 8 characters)"
+              "can't be blank"
             ],
             "name" => [
               "can't be blank"

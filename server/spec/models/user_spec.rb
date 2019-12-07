@@ -35,11 +35,6 @@ RSpec.describe User, type: :model do
         user.password = nil
         expect(user).to be_invalid
       end
-
-      it "８文字以下の時無効であること" do
-        user.password = "a" * 7
-        expect(user).to be_invalid
-      end
     end
   end
 end
