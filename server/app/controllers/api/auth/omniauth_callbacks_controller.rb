@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   def redirect_callbacks
     # derive target redirect route from "resource_class" param, which was set
