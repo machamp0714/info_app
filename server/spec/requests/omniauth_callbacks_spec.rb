@@ -27,5 +27,11 @@ RSpec.describe "OmniauthCallbacks", type: :request do
     it "create a new user" do
       expect { google_omniauth_callback }.to change(User, :count).by(1)
     end
+
+    it "dose not create a new user when already exists user" do
+      create :user, provider: google_hash["provider"], uid: google_hash["uid"]
+
+      expect { google_omniauth_callback }.to change(User, :count).by(0)
+    end
   end
 end
