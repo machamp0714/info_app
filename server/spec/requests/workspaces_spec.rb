@@ -37,7 +37,7 @@ RSpec.describe "Workspaces", type: :request do
       it "return errors json body" do
         post_invalid_params
 
-        expect(response).to include(
+        expect(json).to include(
           "errors" => [
             {
               "source" => "name",
@@ -49,7 +49,7 @@ RSpec.describe "Workspaces", type: :request do
     end
 
     context "when valid params" do
-      let(:valid_params) { { name: "workspace"} }
+      let(:valid_params) { { name: "workspace" } }
 
       subject(:post_valid_params) { post api_workspaces_path, params: valid_params, headers: auth_headers }
 
