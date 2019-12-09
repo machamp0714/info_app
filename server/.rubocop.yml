@@ -35,6 +35,8 @@ Metrics/AbcSize:
 
 Metrics/LineLength:
   Max: 120
+  Exclude:
+    - "spec/support/omniauth_callbacks.rb"
 
 Metrics/BlockLength:
   Enabled: false
@@ -43,6 +45,7 @@ Metrics/MethodLength:
   Exclude:
     - "db/migrate/*.rb" # migrateは長くても許容する
     - "spec/*/*.rb"
+    - "spec/support/omniauth_callbacks.rb"
 
 RSpec/ExampleLength:
   Enabled: false
@@ -65,6 +68,13 @@ Style/Lambda:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+Style/NumericLiterals:
+  Exclude:
+    - "spec/support/omniauth_callbacks.rb"
+
 # 一旦無視
 Rails/BulkChangeTable:
+  Enabled: false
+
+RSpec/AnyInstance:
   Enabled: false
