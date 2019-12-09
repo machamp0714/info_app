@@ -8,6 +8,6 @@ Rails.application.routes.draw do
       omniauth_callbacks: "api/auth/omniauth_callbacks"
     }
 
-    resources :workspaces, only: %i[create]
+    resources :workspaces, only: %i[create update]
   end
 end
