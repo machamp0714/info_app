@@ -1,6 +1,6 @@
 class Api::WorkspacesController < ApplicationController
   before_action :authenticate_api_user!
-  before_action :verify_permission, only: %i[update]
+  before_action :verify_permission, only: %i[update destroy]
 
   def create
     workspace = current_api_user.workspaces.build(workspace_params)
