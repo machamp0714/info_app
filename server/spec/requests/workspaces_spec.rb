@@ -213,7 +213,7 @@ RSpec.describe "Workspaces", type: :request do
 
     context "when not found" do
       let(:auth_headers) { user.create_new_auth_token }
-      subject(:delete_not_found) { delete api_workspace_path, headers: auth_headers }
+      subject(:delete_not_found) { delete api_workspace_path(0), headers: auth_headers }
 
       it "return 404 status code" do
         delete_not_found
