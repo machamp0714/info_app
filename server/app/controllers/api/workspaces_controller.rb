@@ -21,7 +21,12 @@ class Api::WorkspacesController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    workspace = current_api_user.workspaces.find(params[:id])
+    workspace.destroy
+
+    head :no_content
+  end
 
   private
 
