@@ -53,9 +53,8 @@ RSpec.describe "Sessions", type: :request do
 
     context "when token is valid" do
       it "returns 204 status code" do
-        login_path
-        auth_params = get_auth_params_from_login_response(response)
-        delete destroy_api_user_session_path, headers: auth_params
+        auth_headers = user.create_new_auth_token
+        delete destroy_api_user_session_path, headers: auth_headers
 
         expect(response).to have_http_status :no_content
       end
@@ -68,22 +67,5 @@ RSpec.describe "Sessions", type: :request do
         expect(response).to have_http_status :not_found
       end
     end
-  end
-
-  def get_auth_params_from_login_response(response)
-    token = response.headers["access-token"]
-    client = response.headers["client"]
-    expiry = response.headers["expiry"]
-    uid = response.headers["uid"]
-    token_type = response.headers["token-type"]
-
-    auth_params = {
-      "access-token" => token,
-      "client" => client,
-      "expiry" => expiry,
-      "uid" => uid,
-      "token-type" => token_type
-    }
-    auth_params
   end
 end
