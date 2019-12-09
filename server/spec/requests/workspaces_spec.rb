@@ -176,4 +176,70 @@ RSpec.describe "Workspaces", type: :request do
       end
     end
   end
+
+  describe "DELETE /workspace/:id" do
+    let(:user) { create :user }
+    let(:workspace) { create :workspace, user: user }
+
+    context "when no authorized headers provided" do
+      it "return 401 status code" do
+        delete api_workspace_path(workspace)
+
+        expect(response).to have_http_status :unauthorized
+      end
+    end
+
+    context "when no permission" do
+      let(:other_user) { create :user }
+      let(:auth_headers) { other_user.create_new_auth_token }
+
+      subject(:delete_no_permission) { delete api_workspace_path(workspace), headers: auth_headers }
+
+      it "return 403 status code" do
+        delete_no_permission
+
+        expect(response).to have_http_status :forbidden
+      end
+
+      it "return permission errors json" do
+        delete_no_permission
+
+        expect(json).to include(
+          "status" => 403,
+          "message" => "権限がありません"
+        )
+      end
+    end
+
+    context "when not found" do
+      let(:auth_headers) { user.create_new_auth_token }
+      subject(:delete_not_found) { delete api_workspace_path, headers: auth_headers }
+
+      it "return 404 status code" do
+        delete_not_found
+
+        expect(response).to have_http_status :not_found
+      end
+
+      it "return not found errors json" do
+        delete_not_found
+
+        expect(json).to include(
+          "status" => 404,
+          "message" => "Not found"
+        )
+      end
+    end
+
+    context "when deleted success" do
+      let(:auth_headers) { user.create_new_auth_token }
+      subject(:delete_success) { delete api_workspace_path(workspace), headers: auth_headers }
+
+      it "return 204 status code" do
+        delete_success
+
+        expect(response).to have_http_status :no_content
+      end
+    end
+  end
 end
