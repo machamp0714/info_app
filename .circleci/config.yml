@@ -17,22 +17,11 @@ executors:
 
 version: 2.1
 jobs:
-  checkout_client:
-    executor: client_default
-    steps:
-      - checkout
-
-      - save_cache:
-          key: v1-client-{{ .Environment.CIRCLE_SHA1 } }
-          paths:
-            - client
   node_dependencies:
     executor: client_default
     steps:
       - checkout
 
-      - restore_cache:
-          key: v1-client-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: v1-yarn-{{ checksum "client/yarn.lock" }}
       - restore_cache:
@@ -50,22 +39,11 @@ jobs:
           key: v1-node-{{ checksum "client/package.json" }}
           paths:
             - client/node_modules
-  checkout_server:
-    executor: server_default
-    steps:
-      - checkout
-
-      - save_cache:
-          key: v1-server-{{ Environment.CIRCLE_TAG }}
-          paths:
-            - server
   build_server:
     executor: server_default
     steps:
       - checkout
 
-      - restore_cache:
-          key: v1-server-{{ Environment.CIRCLE_TAG }}
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "server/Gemfile.lock" }}
@@ -94,11 +72,5 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - checkout_client
-      - node_dependencies:
-          requires:
-            - checkout_client
-      - checkout_server
-      - build_server:
-          requires:
-            - checkout_server
+      - node_dependencies
+      - build_server
