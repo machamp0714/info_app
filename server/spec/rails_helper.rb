@@ -42,7 +42,10 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  OmniAuth.config.test_mode = true
+
   config.include JsonApiHelpers
+  config.include OmniauthCallbacks
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

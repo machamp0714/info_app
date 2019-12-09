@@ -23,3 +23,6 @@
 
 # busybox
 mysql-data
+
+# rspec
+spec/support/omniauth_callbacks.rb
