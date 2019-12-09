@@ -70,6 +70,12 @@ RSpec.describe "Users", type: :request do
       it "create a new user" do
         expect { post_users_path }.to change(User, :count).by(1)
       end
+
+      it "gives access-token in header" do
+        post_users_path
+
+        expect(response).to have_header("access-token")
+      end
     end
   end
 end
