@@ -11,7 +11,15 @@ class Api::WorkspacesController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    workspace = Workspace.find(params[:id])
+
+    if workspace.update(workspace_params)
+      render json: workspace, status: :ok
+    else
+      render_errors(workspace, :unprocessable_entity)
+    end
+  end
 
   private
 
