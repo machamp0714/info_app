@@ -240,6 +240,10 @@ RSpec.describe "Workspaces", type: :request do
 
         expect(response).to have_http_status :no_content
       end
+
+      it "delete workspace" do
+        expect { delete_success }.to change(Workspace, :count).by(-1)
+      end
     end
   end
 end
