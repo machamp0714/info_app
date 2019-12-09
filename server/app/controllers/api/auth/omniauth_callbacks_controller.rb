@@ -27,7 +27,7 @@ class Api::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallback
 
       render json: @resource, status: :ok
     else
-      render json: { status: 401, message: "認証に失敗しました" }, status: :unauthorized
+      render_errors(@resource, :unprocessable_entity)
     end
   end
 end
