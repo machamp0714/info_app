@@ -4,7 +4,9 @@ FactoryBot.define do
   factory :user do
     sequence(:name) { |n| "username#{n}" }
     sequence(:email) { |n| "email#{n}@gmail.com" }
-    avatar_url { "url" }
+    image { "url" }
     password { "password" }
+    provider { "email" }
+    uid { "" }
   end
 end

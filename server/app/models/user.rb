@@ -7,4 +7,5 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   validates :name, presence: true
+  validates :email, uniqueness: { case_sensitive: false }
 end
