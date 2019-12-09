@@ -8,17 +8,17 @@ RSpec.describe "Workspaces", type: :request do
     context "when no authorization header provided" do
       subject(:post_no_authorization) { post api_workspaces_path, params: { name: "workspace" } }
 
-      it "return 403 status code" do
+      it "return 401 status code" do
         post_no_authorization
 
-        expect(response).to have_http_status :forbidden
+        expect(response).to have_http_status :unauthorized
       end
 
       it "return errors json body" do
         post_no_authorization
 
         expect(json).to include(
-          "message" => "ログインしてください"
+          "errors" => ["アカウント登録もしくはログインしてください。"]
         )
       end
     end
