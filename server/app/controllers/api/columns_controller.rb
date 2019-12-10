@@ -23,6 +23,8 @@ class Api::ColumnsController < ApplicationController
     end
   end
 
+  def destroy; end
+
   private
 
   def column_params

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     }
 
     resources :workspaces, only: %i[create update destroy] do
-      resources :columns, only: %i[create update]
+      resources :columns, only: %i[create update destroy]
     end
   end
 end
