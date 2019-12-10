@@ -13,7 +13,15 @@ class Api::ColumnsController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    column = Column.find(params[:id])
+
+    if column.update(column_params)
+      render json: column, status: :ok
+    else
+      render_errors(column)
+    end
+  end
 
   private
 
