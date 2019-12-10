@@ -2,9 +2,22 @@ class Api::ColumnsController < ApplicationController
   before_action :authenticate_api_user!
   before_action :verify_permission
 
-  def create; end
+  def create
+    workspace = Workspace.find(params[:workspace_id])
+    column = workspace.columns.build(column_params)
+
+    if column.save
+      render json: column, status: :created
+    else
+      render_errors(column)
+    end
+  end
 
   private
+
+  def column_params
+    params.permit(:name)
+  end
 
   def verify_permission
     workspace = Workspace.find(params[:workspace_id])
