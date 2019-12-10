@@ -38,6 +38,6 @@ class Api::WorkspacesController < ApplicationController
     workspace = Workspace.find(params[:id])
     return if workspace.user_id == current_api_user.id
 
-    render json: { status: 403, message: "権限がありません" }, status: :forbidden
+    render_permission_error
   end
 end

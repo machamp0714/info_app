@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
-  protected
+  private
 
   def render_errors(model, status, data = nil)
     response = {
@@ -17,10 +17,12 @@ class ApplicationController < ActionController::API
     render json: response, status: status
   end
 
-  private
-
   def not_found_error
     render json: { status: 404, message: "Not found" }, status: :not_found
+  end
+
+  def render_permission_error
+    render json: { status: 403, message: "権限がありません" }, status: :forbidden
   end
 
   def convert_status(status)
