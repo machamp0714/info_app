@@ -169,4 +169,57 @@ RSpec.describe "Columns", type: :request do
       end
     end
   end
+
+  describe "DELETE /api/workspace/:workspace_id/columns/:id" do
+    let(:user) { create :user }
+    let(:auth_headers) { user.create_new_auth_token }
+    let(:workspace) { create :workspace, user: user }
+    let(:column) { create :column, workspace: workspace }
+
+    context "when no authorization headers provided" do
+      subject(:delete_no_authorization) { delete api_workspace_column_path(workspace, column) }
+
+      it_behaves_like "unauthorized_error"
+    end
+
+    context "when don't have permission" do
+      subject(:delete_no_permission) do
+        delete(
+          api_workspace_column_path(workspace, column),
+          headers: auth_headers
+        )
+      end
+
+      let(:other_user) { create :user }
+      let(:auth_headers) { other_user.create_new_auth_token }
+
+      it_behaves_like "forbidden_error"
+    end
+
+    context "when not found" do
+      subject(:delete_not_found) do
+        delete(
+          api_workspace_column_path(workspace, 0),
+          headers: auth_headers
+        )
+      end
+
+      it_behaves_like "not_found_error"
+    end
+
+    context "when delete success" do
+      subject(:delete_success) do
+        delete(
+          api_workspace_column_path(workspace, column),
+          headers: auth_headers
+        )
+      end
+
+      it "return 204 status code" do
+        delete_success
+
+        expect(response).to have_http_status :no_content
+      end
+    end
+  end
 end
