@@ -7,7 +7,7 @@ class Api::WorkspacesController < ApplicationController
     if workspace.save
       render json: workspace, status: :created
     else
-      render_errors(workspace, :unprocessable_entity)
+      render_errors(workspace)
     end
   end
 
@@ -17,7 +17,7 @@ class Api::WorkspacesController < ApplicationController
     if workspace.update(workspace_params)
       render json: workspace, status: :ok
     else
-      render_errors(workspace, :unprocessable_entity)
+      render_errors(workspace)
     end
   end
 

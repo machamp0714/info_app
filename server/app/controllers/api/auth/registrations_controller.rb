@@ -12,6 +12,6 @@ class Api::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsControl
   end
 
   def render_create_error
-    render_errors(@resource, :unprocessable_entity)
+    render_errors(@resource)
   end
 end

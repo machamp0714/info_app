@@ -26,6 +26,7 @@ RSpec.describe "Workspaces", type: :request do
         post_invalid_params
 
         expect(json).to include(
+          "status" => 422,
           "errors" => [
             {
               "source" => "name",

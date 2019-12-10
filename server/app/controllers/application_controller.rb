@@ -7,14 +7,14 @@ class ApplicationController < ActionController::API
 
   private
 
-  def render_errors(model, status, data = nil)
+  def render_errors(model, data = nil)
     response = {
-      status: convert_status(status),
+      status: 422,
       errors: ErrorsSerializer.new(model).serialized_json
     }
     response = response.merge(data) if data
 
-    render json: response, status: status
+    render json: response, status: :unprocessable_entity
   end
 
   def not_found_error
@@ -23,11 +23,5 @@ class ApplicationController < ActionController::API
 
   def render_permission_error
     render json: { status: 403, message: "権限がありません" }, status: :forbidden
-  end
-
-  def convert_status(status)
-    code = { unprocessable_entity: 422 }
-
-    code[status]
   end
 end

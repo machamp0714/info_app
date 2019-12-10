@@ -24,6 +24,7 @@ RSpec.describe "Users", type: :request do
         post_users_path
 
         expect(json).to include(
+          "status" => 422,
           "errors" => [
             {
               "source" => "password",
