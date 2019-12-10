@@ -23,7 +23,11 @@ class Api::ColumnsController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    Column.find(params[:id]).destroy
+
+    head :no_content
+  end
 
   private
 
