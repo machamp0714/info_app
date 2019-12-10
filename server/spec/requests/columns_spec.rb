@@ -24,7 +24,7 @@ RSpec.describe "Columns", type: :request do
       let(:other_user) { create :user }
       let(:auth_headers) { other_user.create_new_auth_token }
 
-      it_behaves_like "forbidden_error" 
+      it_behaves_like "forbidden_error"
     end
 
     context "when requests invalid params" do
