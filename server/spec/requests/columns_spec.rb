@@ -102,7 +102,7 @@ RSpec.describe "Columns", type: :request do
         patch(
           api_workspace_column_path(workspace, column),
           params: { name: "update column" },
-          headersh: auth_headers
+          headers: auth_headers
         )
       end
 
@@ -117,7 +117,7 @@ RSpec.describe "Columns", type: :request do
         patch(
           api_workspace_column_path(workspace, column),
           params: { name: "" },
-          headersh: auth_headers
+          headers: auth_headers
         )
       end
 
@@ -147,7 +147,7 @@ RSpec.describe "Columns", type: :request do
         patch(
           api_workspace_column_path(workspace, column),
           params: { name: "update column" },
-          headersh: auth_headers
+          headers: auth_headers
         )
       end
 

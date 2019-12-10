@@ -13,6 +13,8 @@ class Api::ColumnsController < ApplicationController
     end
   end
 
+  def update; end
+
   private
 
   def column_params
