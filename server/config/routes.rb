@@ -7,5 +7,7 @@ Rails.application.routes.draw do
       sessions: "api/auth/sessions",
       omniauth_callbacks: "api/auth/omniauth_callbacks"
     }
+
+    resources :workspaces, only: %i[create update destroy]
   end
 end

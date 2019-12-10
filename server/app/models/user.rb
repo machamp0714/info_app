@@ -8,4 +8,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, uniqueness: { case_sensitive: false }
+
+  has_many :workspaces, dependent: :destroy
 end

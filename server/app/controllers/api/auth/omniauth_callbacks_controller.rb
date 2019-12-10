@@ -27,7 +27,7 @@ class Api::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallback
 
       render json: @resource, status: :ok
     else
-      render_errors(@resource, :unprocessable_entity)
+      render_errors(@resource)
     end
   end
 end
