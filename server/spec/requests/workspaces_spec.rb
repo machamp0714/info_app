@@ -8,19 +8,7 @@ RSpec.describe "Workspaces", type: :request do
     context "when no authorization header provided" do
       subject(:post_no_authorization) { post api_workspaces_path, params: { name: "workspace" } }
 
-      it "return 401 status code" do
-        post_no_authorization
-
-        expect(response).to have_http_status :unauthorized
-      end
-
-      it "return errors json body" do
-        post_no_authorization
-
-        expect(json).to include(
-          "errors" => ["アカウント登録もしくはログインしてください。"]
-        )
-      end
+      it_behaves_like "unauthorized_error"
     end
 
     context "when invalid params" do
@@ -82,11 +70,7 @@ RSpec.describe "Workspaces", type: :request do
     context "when no authorized headers provided" do
       subject(:patch_no_authorization) { patch api_workspace_path(workspace) }
 
-      it "return 401 status code" do
-        patch_no_authorization
-
-        expect(response).to have_http_status :unauthorized
-      end
+      it_behaves_like "unauthorized_error"
     end
 
     context "don't have permission" do
@@ -101,20 +85,7 @@ RSpec.describe "Workspaces", type: :request do
         )
       end
 
-      it "return 403 status code" do
-        patch_no_permission
-
-        expect(response).to have_http_status :forbidden
-      end
-
-      it "return forbidden error json" do
-        patch_no_permission
-
-        expect(json).to include(
-          "status" => 403,
-          "message" => "権限がありません"
-        )
-      end
+      it_behaves_like "forbidden_error"
     end
 
     context "when invalid params" do
@@ -182,11 +153,9 @@ RSpec.describe "Workspaces", type: :request do
     let(:workspace) { create :workspace, user: user }
 
     context "when no authorized headers provided" do
-      it "return 401 status code" do
-        delete api_workspace_path(workspace)
+      subject(:delete_no_authorization) { delete api_workspace_path(workspace) }
 
-        expect(response).to have_http_status :unauthorized
-      end
+      it_behaves_like "unauthorized_error"
     end
 
     context "when no permission" do
@@ -195,40 +164,14 @@ RSpec.describe "Workspaces", type: :request do
 
       subject(:delete_no_permission) { delete api_workspace_path(workspace), headers: auth_headers }
 
-      it "return 403 status code" do
-        delete_no_permission
-
-        expect(response).to have_http_status :forbidden
-      end
-
-      it "return permission errors json" do
-        delete_no_permission
-
-        expect(json).to include(
-          "status" => 403,
-          "message" => "権限がありません"
-        )
-      end
+      it_behaves_like "forbidden_error"
     end
 
     context "when not found" do
       let(:auth_headers) { user.create_new_auth_token }
       subject(:delete_not_found) { delete api_workspace_path(0), headers: auth_headers }
 
-      it "return 404 status code" do
-        delete_not_found
-
-        expect(response).to have_http_status :not_found
-      end
-
-      it "return not found errors json" do
-        delete_not_found
-
-        expect(json).to include(
-          "status" => 404,
-          "message" => "Not found"
-        )
-      end
+      it_behaves_like "not_found_error"
     end
 
     context "when deleted success" do
