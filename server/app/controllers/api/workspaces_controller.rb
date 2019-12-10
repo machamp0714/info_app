@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::WorkspacesController < ApplicationController
   before_action :authenticate_api_user!
   before_action :verify_permission, only: %i[update destroy]

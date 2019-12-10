@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "Workspaces", type: :request do
   describe "POST /workspaces" do
@@ -12,9 +14,9 @@ RSpec.describe "Workspaces", type: :request do
     end
 
     context "when invalid params" do
-      let(:invalid_params) { { name: "" } }
-
       subject(:post_invalid_params) { post api_workspaces_path, params: invalid_params, headers: auth_headers }
+
+      let(:invalid_params) { { name: "" } }
 
       it "return 422 status code" do
         post_invalid_params
@@ -38,9 +40,9 @@ RSpec.describe "Workspaces", type: :request do
     end
 
     context "when valid params" do
-      let(:valid_params) { { name: "workspace" } }
-
       subject(:post_valid_params) { post api_workspaces_path, params: valid_params, headers: auth_headers }
+
+      let(:valid_params) { { name: "workspace" } }
 
       it "return 201 status code" do
         post_valid_params
@@ -74,10 +76,7 @@ RSpec.describe "Workspaces", type: :request do
       it_behaves_like "unauthorized_error"
     end
 
-    context "don't have permission" do
-      let(:other_user) { create :user }
-      let(:auth_headers) { other_user.create_new_auth_token }
-
+    context "when don't have permission" do
       subject(:patch_no_permission) do
         patch(
           api_workspace_path(workspace),
@@ -85,6 +84,9 @@ RSpec.describe "Workspaces", type: :request do
           headers: auth_headers
         )
       end
+
+      let(:other_user) { create :user }
+      let(:auth_headers) { other_user.create_new_auth_token }
 
       it_behaves_like "forbidden_error"
     end
@@ -160,24 +162,26 @@ RSpec.describe "Workspaces", type: :request do
     end
 
     context "when no permission" do
+      subject(:delete_no_permission) { delete api_workspace_path(workspace), headers: auth_headers }
+
       let(:other_user) { create :user }
       let(:auth_headers) { other_user.create_new_auth_token }
-
-      subject(:delete_no_permission) { delete api_workspace_path(workspace), headers: auth_headers }
 
       it_behaves_like "forbidden_error"
     end
 
     context "when not found" do
-      let(:auth_headers) { user.create_new_auth_token }
       subject(:delete_not_found) { delete api_workspace_path(0), headers: auth_headers }
+
+      let(:auth_headers) { user.create_new_auth_token }
 
       it_behaves_like "not_found_error"
     end
 
     context "when deleted success" do
-      let(:auth_headers) { user.create_new_auth_token }
       subject(:delete_success) { delete api_workspace_path(workspace), headers: auth_headers }
+
+      let(:auth_headers) { user.create_new_auth_token }
 
       it "return 204 status code" do
         delete_success
