@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :column do
-    name { "MyString" }
-    workspace { nil }
+    sequence(:name) { |n| "column#{n}" }
+    association :workspace
   end
 end
