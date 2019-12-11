@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Tasks", type: :request do
   describe "POST /tasks" do
     let(:user) { create :user }
-    let(:auth_headers) { user.create_new_auth_tokne }
+    let(:auth_headers) { user.create_new_auth_token }
     let(:workspace) { create :workspace, user: user }
     let(:column) { create :column, workspace: workspace }
     let(:invalid_params) { { title: "" } }
@@ -25,7 +25,7 @@ RSpec.describe "Tasks", type: :request do
       end
 
       let(:other_user) { create :user }
-      let(:auth_headers) { other_user.create_new_auth_tokne }
+      let(:auth_headers) { other_user.create_new_auth_token }
 
       it_behaves_like "forbidden_error"
     end
@@ -94,6 +94,6 @@ RSpec.describe "Tasks", type: :request do
   end
 
   def tasks_path(workspace, column)
-    api_workspace_column_tasks(workspace, column)
+    api_workspace_column_tasks_path(workspace, column)
   end
 end
