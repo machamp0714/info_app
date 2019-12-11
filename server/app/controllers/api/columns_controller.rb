@@ -3,7 +3,7 @@
 class Api::ColumnsController < ApplicationController
   before_action :authenticate_api_user!
   before_action :verify_permission, only: %i[create]
-  before_action :verify_column, only: %i[update]
+  before_action :verify_column, only: %i[update destroy]
 
   def create
     workspace = Workspace.find(params[:workspace_id])
@@ -27,8 +27,7 @@ class Api::ColumnsController < ApplicationController
   end
 
   def destroy
-    workspace = Workspace.find(params[:workspace_id])
-    workspace.columns.find(params[:id]).destroy
+    Column.find(params[:id]).destroy
 
     head :no_content
   end

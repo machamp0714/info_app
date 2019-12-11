@@ -3,11 +3,12 @@
 require "rails_helper"
 
 RSpec.describe "Columns", type: :request do
-  describe "POST /api/workspace/:id/columns" do
-    let(:user) { create :user }
-    let(:auth_headers) { user.create_new_auth_token }
-    let(:workspace) { create :workspace, user: user }
+  let(:user) { create :user }
+  let(:auth_headers) { user.create_new_auth_token }
+  let(:workspace) { create :workspace, user: user }
+  let(:column) { create :column, workspace: workspace, user: user }
 
+  describe "POST /api/workspace/:id/columns" do
     context "when no authorization headers provided" do
       subject(:post_no_authorization) { post api_workspace_columns_path(workspace) }
 
@@ -88,11 +89,6 @@ RSpec.describe "Columns", type: :request do
   end
 
   describe "PATCH /api/workspace/:workspace_id/columns/:id" do
-    let(:user) { create :user }
-    let(:auth_headers) { user.create_new_auth_token }
-    let(:workspace) { create :workspace }
-    let(:column) { create :column, workspace: workspace, user: user }
-
     context "when no authorization headers provided" do
       subject(:patch_no_authorization) { patch api_column_path(column) }
 
@@ -173,11 +169,6 @@ RSpec.describe "Columns", type: :request do
   end
 
   describe "DELETE /api/workspace/:workspace_id/columns/:id" do
-    let(:user) { create :user }
-    let(:auth_headers) { user.create_new_auth_token }
-    let(:workspace) { create :workspace, user: user }
-    let(:column) { create :column, workspace: workspace }
-
     context "when no authorization headers provided" do
       subject(:delete_no_authorization) { delete api_column_path(column) }
 
