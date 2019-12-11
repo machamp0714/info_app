@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "Tasks", type: :request do
   let(:user) { create :user }
@@ -79,7 +81,7 @@ RSpec.describe "Tasks", type: :request do
       it "return proper json" do
         post_valid_params
 
-        expect(json).to include( 
+        expect(json).to include(
           "title" => valid_params[:title],
           "description" => valid_params[:description],
           "column" => {
@@ -160,7 +162,7 @@ RSpec.describe "Tasks", type: :request do
       it "return 200 status code" do
         patch_valid_params
 
-        expect(response).to have_http_status 200
+        expect(response).to have_http_status :ok
       end
 
       it "return proper json" do
@@ -203,5 +205,4 @@ RSpec.describe "Tasks", type: :request do
       end
     end
   end
-
 end
