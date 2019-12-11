@@ -14,6 +14,8 @@ class Api::TasksController < ApplicationController
     end
   end
 
+  def update; end
+
   private
 
   def task_params
