@@ -1,6 +1,6 @@
 class Api::TasksController < ApplicationController
   before_action :authenticate_api_user!
-  before_action :verify_permission
+  before_action :verify_permission, only: %i[create]
 
   def create
     column = Column.find(params[:column_id])
