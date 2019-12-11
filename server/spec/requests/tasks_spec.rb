@@ -7,6 +7,7 @@ RSpec.describe "Tasks", type: :request do
   let(:column) { create :column, workspace: workspace, user: user }
   let(:invalid_params) { { title: "" } }
   let(:valid_params) { { title: "task", description: "task memo" } }
+  let(:task) { create :task, column: column, user: user }
 
   describe "POST /tasks" do
     context "when no authorization headers provided" do
@@ -94,8 +95,6 @@ RSpec.describe "Tasks", type: :request do
   end
 
   describe "PATCH /tasks/:id" do
-    let(:task) { create :task, column: column, user: user }
-
     context "when no authorization headers provided" do
       subject(:patch_no_authorization) { patch api_task_path(task) }
 
@@ -177,4 +176,36 @@ RSpec.describe "Tasks", type: :request do
       end
     end
   end
+
+  describe "DELETE api_task_path" do
+    context "when no authorization headers provided" do
+      subject(:delete_no_authorization) { delete api_task_path(task) }
+
+      it_behaves_like "unauthorized_error"
+    end
+
+    context "when no permission" do
+      subject(:delete_no_permission) { delete api_task_path(task), headers: auth_headers }
+
+      let(:other_user) { create :user }
+      let(:auth_headers) { other_user.create_new_auth_token }
+
+      it_behaves_like "forbidden_error"
+    end
+
+    context "when delete success" do
+      subject(:delete_success) { delete api_task_path(task), headers: auth_headers }
+
+      it "return 204 status code" do
+        delete_success
+
+        expect(response).to have_http_status :no_content
+      end
+
+      it "delete task" do
+        expect { delete_success }.to change(Task, :count).by(-1)
+      end
+    end
+  end
+
 end
