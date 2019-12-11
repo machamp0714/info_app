@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Tasks", type: :request do
+  let(:user) { create :user }
+  let(:auth_headers) { user.create_new_auth_token }
+  let(:workspace) { create :workspace, user: user }
+  let(:column) { create :column, workspace: workspace }
+
   describe "POST /tasks" do
-    let(:user) { create :user }
-    let(:auth_headers) { user.create_new_auth_token }
-    let(:workspace) { create :workspace, user: user }
-    let(:column) { create :column, workspace: workspace }
     let(:invalid_params) { { title: "" } }
     let(:valid_params) { { title: "task", description: "task memo" } }
 
@@ -86,7 +87,14 @@ RSpec.describe "Tasks", type: :request do
           }
         )
       end
+
+      it "create a new task" do
+        expect { post_valid_params }.to change(Task, :count).by(1)
+      end
     end
+  end
+
+  describe "PATCH /tasks/:id" do
   end
 
   def tasks_path(workspace, column)
