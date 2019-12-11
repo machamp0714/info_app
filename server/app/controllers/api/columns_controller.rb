@@ -7,7 +7,7 @@ class Api::ColumnsController < ApplicationController
 
   def create
     workspace = Workspace.find(params[:workspace_id])
-    column = workspace.columns.build(column_params)
+    column = workspace.columns.build(column_params.merge(user_id: current_api_user.id))
 
     if column.save
       render json: column, status: :created
@@ -17,8 +17,7 @@ class Api::ColumnsController < ApplicationController
   end
 
   def update
-    workspace = Workspace.find(params[:workspace_id])
-    column = workspace.columns.find(params[:id].merge(user_id: current_api_user))
+    column = Column.find(params[:id])
 
     if column.update(column_params)
       render json: column, status: :ok

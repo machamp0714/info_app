@@ -91,7 +91,7 @@ RSpec.describe "Columns", type: :request do
     let(:user) { create :user }
     let(:auth_headers) { user.create_new_auth_token }
     let(:workspace) { create :workspace }
-    let(:column) { create :column }
+    let(:column) { create :column, workspace: workspace, user: user }
 
     context "when no authorization headers provided" do
       subject(:patch_no_authorization) { patch api_column_path(column) }
