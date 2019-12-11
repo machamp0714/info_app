@@ -11,12 +11,5 @@ RSpec.describe Workspace, type: :model do
 
       expect(workspace).to be_invalid
     end
-
-    it "is invalid when name duplicate" do
-      other_workspace = create :workspace
-      workspace.name = other_workspace.name
-
-      expect(workspace).to be_invalid
-    end
   end
 end
