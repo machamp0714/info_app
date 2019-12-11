@@ -14,7 +14,8 @@ class Api::ColumnsController < ApplicationController
   end
 
   def update
-    column = Column.find(params[:id])
+    workspace = Workspace.find(params[:workspace_id])
+    column = workspace.columns.find(params[:id])
 
     if column.update(column_params)
       render json: column, status: :ok

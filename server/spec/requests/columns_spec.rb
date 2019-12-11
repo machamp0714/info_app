@@ -112,6 +112,20 @@ RSpec.describe "Columns", type: :request do
       it_behaves_like "forbidden_error"
     end
 
+    context "when column not found" do
+      subject(:patch_not_found) do
+        patch(
+          api_workspace_column_path(workspace, other_column),
+          params: { name: "other column" },
+          headers: auth_headers
+        )
+      end
+
+      let(:other_column) { create :column }
+
+      it_behaves_like "not_found_error"
+    end
+
     context "when requests invalid params" do
       subject(:patch_invalid_params) do
         patch(
