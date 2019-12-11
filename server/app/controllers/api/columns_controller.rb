@@ -18,7 +18,7 @@ class Api::ColumnsController < ApplicationController
 
   def update
     workspace = Workspace.find(params[:workspace_id])
-    column = workspace.columns.find(params[:id])
+    column = workspace.columns.find(params[:id].merge(user_id: current_api_user))
 
     if column.update(column_params)
       render json: column, status: :ok
