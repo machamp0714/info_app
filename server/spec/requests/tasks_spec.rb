@@ -4,13 +4,13 @@ RSpec.describe "Tasks", type: :request do
   let(:user) { create :user }
   let(:auth_headers) { user.create_new_auth_token }
   let(:workspace) { create :workspace, user: user }
-  let(:column) { create :column, workspace: workspace }
+  let(:column) { create :column, workspace: workspace, user: user }
   let(:invalid_params) { { title: "" } }
   let(:valid_params) { { title: "task", description: "task memo" } }
 
   describe "POST /tasks" do
     context "when no authorization headers provided" do
-      subject(:post_no_authorization) { post tasks_path(workspace, column) }
+      subject(:post_no_authorization) { post api_column_tasks_path(column) }
 
       it_behaves_like "unauthorized_error"
     end
@@ -18,7 +18,7 @@ RSpec.describe "Tasks", type: :request do
     context "when no permission" do
       subject(:post_no_permission) do
         post(
-          tasks_path(workspace, column),
+          api_column_tasks_path(column),
           params: valid_params,
           headers: auth_headers
         )
@@ -33,7 +33,7 @@ RSpec.describe "Tasks", type: :request do
     context "when requests invalid params" do
       subject(:post_invalid_params) do
         post(
-          tasks_path(workspace, column),
+          api_column_tasks_path(column),
           params: invalid_params,
           headers: auth_headers
         )
@@ -63,7 +63,7 @@ RSpec.describe "Tasks", type: :request do
     context "when requests valid params" do
       subject(:post_valid_params) do
         post(
-          tasks_path(workspace, column),
+          api_column_tasks_path(column),
           params: valid_params,
           headers: auth_headers
         )
@@ -97,7 +97,7 @@ RSpec.describe "Tasks", type: :request do
     let(:task) { create :task, column: column, user: user }
 
     context "when no authorization headers provided" do
-      subject(:patch_no_authorization) { patch task_path(workspace, column, task) }
+      subject(:patch_no_authorization) { patch task_path(task) }
 
       it_behaves_like "unauthorized_error"
     end
@@ -105,7 +105,7 @@ RSpec.describe "Tasks", type: :request do
     context "when no permission" do
       subject(:patch_no_permission) do
         patch(
-          task_path(workspace, column, task),
+          task_path(task),
           params: valid_params,
           headers: auth_headers
         )
@@ -120,7 +120,7 @@ RSpec.describe "Tasks", type: :request do
     context "when requests invalid params" do
       subject(:patch_invalid_params) do
         patch(
-          task_path(workspace, column, task),
+          task_path(task),
           params: invalid_params,
           headers: auth_headers
         )
@@ -150,7 +150,7 @@ RSpec.describe "Tasks", type: :request do
     context "when requests valid params" do
       subject(:patch_valid_params) do
         patch(
-          task_path(workspace, column, task),
+          task_path(task),
           params: valid_params,
           headers: auth_headers
         )
@@ -176,13 +176,5 @@ RSpec.describe "Tasks", type: :request do
         )
       end
     end
-  end
-
-  def tasks_path(workspace, column)
-    api_workspace_column_tasks_path(workspace, column)
-  end
-
-  def task_path(workspace, column, task)
-    api_workspace_column_task_path(workspace, column, task)
   end
 end
