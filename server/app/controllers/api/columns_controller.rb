@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::ColumnsController < ApplicationController
   before_action :authenticate_api_user!
   before_action :verify_permission
