@@ -1,7 +1,7 @@
 class Api::TasksController < ApplicationController
   before_action :authenticate_api_user!
   before_action :verify_permission, only: %i[create]
-  before_action :verify_task, only: %i[update]
+  before_action :verify_task, only: %i[update destroy]
 
   def create
     column = Column.find(params[:column_id])
@@ -22,6 +22,12 @@ class Api::TasksController < ApplicationController
     else
       render_errors(task)
     end
+  end
+
+  def destroy
+    Task.find(params[:id]).destroy
+
+    head :no_content
   end
 
   private

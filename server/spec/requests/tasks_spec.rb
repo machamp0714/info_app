@@ -201,10 +201,6 @@ RSpec.describe "Tasks", type: :request do
 
         expect(response).to have_http_status :no_content
       end
-
-      it "delete task" do
-        expect { delete_success }.to change(Task, :count).by(-1)
-      end
     end
   end
 
