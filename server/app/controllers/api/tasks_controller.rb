@@ -1,6 +1,7 @@
 class Api::TasksController < ApplicationController
   before_action :authenticate_api_user!
   before_action :verify_permission, only: %i[create]
+  before_action :verify_task, only: %i[update]
 
   def create
     column = Column.find(params[:column_id])
@@ -24,6 +25,13 @@ class Api::TasksController < ApplicationController
   def verify_permission
     column = Column.find(params[:column_id])
     return if column.user_id == current_api_user.id
+
+    render_permission_error
+  end
+
+  def verify_task
+    task = Task.find(params[:id])
+    return if task.user_id == current_api_user.id
 
     render_permission_error
   end
