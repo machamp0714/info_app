@@ -14,7 +14,15 @@ class Api::TasksController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    task = Task.find(params[:id])
+
+    if task.update(task_params)
+      render json: task, status: :ok
+    else
+      render_errors(task)
+    end
+  end
 
   private
 
