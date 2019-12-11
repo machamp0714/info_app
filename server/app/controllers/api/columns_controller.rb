@@ -25,7 +25,8 @@ class Api::ColumnsController < ApplicationController
   end
 
   def destroy
-    Column.find(params[:id]).destroy
+    workspace = Workspace.find(params[:workspace_id])
+    workspace.columns.find(params[:id]).destroy
 
     head :no_content
   end

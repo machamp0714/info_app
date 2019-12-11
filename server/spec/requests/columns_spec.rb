@@ -213,10 +213,12 @@ RSpec.describe "Columns", type: :request do
     context "when not found" do
       subject(:delete_not_found) do
         delete(
-          api_workspace_column_path(workspace, 0),
+          api_workspace_column_path(workspace, other_column),
           headers: auth_headers
         )
       end
+
+      let(:other_column) { create :column }
 
       it_behaves_like "not_found_error"
     end
