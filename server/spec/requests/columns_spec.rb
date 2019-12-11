@@ -90,11 +90,11 @@ RSpec.describe "Columns", type: :request do
   describe "PATCH /api/workspace/:workspace_id/columns/:id" do
     let(:user) { create :user }
     let(:auth_headers) { user.create_new_auth_token }
-    let(:workspace) { create :workspace, user: user }
-    let(:column) { create :column, workspace: workspace }
+    let(:workspace) { create :workspace }
+    let(:column) { create :column }
 
     context "when no authorization headers provided" do
-      subject(:patch_no_authorization) { patch api_workspace_column_path(workspace, column) }
+      subject(:patch_no_authorization) { patch api_column_path(column) }
 
       it_behaves_like "unauthorized_error"
     end
@@ -102,7 +102,7 @@ RSpec.describe "Columns", type: :request do
     context "when don't have permission" do
       subject(:patch_no_permission) do
         patch(
-          api_workspace_column_path(workspace, column),
+          api_column_path(column),
           params: { name: "update column" },
           headers: auth_headers
         )
@@ -114,24 +114,10 @@ RSpec.describe "Columns", type: :request do
       it_behaves_like "forbidden_error"
     end
 
-    context "when column not found" do
-      subject(:patch_not_found) do
-        patch(
-          api_workspace_column_path(workspace, other_column),
-          params: { name: "other column" },
-          headers: auth_headers
-        )
-      end
-
-      let(:other_column) { create :column }
-
-      it_behaves_like "not_found_error"
-    end
-
     context "when requests invalid params" do
       subject(:patch_invalid_params) do
         patch(
-          api_workspace_column_path(workspace, column),
+          api_column_path(column),
           params: { name: "" },
           headers: auth_headers
         )
@@ -161,7 +147,7 @@ RSpec.describe "Columns", type: :request do
     context "when requests valid params" do
       subject(:patch_valid_params) do
         patch(
-          api_workspace_column_path(workspace, column),
+          api_column_path(column),
           params: { name: "update column" },
           headers: auth_headers
         )
@@ -193,7 +179,7 @@ RSpec.describe "Columns", type: :request do
     let(:column) { create :column, workspace: workspace }
 
     context "when no authorization headers provided" do
-      subject(:delete_no_authorization) { delete api_workspace_column_path(workspace, column) }
+      subject(:delete_no_authorization) { delete api_column_path(column) }
 
       it_behaves_like "unauthorized_error"
     end
@@ -201,7 +187,7 @@ RSpec.describe "Columns", type: :request do
     context "when don't have permission" do
       subject(:delete_no_permission) do
         delete(
-          api_workspace_column_path(workspace, column),
+          api_column_path(column),
           headers: auth_headers
         )
       end
@@ -212,23 +198,10 @@ RSpec.describe "Columns", type: :request do
       it_behaves_like "forbidden_error"
     end
 
-    context "when not found" do
-      subject(:delete_not_found) do
-        delete(
-          api_workspace_column_path(workspace, other_column),
-          headers: auth_headers
-        )
-      end
-
-      let(:other_column) { create :column }
-
-      it_behaves_like "not_found_error"
-    end
-
     context "when delete success" do
       subject(:delete_success) do
         delete(
-          api_workspace_column_path(workspace, column),
+          api_column_path(column),
           headers: auth_headers
         )
       end
