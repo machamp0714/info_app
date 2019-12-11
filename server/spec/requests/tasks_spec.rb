@@ -78,15 +78,11 @@ RSpec.describe "Tasks", type: :request do
       it "return proper json" do
         post_valid_params
 
-        expect(json).to include(
+        expect(json).to include( 
           "title" => valid_params[:title],
           "description" => valid_params[:description],
           "column" => {
             "name" => column.name
-          },
-          "user" => {
-            "name" => user.name,
-            "image" => user.image
           }
         )
       end
