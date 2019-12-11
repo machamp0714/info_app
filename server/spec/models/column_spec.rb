@@ -9,12 +9,5 @@ RSpec.describe Column, type: :model do
 
       expect(column).to be_invalid
     end
-
-    it "is invalid when name duplicate" do
-      other_column = create :column
-      column.name = other_column.name
-
-      expect(column).to be_invalid
-    end
   end
 end

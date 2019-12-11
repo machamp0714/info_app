@@ -4,5 +4,5 @@ class Workspace < ApplicationRecord
   belongs_to :user
   has_many :columns, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, presence: true
 end

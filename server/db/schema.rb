@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_014644) do
+ActiveRecord::Schema.define(version: 2019_12_11_022145) do
 
   create_table "columns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "workspace_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["id", "name"], name: "index_columns_on_id_and_name", unique: true
     t.index ["workspace_id"], name: "index_columns_on_workspace_id"
   end
 
@@ -41,7 +40,6 @@ ActiveRecord::Schema.define(version: 2019_12_11_014644) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["id", "name"], name: "index_workspaces_on_id_and_name", unique: true
     t.index ["user_id"], name: "index_workspaces_on_user_id"
   end
 
