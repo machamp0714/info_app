@@ -85,6 +85,7 @@ RSpec.describe "Tasks", type: :request do
           "title" => valid_params[:title],
           "description" => valid_params[:description],
           "column" => {
+            "id" => column.id,
             "name" => column.name
           }
         )
@@ -172,6 +173,7 @@ RSpec.describe "Tasks", type: :request do
           "title" => valid_params[:title],
           "description" => valid_params[:description],
           "column" => {
+            "id" => column.id,
             "name" => column.name
           }
         )

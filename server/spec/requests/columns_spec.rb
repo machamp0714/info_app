@@ -99,6 +99,7 @@ RSpec.describe "Columns", type: :request do
         expect(json).to include(
           "name" => "column",
           "workspace" => {
+            "id" => workspace.id,
             "name" => workspace.name
           }
         )
@@ -177,8 +178,10 @@ RSpec.describe "Columns", type: :request do
         patch_valid_params
 
         expect(json).to include(
+          "id" => column.id,
           "name" => "update column",
           "workspace" => {
+            "id" => workspace.id,
             "name" => workspace.name
           }
         )
