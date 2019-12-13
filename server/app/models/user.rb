@@ -10,4 +10,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }
 
   has_many :workspaces, dependent: :destroy
+  has_many :columns, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 end

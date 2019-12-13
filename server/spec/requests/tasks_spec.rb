@@ -2,42 +2,27 @@
 
 require "rails_helper"
 
-RSpec.describe "Columns", type: :request do
+RSpec.describe "Tasks", type: :request do
   let(:user) { create :user }
   let(:auth_headers) { user.create_new_auth_token }
   let(:workspace) { create :workspace, user: user }
   let(:column) { create :column, workspace: workspace, user: user }
+  let(:invalid_params) { { title: "" } }
+  let(:valid_params) { { title: "task", description: "task memo" } }
+  let(:task) { create :task, column: column, user: user }
 
-  describe "GET /api/workspace/:id/columns" do
-    context "when no authorized" do
-      subject(:get_unauthorized) { get api_workspace_columns_path(workspace) }
-
-      it_behaves_like "unauthorized_error"
-    end
-
-    context "when get success" do
-      subject(:get_success) { get api_workspace_columns_path(workspace), headers: auth_headers }
-
-      it "return 200 status code" do
-        get_success
-
-        expect(response).to have_http_status :ok
-      end
-    end
-  end
-
-  describe "POST /api/workspace/:id/columns" do
+  describe "POST /tasks" do
     context "when no authorization headers provided" do
-      subject(:post_no_authorization) { post api_workspace_columns_path(workspace) }
+      subject(:post_no_authorization) { post api_column_tasks_path(column) }
 
       it_behaves_like "unauthorized_error"
     end
 
-    context "when don't have permission" do
+    context "when no permission" do
       subject(:post_no_permission) do
         post(
-          api_workspace_columns_path(workspace),
-          params: { name: "column" },
+          api_column_tasks_path(column),
+          params: valid_params,
           headers: auth_headers
         )
       end
@@ -51,8 +36,8 @@ RSpec.describe "Columns", type: :request do
     context "when requests invalid params" do
       subject(:post_invalid_params) do
         post(
-          api_workspace_columns_path(workspace),
-          params: { name: "" },
+          api_column_tasks_path(column),
+          params: invalid_params,
           headers: auth_headers
         )
       end
@@ -70,7 +55,7 @@ RSpec.describe "Columns", type: :request do
           "status" => 422,
           "errors" => [
             {
-              "source" => "name",
+              "source" => "title",
               "message" => "を入力してください"
             }
           ]
@@ -81,8 +66,8 @@ RSpec.describe "Columns", type: :request do
     context "when requests valid params" do
       subject(:post_valid_params) do
         post(
-          api_workspace_columns_path(workspace),
-          params: { name: "column" },
+          api_column_tasks_path(column),
+          params: valid_params,
           headers: auth_headers
         )
       end
@@ -97,28 +82,33 @@ RSpec.describe "Columns", type: :request do
         post_valid_params
 
         expect(json).to include(
-          "name" => "column",
-          "workspace" => {
-            "id" => workspace.id,
-            "name" => workspace.name
+          "title" => valid_params[:title],
+          "description" => valid_params[:description],
+          "column" => {
+            "id" => column.id,
+            "name" => column.name
           }
         )
+      end
+
+      it "create a new task" do
+        expect { post_valid_params }.to change(Task, :count).by(1)
       end
     end
   end
 
-  describe "PATCH /api/workspace/:workspace_id/columns/:id" do
+  describe "PATCH /tasks/:id" do
     context "when no authorization headers provided" do
-      subject(:patch_no_authorization) { patch api_column_path(column) }
+      subject(:patch_no_authorization) { patch api_task_path(task) }
 
       it_behaves_like "unauthorized_error"
     end
 
-    context "when don't have permission" do
+    context "when no permission" do
       subject(:patch_no_permission) do
         patch(
-          api_column_path(column),
-          params: { name: "update column" },
+          api_task_path(task),
+          params: valid_params,
           headers: auth_headers
         )
       end
@@ -132,8 +122,8 @@ RSpec.describe "Columns", type: :request do
     context "when requests invalid params" do
       subject(:patch_invalid_params) do
         patch(
-          api_column_path(column),
-          params: { name: "" },
+          api_task_path(task),
+          params: invalid_params,
           headers: auth_headers
         )
       end
@@ -151,7 +141,7 @@ RSpec.describe "Columns", type: :request do
           "status" => 422,
           "errors" => [
             {
-              "source" => "name",
+              "source" => "title",
               "message" => "を入力してください"
             }
           ]
@@ -162,11 +152,13 @@ RSpec.describe "Columns", type: :request do
     context "when requests valid params" do
       subject(:patch_valid_params) do
         patch(
-          api_column_path(column),
-          params: { name: "update column" },
+          api_task_path(task),
+          params: valid_params,
           headers: auth_headers
         )
       end
+
+      let(:valid_params) { { title: "update", description: "update" } }
 
       it "return 200 status code" do
         patch_valid_params
@@ -178,31 +170,26 @@ RSpec.describe "Columns", type: :request do
         patch_valid_params
 
         expect(json).to include(
-          "id" => column.id,
-          "name" => "update column",
-          "workspace" => {
-            "id" => workspace.id,
-            "name" => workspace.name
+          "title" => valid_params[:title],
+          "description" => valid_params[:description],
+          "column" => {
+            "id" => column.id,
+            "name" => column.name
           }
         )
       end
     end
   end
 
-  describe "DELETE /api/workspace/:workspace_id/columns/:id" do
+  describe "DELETE api_task_path" do
     context "when no authorization headers provided" do
-      subject(:delete_no_authorization) { delete api_column_path(column) }
+      subject(:delete_no_authorization) { delete api_task_path(task) }
 
       it_behaves_like "unauthorized_error"
     end
 
-    context "when don't have permission" do
-      subject(:delete_no_permission) do
-        delete(
-          api_column_path(column),
-          headers: auth_headers
-        )
-      end
+    context "when no permission" do
+      subject(:delete_no_permission) { delete api_task_path(task), headers: auth_headers }
 
       let(:other_user) { create :user }
       let(:auth_headers) { other_user.create_new_auth_token }
@@ -211,12 +198,7 @@ RSpec.describe "Columns", type: :request do
     end
 
     context "when delete success" do
-      subject(:delete_success) do
-        delete(
-          api_column_path(column),
-          headers: auth_headers
-        )
-      end
+      subject(:delete_success) { delete api_task_path(task), headers: auth_headers }
 
       it "return 204 status code" do
         delete_success

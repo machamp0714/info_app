@@ -4,6 +4,12 @@ class Api::WorkspacesController < ApplicationController
   before_action :authenticate_api_user!
   before_action :verify_permission, only: %i[update destroy]
 
+  def index
+    workspaces = current_api_user.workspaces
+
+    render json: workspaces, status: :ok
+  end
+
   def create
     workspace = current_api_user.workspaces.build(workspace_params)
     if workspace.save
