@@ -15,8 +15,6 @@ RSpec.describe "Workspaces", type: :request do
 
       let(:user) { create :user }
       let(:auth_headers) { user.create_new_auth_token }
-      let!(:workspace) { create :workspace, user: user }
-      let!(:other_workspace) { create :workspace, user: user }
 
       it "return 200 status code" do
         get_success
