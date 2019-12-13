@@ -23,21 +23,6 @@ RSpec.describe "Workspaces", type: :request do
 
         expect(response).to have_http_status :ok
       end
-
-      it "return proper json body" do
-        get_success
-
-        expect(json).to include(
-          {
-            "id" => workspace.id,
-            "name" => workspace.name
-          },
-          {
-            "id" => other_workspace.id,
-            "name" => other_workspace.name
-          }
-        )
-      end
     end
   end
 
