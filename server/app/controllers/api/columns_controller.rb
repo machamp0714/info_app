@@ -5,6 +5,13 @@ class Api::ColumnsController < ApplicationController
   before_action :verify_permission, only: %i[create]
   before_action :verify_column, only: %i[update destroy]
 
+  def index
+    workspace = Workspace.find(params[:workspace_id])
+    columns = workspace.columns
+
+    render json: columns, status: :ok
+  end
+
   def create
     workspace = Workspace.find(params[:workspace_id])
     column = workspace.columns.build(column_params.merge(user_id: current_api_user.id))
