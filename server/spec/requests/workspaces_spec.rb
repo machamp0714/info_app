@@ -3,6 +3,44 @@
 require "rails_helper"
 
 RSpec.describe "Workspaces", type: :request do
+  describe "GET /workspaces" do
+    context "when no authorized" do
+      subject(:get_unauthorized) { get api_workspaces_path }
+
+      it_behaves_like "unauthorized_error"
+    end
+
+    context "when requests with authorized header" do
+      subject(:get_success) { get api_workspaces_path, headers: auth_headers }
+
+      let(:user) { create :user }
+      let(:auth_headers) { user.create_new_auth_token }
+      let!(:workspace) { create :workspace }
+      let!(:other_workspace) { create :workspace }
+
+      it "return 200 status code" do
+        get_success
+
+        expect(response).to have_http_status :ok
+      end
+
+      it "return proper json body" do
+        get_success
+
+        expect(json).to include(
+          {
+            "id" => workspace.id,
+            "name" => workspace.name
+          },
+          {
+            "id" => other_workspace.id,
+            "name" => other_workspace.name
+          }
+        )
+      end
+    end
+  end
+
   describe "POST /workspaces" do
     let(:user) { create :user }
     let(:auth_headers) { user.create_new_auth_token }
