@@ -8,6 +8,24 @@ RSpec.describe "Columns", type: :request do
   let(:workspace) { create :workspace, user: user }
   let(:column) { create :column, workspace: workspace, user: user }
 
+  describe "GET /api/workspace/:id/columns" do
+    context "when no authorized" do
+      subject(:get_unauthorized) { get api_workspace_columns_path(workspace) }
+
+      it_behaves_like "unauthorized_error"
+    end
+
+    context "when get success" do
+      subject(:get_success) { get api_workspace_columns_path(workspace), headers: auth_headers }
+
+      it "return 200 status code" do
+        get_success
+
+        expect(response).to have_http_status :ok
+      end
+    end
+  end
+
   describe "POST /api/workspace/:id/columns" do
     context "when no authorization headers provided" do
       subject(:post_no_authorization) { post api_workspace_columns_path(workspace) }
