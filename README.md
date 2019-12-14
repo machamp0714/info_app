@@ -18,7 +18,7 @@ Qiita、Evernote、はてなブックマークといったサービスで
   - RDS
   - Route53
   - S3
-  - CloudFormation
+  - CloudF
 - Terraform
 - Capistrano
 - CircleCI
