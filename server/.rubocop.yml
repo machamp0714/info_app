@@ -72,6 +72,11 @@ Style/NumericLiterals:
   Exclude:
     - "spec/support/omniauth_callbacks.rb"
 
+#unicorn
+Style/GlobalVars:
+  Exclude:
+    - "./config/unicorn.conf.rb"
+
 # 一旦無視
 Rails/BulkChangeTable:
   Enabled: false
