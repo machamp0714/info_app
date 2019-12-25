@@ -5,3 +5,18 @@
   height: 90px;
   background-color: $primary-color;
 }
+
+.header-content {
+  padding: 0 160px;
+}
+
+.header-menu {
+  float: right;
+  line-height: 90px;
+}
+
+.header-item {
+  color: #ffffff;
+  float: left;
+  margin-left: 20px;
+}

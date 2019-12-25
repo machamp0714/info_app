@@ -13,4 +13,7 @@ code {
 }
 ul {
   margin: 0;
+  list-style: none;
 }
+
+@import "./styles/base.scss";
