@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Top from "./components/Dashboard/Top";
+import Signup from "./containers/Auth/Signup";
 import Signin from "./components/Auth/Signin";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -13,7 +13,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Top} />
+        <Route exact path="/" component={Signup} />
         <Route path="/signin" component={Signin} />
       </Switch>
     </BrowserRouter>
