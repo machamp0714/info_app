@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
@@ -7,7 +7,6 @@ import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -30,6 +29,19 @@ const useStyles = makeStyles(theme => ({
 
 const Top = () => {
   const classes = useStyles();
+  const [values, setState] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+
+  const handleChange = e => {
+    setState({
+      ...values,
+      [e.target.id]: e.target.value
+    });
+    console.log(values);
+  };
 
   return (
     <div>
@@ -62,16 +74,23 @@ const Top = () => {
                 <IconButton className="form-icon">
                   <PersonOutlineIcon className="icon" />
                 </IconButton>
-                <InputBase className="auth-text-form" placeholder="Name" />
+                <InputBase
+                  id="name"
+                  className="auth-text-form"
+                  placeholder="Name"
+                  onChange={handleChange}
+                />
               </div>
               <div className="paper-box">
                 <IconButton className="form-icon">
                   <MailOutlineIcon className="icon" />
                 </IconButton>
                 <InputBase
+                  id="email"
                   type="email"
                   className="auth-text-form"
                   placeholder="Email"
+                  onChange={handleChange}
                 />
               </div>
               <div className="paper-box">
@@ -79,9 +98,11 @@ const Top = () => {
                   <LockOutlinedIcon className="icon" />
                 </IconButton>
                 <InputBase
+                  id="password"
                   type="password"
                   className="auth-text-form"
                   placeholder="Password"
+                  onChange={handleChange}
                 />
               </div>
             </div>
