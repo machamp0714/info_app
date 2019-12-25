@@ -2,10 +2,17 @@
 
 class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
+  include ActionController::Cookies
+  include ActionController::RequestForgeryProtection
 
+  before_action :set_csrf_token
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   private
+
+  def set_csrf_token
+    cookies["CSRF_TOKEN"] = form_authenticity_token
+  end
 
   def render_errors(model, data = nil)
     response = {
