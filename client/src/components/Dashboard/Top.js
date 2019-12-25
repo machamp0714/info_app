@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
@@ -8,7 +7,6 @@ import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { signup } from "../../actions/authActions";
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -131,8 +129,4 @@ const Top = ({ signup }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  signup: values => dispatch(signup(values))
-});
-
-export default connect(null, mapDispatchToProps)(Top);
+export default Top;
