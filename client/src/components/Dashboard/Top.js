@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
@@ -7,8 +8,9 @@ import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { signup } from "../../actions/authActions";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   icon: {
     "&:hover": {
       backgroundColor: "#FFFFFF"
@@ -27,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Top = () => {
+const Top = ({ signup }) => {
   const classes = useStyles();
   const [values, setState] = useState({
     name: "",
@@ -40,7 +42,12 @@ const Top = () => {
       ...values,
       [e.target.id]: e.target.value
     });
-    console.log(values);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    signup(values);
   };
 
   return (
@@ -70,46 +77,52 @@ const Top = () => {
           <div className="form-content">
             <div className="description-text">or</div>
             <div className="login-form-container">
-              <div className="paper-box">
-                <IconButton className="form-icon">
-                  <PersonOutlineIcon className="icon" />
-                </IconButton>
-                <InputBase
-                  id="name"
-                  className="auth-text-form"
-                  placeholder="Name"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="paper-box">
-                <IconButton className="form-icon">
-                  <MailOutlineIcon className="icon" />
-                </IconButton>
-                <InputBase
-                  id="email"
-                  type="email"
-                  className="auth-text-form"
-                  placeholder="Email"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="paper-box">
-                <IconButton className="form-icon">
-                  <LockOutlinedIcon className="icon" />
-                </IconButton>
-                <InputBase
-                  id="password"
-                  type="password"
-                  className="auth-text-form"
-                  placeholder="Password"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="submit">
-              <Button className={classes.button} variant="contained">
-                Sign up
-              </Button>
+              <form onSubmit={handleSubmit}>
+                <div className="paper-box">
+                  <IconButton className="form-icon">
+                    <PersonOutlineIcon className="icon" />
+                  </IconButton>
+                  <InputBase
+                    id="name"
+                    className="auth-text-form"
+                    placeholder="Name"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="paper-box">
+                  <IconButton className="form-icon">
+                    <MailOutlineIcon className="icon" />
+                  </IconButton>
+                  <InputBase
+                    id="email"
+                    type="email"
+                    className="auth-text-form"
+                    placeholder="Email"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="paper-box">
+                  <IconButton className="form-icon">
+                    <LockOutlinedIcon className="icon" />
+                  </IconButton>
+                  <InputBase
+                    id="password"
+                    type="password"
+                    className="auth-text-form"
+                    placeholder="Password"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="submit">
+                  <Button
+                    type="submit"
+                    className={classes.button}
+                    variant="contained"
+                  >
+                    Sign up
+                  </Button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -118,4 +131,8 @@ const Top = () => {
   );
 };
 
-export default Top;
+const mapDispatchToProps = dispatch => ({
+  signup: values => dispatch(signup(values))
+});
+
+export default connect(null, mapDispatchToProps)(Top);
