@@ -9,11 +9,6 @@ import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
 
 const useStyles = makeStyles(() => ({
-  icon: {
-    "&:hover": {
-      backgroundColor: "#FFFFFF"
-    }
-  },
   button: {
     width: "120px",
     height: "40px",
