@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Top from "./containers/Auth/Top";
 import Signin from "./containers/Auth/Signin";
-import Signup from "./components/Auth/Signup";
+import Signup from "./containers/Auth/Signup";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
