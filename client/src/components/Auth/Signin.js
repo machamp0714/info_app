@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
+import LocalStorage from "../Auth/LocalStorage";
 import { Redirect } from "react-router-dom";
 
 const mailIcon = <MailOutlineIcon className="icon" />;
@@ -30,12 +31,7 @@ const Signin = ({ user, headers, loggedIn, signin }) => {
   };
 
   if (loggedIn) {
-    localStorage.setItem("access-token", headers["access-token"]);
-    localStorage.setItem("client", headers["client"]);
-    localStorage.setItem("uid", headers["uid"]);
-    localStorage.setItem("user", JSON.stringify(user));
-
-    return <Redirect to={"/" + user.name} />;
+    return <LocalStorage headers={headers} user={user} />;
   }
 
   return (
