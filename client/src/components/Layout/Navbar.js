@@ -1,23 +1,13 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import SignedoutLinks from "../Layout/SignedoutLinks";
 
 const Navbar = () => {
+  const user = localStorage.getItem("user");
+
   return (
     <div className="header">
       <div className="header-content">
-        <ul className="header-menu">
-          <li className="header-item">
-            <Button color="inherit">sign up</Button>
-          </li>
-          <li className="header-item">
-            <Button color="inherit">
-              <Link to="/signin" className="nav-link">
-                sign in
-              </Link>
-            </Button>
-          </li>
-        </ul>
+        {user ? <div>login</div> : <SignedoutLinks />}
       </div>
     </div>
   );
