@@ -65,7 +65,7 @@ const Top = ({ signup }) => {
           </div>
           <div className="divider"></div>
           <div className="form-content">
-            <div className="description-text">or</div>
+            <div className="description-text center">or</div>
             <div className="login-form-container">
               <form onSubmit={handleSubmit}>
                 <TextInputWithIcon
@@ -89,7 +89,7 @@ const Top = ({ signup }) => {
                   placeholder="Password"
                   handleChange={handleChange}
                 />
-                <div className="submit">
+                <div className="center">
                   <Button
                     type="submit"
                     className={classes.button}
