@@ -7,6 +7,7 @@ import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
 import LocalStorage from "./LocalStorage";
+import IconButton from "../Button/IconButton";
 
 const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
@@ -41,15 +42,9 @@ const Signup = ({ user, headers, loggedIn, signup }) => {
       <Navbar />
       <div className="top-form-content m-auto">
         <div className="sns-login-content">
-          <button className="sns-icon-button github">
-            <FontAwesomeIcon icon={["fab", "github"]} />
-          </button>
-          <button className="sns-icon-button twitter">
-            <FontAwesomeIcon icon={["fab", "twitter"]} />
-          </button>
-          <button className="sns-icon-button google">
-            <FontAwesomeIcon icon={["fab", "google"]} />
-          </button>
+          <IconButton icon="github" />
+          <IconButton icon="twitter" />
+          <IconButton icon="google" />
         </div>
         <div className="divider"></div>
         <div className="form-content">

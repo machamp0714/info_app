@@ -6,6 +6,7 @@ import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
 import LocalStorage from "../Auth/LocalStorage";
+import IconButton from "../Button/IconButton";
 
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
@@ -38,15 +39,9 @@ const Signin = ({ user, headers, loggedIn, signin }) => {
       <Navbar />
       <div className="top-form-content m-auto">
         <div className="sns-login-content">
-          <button className="sns-icon-button github">
-            <FontAwesomeIcon icon={["fab", "github"]} />
-          </button>
-          <button className="sns-icon-button twitter">
-            <FontAwesomeIcon icon={["fab", "twitter"]} />
-          </button>
-          <button className="sns-icon-button google">
-            <FontAwesomeIcon icon={["fab", "google"]} />
-          </button>
+          <IconButton icon="github" />
+          <IconButton icon="twitter" />
+          <IconButton icon="google" />
         </div>
         <div className="divider"></div>
         <div className="form-content">
