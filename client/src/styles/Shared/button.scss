@@ -1,6 +1,8 @@
+@import "../variables.scss";
+
 .sns-icon-button {
   width: 110px;
-  height: 35px;
+  height: 40px;
   background-color: #f1f3f9;
   border: none;
   border-radius: 5px;
@@ -17,7 +19,7 @@
   display: block;
   font-size: 12px;
   margin-left: 7px;
-  color: #000000;
+  color: $primary-color;
 }
 
 .github {

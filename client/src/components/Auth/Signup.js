@@ -40,42 +40,44 @@ const Signup = ({ user, headers, loggedIn, signup }) => {
   return (
     <div>
       <Navbar />
-      <div className="top-form-content m-auto">
-        <div className="sns-login-content">
-          <IconButton icon="github" />
-          <IconButton icon="twitter" />
-          <IconButton icon="google" />
-        </div>
-        <div className="divider"></div>
-        <div className="form-content">
-          <div className="description-text center">or</div>
-          <div className="login-form-body">
-            <form onSubmit={handleSubmit}>
-              <TextInputWithIcon
-                icon={personIcon}
-                id="name"
-                type="text"
-                placeholder="Name"
-                handleChange={handleChange}
-              />
-              <TextInputWithIcon
-                icon={mailIcon}
-                id="email"
-                type="email"
-                placeholder="Email"
-                handleChange={handleChange}
-              />
-              <TextInputWithIcon
-                icon={pwIcon}
-                id="password"
-                type="password"
-                placeholder="Password"
-                handleChange={handleChange}
-              />
-              <div className="center">
-                <PrimaryButton value="Sign up" />
-              </div>
-            </form>
+      <div className="top-container">
+        <div className="top-form-content top-form-content-h m-auto">
+          <div className="sns-login-content">
+            <IconButton icon="github" />
+            <IconButton icon="twitter" />
+            <IconButton icon="google" />
+          </div>
+          <div className="divider"></div>
+          <div className="form-content">
+            <div className="description-text center">or</div>
+            <div className="login-form-body">
+              <form onSubmit={handleSubmit}>
+                <TextInputWithIcon
+                  icon={personIcon}
+                  id="name"
+                  type="text"
+                  placeholder="Name"
+                  handleChange={handleChange}
+                />
+                <TextInputWithIcon
+                  icon={mailIcon}
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  handleChange={handleChange}
+                />
+                <TextInputWithIcon
+                  icon={pwIcon}
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  handleChange={handleChange}
+                />
+                <div className="center">
+                  <PrimaryButton value="Sign up" />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
