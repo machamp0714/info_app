@@ -6,6 +6,7 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextInputWithIcon from "../Form/textInputWithIcon";
+import Navbar from "../Layout/Navbar";
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -53,14 +54,7 @@ const Top = ({ signup }) => {
 
   return (
     <div>
-      <div className="header">
-        <div className="header-content">
-          <ul className="header-menu">
-            <li className="header-item">Sign up</li>
-            <li className="header-item">Sign in</li>
-          </ul>
-        </div>
-      </div>
+      <Navbar />
       <div className="top-container">
         <div className="top-form-container">
           <div className="sns-signin">
