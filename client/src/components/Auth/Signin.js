@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
-const Signin = () => {
+const Signin = ({ user, headers, loggedIn, signin }) => {
   const classes = useStyles();
   const [values, setState] = useState({
     email: "",
@@ -40,7 +40,16 @@ const Signin = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    signin(values);
   };
+
+  if (loggedIn) {
+    localStorage.setItem("access-token", headers["access-token"]);
+    localStorage.setItem("client", headers["client"]);
+    localStorage.setItem("uid", headers["uid"]);
+    localStorage.setItem("user", JSON.stringify(user));
+  }
 
   return (
     <div>
