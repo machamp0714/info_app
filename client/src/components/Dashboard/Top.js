@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
@@ -26,7 +26,7 @@ const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
-const Top = ({ signup }) => {
+const Top = ({ headers, user, signup }) => {
   const classes = useStyles();
   const [values, setState] = useState({
     name: "",

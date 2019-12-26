@@ -1,17 +1,26 @@
 const initState = {
-  loggedIn: false
+  user: {
+    name: "",
+    email: "",
+    password: ""
+  },
+  headers: {
+    "access-token": "",
+    client: "",
+    uid: ""
+  }
 };
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case "SIGNUP_SUCCESS":
       return {
-        data: action.payload,
-        loggedIn: true
+        user: action.payload,
+        headers: action.meta
       };
     case "SIGNUP_ERROR":
       return {
-        loggedIn: false
+        ...state
       };
     default:
       return state;
