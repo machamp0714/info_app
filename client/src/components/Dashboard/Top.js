@@ -58,7 +58,7 @@ const Top = ({ headers, user, loggedIn, signup }) => {
     <div>
       <Navbar />
       <div className="top-container">
-        <div className="top-form-content">
+        <div className="top-form-content ml-auto">
           <div className="sns-login-content">
             <button className="sns-icon-button github">
               <FontAwesomeIcon icon={["fab", "github"]} />
