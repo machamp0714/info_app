@@ -6,7 +6,6 @@ import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
 import LocalStorage from "../Auth/LocalStorage";
-import { Redirect } from "react-router-dom";
 
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;

@@ -7,7 +7,6 @@ import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
 import LocalStorage from "../Auth/LocalStorage";
-import { Redirect } from "react-router-dom";
 
 const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
@@ -45,12 +44,15 @@ const Top = ({ headers, user, loggedIn, signup }) => {
           <div className="sns-login-content">
             <button className="sns-icon-button github">
               <FontAwesomeIcon icon={["fab", "github"]} />
+              <span className="button-text">github</span>
             </button>
             <button className="sns-icon-button twitter">
               <FontAwesomeIcon icon={["fab", "twitter"]} />
+              <span className="button-text">twitter</span>
             </button>
             <button className="sns-icon-button google">
               <FontAwesomeIcon icon={["fab", "google"]} />
+              <span className="button-text">google</span>
             </button>
           </div>
           <div className="divider"></div>

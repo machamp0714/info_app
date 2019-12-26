@@ -1,0 +1,33 @@
+.sns-icon-button {
+  width: 110px;
+  height: 35px;
+  background-color: #f1f3f9;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.button-text {
+  display: block;
+  font-size: 12px;
+  margin-left: 10px;
+  color: #000000;
+}
+
+.github {
+  color: #000000;
+}
+
+.twitter {
+  color: rgba(29, 161, 242, 1);
+}
+
+.google {
+  color: #ea4335;
+}
