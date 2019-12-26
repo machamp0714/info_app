@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import InputBase from "@material-ui/core/InputBase";
 import Button from "@material-ui/core/Button";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TextInputWithIcon from "../Form/textInputWithIcon";
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -26,6 +25,10 @@ const useStyles = makeStyles(() => ({
     }
   }
 }));
+
+const personIcon = <PersonOutlineIcon className="icon" />;
+const mailIcon = <MailOutlineIcon className="icon" />;
+const pwIcon = <LockOutlinedIcon className="icon" />;
 
 const Top = ({ signup }) => {
   const classes = useStyles();
@@ -76,41 +79,27 @@ const Top = ({ signup }) => {
             <div className="description-text">or</div>
             <div className="login-form-container">
               <form onSubmit={handleSubmit}>
-                <div className="paper-box">
-                  <IconButton className="form-icon">
-                    <PersonOutlineIcon className="icon" />
-                  </IconButton>
-                  <InputBase
-                    id="name"
-                    className="auth-text-form"
-                    placeholder="Name"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="paper-box">
-                  <IconButton className="form-icon">
-                    <MailOutlineIcon className="icon" />
-                  </IconButton>
-                  <InputBase
-                    id="email"
-                    type="email"
-                    className="auth-text-form"
-                    placeholder="Email"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="paper-box">
-                  <IconButton className="form-icon">
-                    <LockOutlinedIcon className="icon" />
-                  </IconButton>
-                  <InputBase
-                    id="password"
-                    type="password"
-                    className="auth-text-form"
-                    placeholder="Password"
-                    onChange={handleChange}
-                  />
-                </div>
+                <TextInputWithIcon
+                  icon={personIcon}
+                  id="name"
+                  type="text"
+                  placeholder="Name"
+                  handleChange={handleChange}
+                />
+                <TextInputWithIcon
+                  icon={mailIcon}
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  handleChange={handleChange}
+                />
+                <TextInputWithIcon
+                  icon={pwIcon}
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  handleChange={handleChange}
+                />
                 <div className="submit">
                   <Button
                     type="submit"
