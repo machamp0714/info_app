@@ -6,7 +6,11 @@ const SignedoutLinks = () => {
   return (
     <ul className="header-menu">
       <li className="header-item">
-        <Button color="inherit">sign up</Button>
+        <Button color="inherit">
+          <Link to="/signup" className="nav-link">
+            sign up
+          </Link>
+        </Button>
       </li>
       <li className="header-item">
         <Button color="inherit">
