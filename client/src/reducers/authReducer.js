@@ -8,7 +8,8 @@ const initState = {
     "access-token": "",
     client: "",
     uid: ""
-  }
+  },
+  loggedIn: false
 };
 
 const authReducer = (state = initState, action) => {
@@ -16,11 +17,13 @@ const authReducer = (state = initState, action) => {
     case "SIGNUP_SUCCESS":
       return {
         user: action.payload,
-        headers: action.meta
+        headers: action.meta,
+        loggedIn: true
       };
     case "SIGNUP_ERROR":
       return {
-        ...state
+        ...state,
+        loggedIn: false
       };
     default:
       return state;

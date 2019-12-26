@@ -4,7 +4,8 @@ import Top from "../../components/Dashboard/Top";
 
 const mapStateToProps = state => ({
   headers: state.auth.headers,
-  user: state.auth.user
+  user: state.auth.user,
+  loggedIn: state.auth.loggedIn
 });
 
 const mapDispatchToProps = dispatch => ({

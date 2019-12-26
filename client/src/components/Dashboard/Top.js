@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
@@ -26,7 +26,7 @@ const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
-const Top = ({ headers, user, signup }) => {
+const Top = ({ headers, user, loggedIn, signup }) => {
   const classes = useStyles();
   const [values, setState] = useState({
     name: "",
@@ -46,6 +46,13 @@ const Top = ({ headers, user, signup }) => {
 
     signup(values);
   };
+
+  if (loggedIn) {
+    localStorage.setItem("access-token", headers["access-token"]);
+    localStorage.setItem("client", headers["client"]);
+    localStorage.setItem("uid", headers["uid"]);
+    localStorage.setItem("user", JSON.stringify(user));
+  }
 
   return (
     <div>
