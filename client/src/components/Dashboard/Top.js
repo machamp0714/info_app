@@ -51,8 +51,8 @@ const Top = ({ signup }) => {
     <div>
       <Navbar />
       <div className="top-container">
-        <div className="top-form-container">
-          <div className="sns-signin">
+        <div className="top-form-content">
+          <div className="sns-login-content">
             <button className="sns-icon-button github">
               <FontAwesomeIcon icon={["fab", "github"]} />
             </button>
@@ -66,7 +66,7 @@ const Top = ({ signup }) => {
           <div className="divider"></div>
           <div className="form-content">
             <div className="description-text center">or</div>
-            <div className="login-form-container">
+            <div className="login-form-body">
               <form onSubmit={handleSubmit}>
                 <TextInputWithIcon
                   icon={personIcon}

@@ -5,7 +5,7 @@
   display: flex;
 }
 
-.top-form-container {
+.top-form-content {
   width: 400px;
   height: 520px;
   margin-top: 70px;
@@ -15,7 +15,7 @@
   box-shadow: 0 3px 17px 0 rgba(44, 40, 40, 0.11);
 }
 
-.login-form-container {
+.login-form-body {
   margin-top: 12px;
   padding: 0 50px;
 }
@@ -31,7 +31,7 @@
   color: #aeafb5;
 }
 
-.sns-signin {
+.sns-login-content {
   margin-top: 12px;
   display: flex;
   justify-content: space-around;
