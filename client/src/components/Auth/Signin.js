@@ -1,31 +1,15 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
-
-const useStyles = makeStyles(theme => ({
-  button: {
-    width: "120px",
-    height: "40px",
-    backgroundColor: "#172b4d",
-    color: "#FFFFFF",
-    boxShadow: "none",
-    "&:hover": {
-      backgroundColor: "#172b4d",
-      boxShadow: "none"
-    }
-  }
-}));
+import PrimaryButton from "../Button/PrimaryButton";
 
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
 const Signin = ({ user, headers, loggedIn, signin }) => {
-  const classes = useStyles();
   const [values, setState] = useState({
     email: "",
     password: ""
@@ -86,13 +70,7 @@ const Signin = ({ user, headers, loggedIn, signin }) => {
                 handleChange={handleChange}
               />
               <div className="center">
-                <Button
-                  type="submit"
-                  className={classes.button}
-                  variant="contained"
-                >
-                  Sign up
-                </Button>
+                <PrimaryButton value="Sign in" />
               </div>
             </form>
           </div>
