@@ -1,5 +1,4 @@
 import request from "../config/axios";
-import axios from "axios";
 
 export const signup = values => {
   return dispatch => {

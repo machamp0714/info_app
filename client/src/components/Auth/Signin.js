@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
