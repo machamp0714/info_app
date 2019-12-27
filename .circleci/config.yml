@@ -17,7 +17,7 @@ executors:
   deploy:
     docker:
       - image: circleci/python
-    working_directory: ~/repo
+    working_directory: ~/front
 
 version: 2.1
 jobs:
@@ -62,8 +62,6 @@ jobs:
       - run:
           name: install aws cli
           command: sudo pip install awscli
-      - run:
-          command: ls
       - deploy:
           name: deploy s3
           environment:
