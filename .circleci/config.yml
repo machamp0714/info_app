@@ -31,7 +31,7 @@ jobs:
       - restore_cache:
           key: v1-node-{{ checksum "client/package.json" }}
       - restore_cache:
-          key: v1-build-{{ checksum .Environment.CIRCLE_SHA1 }}
+          key: v1-build-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: yarn install
           command: |
@@ -58,7 +58,7 @@ jobs:
     executor: deploy
     steps:
       - restore_cache:
-          key: v1-build-{{ checksum .Environment.CIRCLE_SHA1 }}
+          key: v1-build-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: install aws cli
           command: sudo pip install awscli
