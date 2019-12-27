@@ -14,4 +14,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get "csrf_token", to: "application#csrf_token"
 end

@@ -1,0 +1,60 @@
+@import "../variables.scss";
+
+.top-container {
+  padding: 0 165px;
+  display: flex;
+}
+
+.top-form-content {
+  width: 400px;
+  margin-top: 70px;
+  border-radius: 10px;
+  background-color: $form-backgroud-color;
+  box-shadow: 0 3px 17px 0 rgba(44, 40, 40, 0.11);
+}
+
+.top-form-content-h {
+  height: 470px;
+}
+
+.signin-form-content-h {
+  height: 365px;
+}
+
+.login-form-body {
+  margin-top: 12px;
+  padding: 0 20px;
+}
+
+.divider {
+  margin: 12px 0;
+  width: 400px;
+  height: 1px;
+  border: 0.1px solid #eeeeee;
+}
+
+.description-text {
+  color: #aeafb5;
+}
+
+.sns-login-content {
+  margin-top: 12px;
+  padding: 0 12px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.icon {
+  color: $primary-color;
+}
+
+.lead-text {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.text-link {
+  color: #787a86;
+  font-size: 14px;
+}
