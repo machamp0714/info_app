@@ -6,7 +6,10 @@ class ApplicationController < ActionController::API
   include ActionController::RequestForgeryProtection
 
   before_action :set_csrf_token
+  protect_from_forgery with: :exception
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
+
+  def csrf_token; end
 
   private
 
