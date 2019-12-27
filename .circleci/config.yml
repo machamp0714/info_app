@@ -66,7 +66,7 @@ jobs:
           name: deploy s3
           environment:
             S3_BUCKET: info-app.com
-          command: aws s3 sync client/build s3://{S3_BUCKET}/ --delete
+          command: aws s3 sync client/build s3://${S3_BUCKET}/ --delete
   build_server:
     executor: server_default
     steps:
