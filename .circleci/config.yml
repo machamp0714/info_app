@@ -51,7 +51,7 @@ jobs:
             cd client
             yarn build
       - save_cache:
-          key: v1-build-{{ checksum .Environment.CIRCLE_SHA1 }}
+          key: v1-build-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - client/build
   deploy_s3:
