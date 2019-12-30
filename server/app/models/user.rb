@@ -12,4 +12,8 @@ class User < ApplicationRecord
   has_many :workspaces, dependent: :destroy
   has_many :columns, dependent: :destroy
   has_many :tasks, dependent: :destroy
+
+  def self.get_email(auth)
+    auth["email"] || "github-#{auth['id']}@example.com"
+  end
 end
