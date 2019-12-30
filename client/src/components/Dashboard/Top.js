@@ -7,6 +7,7 @@ import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
 import LocalStorage from "../Auth/LocalStorage";
 import IconButton from "../Button/IconButton";
+import axios from "axios";
 
 const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
@@ -32,6 +33,22 @@ const Top = ({ headers, user, loggedIn, signup }) => {
     signup(values);
   };
 
+  const handleClick = () => {
+    axios
+      .get("http://localhost:3001/api/twitter_oauth_url")
+      .then(response => {
+        const loginWindow = window.open(
+          response.data.url,
+          "github",
+          "top=400,width=300,height=300,toolbar=yes,menubar=yes,scrollbars=yes"
+        );
+        loginWindow.focus();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   if (loggedIn) {
     return <LocalStorage headers={headers} user={user} />;
   }
@@ -43,7 +60,7 @@ const Top = ({ headers, user, loggedIn, signup }) => {
         <div className="top-form-content top-form-content-h ml-auto">
           <div className="sns-login-content">
             <IconButton icon="github" />
-            <IconButton icon="twitter" />
+            <IconButton handleClick={handleClick} icon="twitter" />
             <IconButton icon="google" />
           </div>
           <div className="divider"></div>
