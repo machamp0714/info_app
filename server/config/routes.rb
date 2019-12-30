@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :tasks, only: %i[create update destroy]
       end
     end
+    get "twitter_oauth_url", to: "auth/omniauth_callbacks#twitter"
   end
 
   get "csrf_token", to: "application#csrf_token"
