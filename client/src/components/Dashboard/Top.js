@@ -7,13 +7,12 @@ import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
 import LocalStorage from "../Auth/LocalStorage";
 import IconButton from "../Button/IconButton";
-import axios from "axios";
 
 const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
-const Top = ({ headers, user, loggedIn, signup }) => {
+const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
   const [values, setState] = useState({
     name: "",
     email: "",
@@ -34,28 +33,7 @@ const Top = ({ headers, user, loggedIn, signup }) => {
   };
 
   const handleClick = () => {
-    axios
-      .get("http://localhost:3001/api/github_oauth_url")
-      .then(response => {
-        const loginWindow = openLoginWindow(response.data.url);
-        loginWindow.focus();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const openLoginWindow = url => {
-    const width = 500;
-    const height = 600;
-    const windowX = (window.screen.width - width) / 2;
-    const windowY = (window.screen.height - height) / 2;
-    const title = "ログイン - Githubアカウント";
-    window.open(
-      url,
-      title,
-      `top=${windowY},left=${windowX},width=${width},height=${height}`
-    );
+    getOAuthUrl();
   };
 
   if (loggedIn) {
