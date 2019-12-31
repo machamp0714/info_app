@@ -35,18 +35,27 @@ const Top = ({ headers, user, loggedIn, signup }) => {
 
   const handleClick = () => {
     axios
-      .get("http://localhost:3001/api/twitter_oauth_url")
+      .get("http://localhost:3001/api/github_oauth_url")
       .then(response => {
-        const loginWindow = window.open(
-          response.data.url,
-          "github",
-          "top=400,width=300,height=300,toolbar=yes,menubar=yes,scrollbars=yes"
-        );
+        const loginWindow = openLoginWindow(response.data.url);
         loginWindow.focus();
       })
       .catch(error => {
         console.log(error);
       });
+  };
+
+  const openLoginWindow = url => {
+    const width = 500;
+    const height = 600;
+    const windowX = (window.screen.width - width) / 2;
+    const windowY = (window.screen.height - height) / 2;
+    const title = "ログイン - Githubアカウント";
+    window.open(
+      url,
+      title,
+      `top=${windowY},left=${windowX},width=${width},height=${height}`
+    );
   };
 
   if (loggedIn) {
@@ -59,9 +68,7 @@ const Top = ({ headers, user, loggedIn, signup }) => {
       <div className="top-container">
         <div className="top-form-content top-form-content-h ml-auto">
           <div className="sns-login-content">
-            <IconButton icon="github" />
-            <IconButton handleClick={handleClick} icon="twitter" />
-            <IconButton icon="google" />
+            <IconButton handleClick={handleClick} icon="github" />
           </div>
           <div className="divider"></div>
           <div className="form-content">
