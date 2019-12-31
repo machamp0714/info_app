@@ -12,7 +12,7 @@ const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
-const Signup = ({ user, headers, loggedIn, signup }) => {
+const Signup = ({ user, headers, loggedIn, signup, getOAuthUrl }) => {
   const [values, setState] = useState({
     name: "",
     email: "",
@@ -32,6 +32,10 @@ const Signup = ({ user, headers, loggedIn, signup }) => {
     signup(values);
   };
 
+  const handleClick = () => {
+    getOAuthUrl();
+  };
+
   if (loggedIn) {
     return <LocalStorage headers={headers} user={user} />;
   }
@@ -42,9 +46,7 @@ const Signup = ({ user, headers, loggedIn, signup }) => {
       <div className="top-container">
         <div className="top-form-content top-form-content-h m-auto">
           <div className="sns-login-content">
-            <IconButton icon="github" />
-            <IconButton icon="twitter" />
-            <IconButton icon="google" />
+            <IconButton handleClick={handleClick} icon="github" />
           </div>
           <div className="divider"></div>
           <div className="form-content">

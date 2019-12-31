@@ -27,6 +27,7 @@ const TextInputWithIcon = ({ icon, id, placeholder, type, handleChange }) => {
         className="auth-text-field"
         placeholder={placeholder}
         onChange={handleChange}
+        autoComplete="off"
       />
     </div>
   );

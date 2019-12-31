@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { signup } from "../../actions/authActions";
+import { signup, getOAuthUrl } from "../../actions/authActions";
 import Signup from "../../components/Auth/Signup";
 
 const mapStateToProps = state => ({
@@ -9,7 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  signup: values => dispatch(signup(values))
+  signup: values => dispatch(signup(values)),
+  getOAuthUrl: () => getOAuthUrl()
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

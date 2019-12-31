@@ -10,7 +10,7 @@ import IconButton from "../Button/IconButton";
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
-const Signin = ({ user, headers, loggedIn, signin }) => {
+const Signin = ({ user, headers, loggedIn, signin, getOAuthUrl }) => {
   const [values, setState] = useState({
     email: "",
     password: ""
@@ -29,6 +29,10 @@ const Signin = ({ user, headers, loggedIn, signin }) => {
     signin(values);
   };
 
+  const handleClick = () => {
+    getOAuthUrl();
+  };
+
   if (loggedIn) {
     return <LocalStorage headers={headers} user={user} />;
   }
@@ -39,9 +43,7 @@ const Signin = ({ user, headers, loggedIn, signin }) => {
       <div className="top-container">
         <div className="top-form-content signin-form-content-h m-auto">
           <div className="sns-login-content">
-            <IconButton icon="github" />
-            <IconButton icon="twitter" />
-            <IconButton icon="google" />
+            <IconButton handleClick={handleClick} icon="github" />
           </div>
           <div className="divider"></div>
           <div className="form-content">

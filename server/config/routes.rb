@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :tasks, only: %i[create update destroy]
       end
     end
+    get "github_oauth_url", to: "auth/omniauth_callbacks#github"
   end
 
   get "csrf_token", to: "application#csrf_token"
