@@ -3,7 +3,7 @@
 require "net/https"
 
 class Api::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
-  def twitter
+  def github
     oauth_url = "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_KEY']}&scope=read%20user"
 
     render json: { url: oauth_url }, status: :ok
