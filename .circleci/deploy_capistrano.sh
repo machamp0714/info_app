@@ -7,5 +7,5 @@ EOF
 
 eval $(ssh-agent)
 ssh-add
-cd server
+cd ../server
 bundle exec cap production deploy
