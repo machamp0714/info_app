@@ -67,11 +67,20 @@ jobs:
           environment:
             S3_BUCKET: info-app.com
           command: aws s3 sync client/build s3://${S3_BUCKET}/ --delete
-  build_server:
+  checkout_code:
     executor: server_default
     steps:
       - checkout
 
+      - save_cache:
+          key: v1-server-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/backend/server
+  build_server:
+    executor: server_default
+    steps:
+      - restore_cache:
+          key: v1-server-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "server/Gemfile.lock" }}
@@ -96,15 +105,35 @@ jobs:
           command: |
             cd server
             bundle exec rspec
+  deploy_capistrano:
+    executor: server_default
+    steps:
+      - restore_cache:
+          key: v1-server-{{ Environment.CIRCLE_SHA1 }}
+      - add_ssh_keys:
+          fingerprints:
+            - "f1:2b:9a:57:68:c1:27:72:cb:ba:6c:99:be:71:a0:71"
+      - deploy:
+          name: deploy by capistrano
+          command: .circleci/deploy_capistrano.sh
 workflows:
   version: 2
   build_test_deploy:
     jobs:
       - build_client
-      - build_server
       - deploy_s3:
           requires:
             - build_client
+          filters:
+            branches:
+              only: master
+      - checkout_code
+      - build_server:
+          requires:
+            - checkout_code
+      - deploy_capistrano:
+          requires:
+            - build_server
           filters:
             branches:
               only: master
