@@ -3,9 +3,9 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server "0.0.0.0", user: "tatsuya", roles: %w[app db web]
+server "18.177.165.218", user: "tatsuya", roles: %w[app db web]
 
-set :ssh_options, keys: "~/.ssh/amazon-linux2"
+set :ssh_options, keys: "~/.ssh/info_rsa"
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
