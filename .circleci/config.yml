@@ -86,6 +86,8 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             - v1-dependencies-
       - run:
+          command: ls
+      - run:
           name: bundle install
           command: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
