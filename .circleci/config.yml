@@ -83,31 +83,33 @@ jobs:
           key: v1-server-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-{{ checksum "server/Gemfile.lock" }}
             - v1-dependencies-
       - run:
-          command: ls
-      - run:
           name: bundle install
-          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+          command: |
+            cd server
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "server/Gemfile.lock" }}
           paths:
-            - vendor/bundle
+            - server/vendor/bundle
       - run:
           name: setup db
           command: |
+            cd server
             bundle exec rake db:create
             bundle exec rake db:schema:load
       - run:
           name: run tests
-          command: bundle exec rspec
+          command: |
+            cd server
+            bundle exec rspec
   deploy_capistrano:
     executor: server_default
     steps:
       - restore_cache:
           key: v1-server-{{ Environment.CIRCLE_SHA1 }}
-
       - add_ssh_keys:
           fingerprints:
             - "f1:2b:9a:57:68:c1:27:72:cb:ba:6c:99:be:71:a0:71"
