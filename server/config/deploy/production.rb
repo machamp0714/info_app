@@ -5,7 +5,7 @@
 
 server "18.177.165.218", user: "tatsuya", roles: %w[app db web]
 
-set :ssh_options, keys: "~/.ssh/info_rsa"
+set :ssh_options, keys: "~/.ssh/deploy_rsa"
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
