@@ -67,18 +67,10 @@ jobs:
           environment:
             S3_BUCKET: info-app.com
           command: aws s3 sync client/build s3://${S3_BUCKET}/ --delete
-  checkout_code:
-    executor: server_default
-    steps:
-      - checkout
-
-      - save_cache:
-          key: v1-server-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/backend/server
   build_server:
     executor: server_default
     steps:
+      - checkout
       - restore_cache:
           key: v1-server-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
@@ -127,9 +119,7 @@ workflows:
             branches:
               only: master
       - checkout_code
-      - build_server:
-          requires:
-            - checkout_code
+      - build_server
       # - deploy_capistrano:
       #     requires:
       #       - build_server
