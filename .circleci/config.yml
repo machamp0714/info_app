@@ -118,7 +118,6 @@ workflows:
           filters:
             branches:
               only: master
-      - checkout_code
       - build_server
       # - deploy_capistrano:
       #     requires:
