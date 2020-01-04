@@ -95,9 +95,6 @@ jobs:
           paths:
             - server/vendor/bundle
       - run:
-          name: wait for db
-          command: dockerize -wait tcp://mysql:3306 -timeout 1m
-      - run:
           name: setup db
           command: |
             cd server
