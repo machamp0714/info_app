@@ -24,7 +24,6 @@ before_fork do |server, worker|
     begin
       Process.kill "QUIT", File.read(old_pid).to_i
     rescue Errno::ENOENT, Errno::ESRCH => e
-      logger.debug("#{e.class}:#{e.message}")
     end
   end
 end
