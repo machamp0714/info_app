@@ -8,7 +8,7 @@ set :repo_tree, "server"
 set :keep_releases, 5
 set :rbenv_ruby, "2.6.5"
 set :log_level, :debug
-append :linked_files, "config/master.key", "config/env.yml"
+append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets"
 
 namespace :deploy do
