@@ -1,10 +1,9 @@
-import request from "../config/axios";
-import axios from "axios";
+import { request, client } from "../config/axios";
 
 export const signup = values => {
   return dispatch => {
     request
-      .post("http://localhost:3001/api/auth", values)
+      .post("/api/auth", values)
       .then(response => {
         dispatch({
           type: "SIGNUP_SUCCESS",
@@ -21,7 +20,7 @@ export const signup = values => {
 export const signin = values => {
   return dispatch => {
     request
-      .post("http://localhost:3001/api/auth/sign_in", values)
+      .post("/api/auth/sign_in", values)
       .then(response => {
         dispatch({
           type: "SIGNIN_SUCCESS",
@@ -36,8 +35,8 @@ export const signin = values => {
 };
 
 export const getOAuthUrl = () => {
-  axios
-    .get("http://localhost:3001/api/github_oauth_url")
+  client
+    .get("/api/github_oauth_url")
     .then(response => {
       const loginWindow = openLoginWindow(response.data.url);
       loginWindow.focus();
