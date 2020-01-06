@@ -115,7 +115,9 @@ jobs:
             - "f1:2b:9a:57:68:c1:27:72:cb:ba:6c:99:be:71:a0:71"
       - deploy:
           name: deploy by capistrano
-          command: .circleci/deploy_capistrano.sh
+          command: |
+            cd server
+            bundle exec cap production deploy
 workflows:
   version: 2
   build_test_deploy:
