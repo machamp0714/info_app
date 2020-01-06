@@ -67,6 +67,13 @@ jobs:
           environment:
             S3_BUCKET: info-app.com
           command: aws s3 sync client/build s3://${S3_BUCKET}/ --delete
+  checkout_code:
+    executor: server_default
+    steps:
+      - checkout
+      - save_cache:
+          key: v1-code-{{ .Environment.CIRCLE_TAG }}
+          path: ~/backend
   build_server:
     executor: server_default
     steps:
@@ -100,7 +107,8 @@ jobs:
   deploy_capistrano:
     executor: server_default
     steps:
-      - checkout
+      - restore_cache:
+          key: v1-code-{{ .Environment.CIRCLE_TAG }}
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "server/Gemfile.lock" }}
@@ -122,9 +130,11 @@ workflows:
           filters:
             branches:
               only: master
+      - checkout_code
       - build_server
       - deploy_capistrano:
           requires:
+            - checkout_code
             - build_server
           filters:
             branches:
