@@ -101,6 +101,10 @@ jobs:
     executor: server_default
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "server/Gemfile.lock" }}
+            - v1-dependencies-
       - add_ssh_keys:
           fingerprints:
             - "f1:2b:9a:57:68:c1:27:72:cb:ba:6c:99:be:71:a0:71"
