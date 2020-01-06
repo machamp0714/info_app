@@ -73,7 +73,8 @@ jobs:
       - checkout
       - save_cache:
           key: v1-code-{{ .Environment.CIRCLE_TAG }}
-          path: ~/backend
+          paths:
+            - ~/backend
   build_server:
     executor: server_default
     steps:
