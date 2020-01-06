@@ -5,7 +5,5 @@ cat <<EOF >> $HOME/.ssh/config
   ForwardAgent yes
 EOF
 
-eval `ssh-agent`
-ssh-add
 cd server
 bundle exec cap production deploy
