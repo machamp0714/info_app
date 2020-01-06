@@ -3,10 +3,10 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server "18.177.165.218", user: "tatsuya", roles: %w[web db app], port: 22, primary: true
+server ENV["DEPLOY_HOST"], user: ENV["DEPLOY_USER"], roles: %w[web db app]
 
 set :ssh_options, {
-    keys: "~/.ssh/id_rsa",
+    keys: ENV["DEPLOY_SSH_KEY"],
     forward_agent: true
 }
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
