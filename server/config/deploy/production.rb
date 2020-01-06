@@ -7,7 +7,7 @@ server "18.177.165.218",
   user: "tatsuya",
   roles: %w[web db app],
   ssh_options: {
-    keys: "~/.ssh/deploy_rsa",
+    keys: "~/.ssh/id_rsa",
     forward_agent: true
   }
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
