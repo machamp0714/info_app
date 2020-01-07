@@ -1,7 +1,12 @@
 @import "./Shared/all.scss";
 @import "./Dashboard/all.scss";
 @import "./Auth//auth.scss";
+@import "./variables.scss";
 
 body {
   background-color: #f1f3f9;
+}
+p {
+  margin: 0;
+  color: $primary-color;
 }
