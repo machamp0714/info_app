@@ -7,7 +7,7 @@ const Navbar = () => {
 
   return (
     <div className="header">
-      <div className="header-content">
+      <div className={user ? "header-signedin" : "header-signedout"}>
         {user ? <SignedinLinks /> : <SignedoutLinks />}
       </div>
     </div>

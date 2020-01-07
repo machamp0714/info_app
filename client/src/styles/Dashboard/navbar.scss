@@ -6,8 +6,12 @@
   background-color: $primary-color;
 }
 
-.header-content {
+.header-signedout {
   padding: 0 100px;
+}
+
+.header-signedin {
+  padding-right: 30px;
 }
 
 .header-menu {
