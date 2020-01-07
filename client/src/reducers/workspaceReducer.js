@@ -1,0 +1,19 @@
+const initState = {
+  workspaces: []
+};
+
+const workspaceReducer = (state = initState, action) => {
+  switch (action.type) {
+    case "CREATE_SUCCESS":
+      console.log(action.payload);
+      return {
+        workspaces: [...state.workspaces, action.payload]
+      };
+    case "CREATE_ERROR":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export default workspaceReducer;
