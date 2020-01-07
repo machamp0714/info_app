@@ -7,6 +7,7 @@ import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
 import LocalStorage from "./LocalStorage";
 import IconButton from "../Button/IconButton";
+import bg from "../../images/background.png";
 
 const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
@@ -36,12 +37,17 @@ const Signup = ({ user, headers, loggedIn, signup, getOAuthUrl }) => {
     getOAuthUrl();
   };
 
+  const style = {
+    backgroundImage: `url(${bg})`,
+    height: "100vh"
+  };
+
   if (loggedIn) {
     return <LocalStorage headers={headers} user={user} />;
   }
 
   return (
-    <div>
+    <div style={style}>
       <Navbar />
       <div className="top-container">
         <div className="top-form-content top-form-content-h m-auto">
