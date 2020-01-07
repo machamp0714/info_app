@@ -24,7 +24,7 @@ const SignedinLinks = () => {
   };
 
   return (
-    <div>
+    <div className="profile">
       <div className="nav-profile" onClick={handleToggle} ref={anchorRef}>
         <div className="profile-image">
           <img

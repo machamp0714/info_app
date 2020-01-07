@@ -29,9 +29,12 @@
   color: #ffffff;
 }
 
+.profile {
+  margin-left: auto;
+}
+
 .nav-profile {
   display: flex;
-  float: right;
   align-items: center;
   line-height: 70px;
   cursor: pointer;
