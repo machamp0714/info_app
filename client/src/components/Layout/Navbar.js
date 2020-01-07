@@ -1,5 +1,6 @@
 import React from "react";
-import SignedoutLinks from "../Layout/SignedoutLinks";
+import SignedoutLinks from "./SignedoutLinks";
+import SignedinLinks from "./SignedinLinks";
 
 const Navbar = () => {
   const user = localStorage.getItem("user");
@@ -7,7 +8,7 @@ const Navbar = () => {
   return (
     <div className="header">
       <div className="header-content">
-        {user ? <div>login</div> : <SignedoutLinks />}
+        {user ? <SignedinLinks /> : <SignedoutLinks />}
       </div>
     </div>
   );
