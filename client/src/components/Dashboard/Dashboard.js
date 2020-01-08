@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "./Sidebar";
-import SearchSubmit from "../Form/SearchSubmit";
+import CreateWorkspace from "../../containers/Workspace/CreateWorkspace";
 
 const Dashboard = () => {
   return (
@@ -11,7 +11,7 @@ const Dashboard = () => {
           <p>まだworkspaceがありません。</p>
           <p>まずはworkspaceを作成しましょう！</p>
         </div>
-        <SearchSubmit />
+        <CreateWorkspace />
       </div>
     </div>
   );

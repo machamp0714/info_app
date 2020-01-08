@@ -10,10 +10,10 @@ const createError = error => ({
   payload: error
 });
 
-export const createWorkspace = name => {
+export const createWorkspace = param => {
   return dispatch => {
     request
-      .post("/api/workspaces", name)
+      .post("/api/workspaces", param)
       .then(response => dispatch(createSuccess(response)))
       .catch(error => dispatch(createError(error)));
   };

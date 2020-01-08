@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -24,11 +24,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SearchSubmit = () => {
+const SearchSubmit = ({ createWorkspace }) => {
   const classes = useStyles();
+  const [param, setParam] = useState({ name: "" });
+
+  const handleChange = e => {
+    setParam({ [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = e => {
+    createWorkspace(param);
+    e.preventDefault();
+  };
+
   return (
-    <Paper component="form" className={classes.root}>
-      <InputBase className={classes.input} placeholder="workspace" />
+    <Paper onSubmit={handleSubmit} component="form" className={classes.root}>
+      <InputBase
+        id="name"
+        className={classes.input}
+        placeholder="workspace"
+        onChange={handleChange}
+      />
       <IconButton type="submit" className={classes.icon}>
         <ArrowForwardIosOutlinedIcon />
       </IconButton>
