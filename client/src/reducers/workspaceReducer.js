@@ -4,6 +4,14 @@ const initState = {
 
 const workspaceReducer = (state = initState, action) => {
   switch (action.type) {
+    case "GET_SUCCESS":
+      console.log(action.payload);
+      return {
+        workspaces: action.payload
+      };
+    case "GET_ERROR":
+      console.log(action.payload);
+      return action.payload;
     case "CREATE_SUCCESS":
       console.log(action.payload);
       return {
