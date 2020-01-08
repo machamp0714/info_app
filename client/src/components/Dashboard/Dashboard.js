@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import CreateWorkspace from "../../containers/Workspace/CreateWorkspace";
 
-const Dashboard = () => {
+const Dashboard = ({ workspaces, getWorkspaces }) => {
+  console.log(workspaces);
+  useEffect(() => {
+    getWorkspaces();
+  });
+
   return (
     <div>
       <Sidebar />

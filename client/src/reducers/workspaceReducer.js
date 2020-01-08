@@ -11,7 +11,7 @@ const workspaceReducer = (state = initState, action) => {
       };
     case "GET_ERROR":
       console.log(action.payload);
-      return action.payload;
+      return state;
     case "CREATE_SUCCESS":
       console.log(action.payload);
       return {
