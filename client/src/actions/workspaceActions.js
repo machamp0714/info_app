@@ -1,5 +1,9 @@
 import { request, client } from "../config/axios";
 
+const requestLoading = () => ({
+  type: "GET_LOADING"
+});
+
 const getSuccess = response => ({
   type: "GET_SUCCESS",
   payload: response.data
@@ -31,6 +35,7 @@ export const createWorkspace = param => {
 
 export const getWorkspaces = () => {
   return dispatch => {
+    dispatch(requestLoading());
     client
       .get("/api/workspaces")
       .then(response => dispatch(getSuccess(response)))

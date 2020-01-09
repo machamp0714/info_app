@@ -3,6 +3,7 @@ import Dashboard from "../../components/Dashboard/Dashboard";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
+  isLoading: state.workspace.isLoading,
   workspaces: state.workspace.workspaces
 });
 

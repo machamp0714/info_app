@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import CreateWorkspace from "../../containers/Workspace/CreateWorkspace";
 
-const Dashboard = ({ workspaces, getWorkspaces }) => {
+const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
   useEffect(() => {
     getWorkspaces();
   }, []);
-
+  if (isLoading) {
+    return <div>isLoading</div>;
+  }
   return (
     <div>
       <Sidebar />
