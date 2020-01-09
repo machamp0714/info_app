@@ -3,10 +3,9 @@ import Sidebar from "./Sidebar";
 import CreateWorkspace from "../../containers/Workspace/CreateWorkspace";
 
 const Dashboard = ({ workspaces, getWorkspaces }) => {
-  console.log(workspaces);
   useEffect(() => {
     getWorkspaces();
-  });
+  }, []);
 
   return (
     <div>
