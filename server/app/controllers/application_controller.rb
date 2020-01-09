@@ -5,11 +5,11 @@ class ApplicationController < ActionController::API
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
 
-  # protect_from_forgery with: :exception unless Rails.env.test?
+  protect_from_forgery with: :exception unless Rails.env.test?
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   def csrf_token
-    # cookies["CSRF_TOKEN"] = form_authenticity_token
+    cookies["CSRF_TOKEN"] = form_authenticity_token
   end
 
   private
@@ -30,5 +30,9 @@ class ApplicationController < ActionController::API
 
   def render_permission_error
     render json: { status: 403, message: "権限がありません" }, status: :forbidden
+  end
+
+  def session_clear
+    session["warden.user.user.key"] = nil if session["warden.user.user.key"]
   end
 end
