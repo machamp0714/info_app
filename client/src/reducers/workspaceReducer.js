@@ -1,5 +1,5 @@
 const initState = {
-  isLoading: false,
+  isLoading: true,
   workspaces: []
 };
 

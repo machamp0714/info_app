@@ -23,7 +23,11 @@ const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
   }
   return (
     <div>
-      <SignedinNavbar open={open} handleDrawerOpen={handleDrawerOpen} />
+      <SignedinNavbar
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        workspaces={workspaces}
+      />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
       <div className="none-workspace">
         <div className="workspace-description">
