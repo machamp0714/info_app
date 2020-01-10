@@ -48,6 +48,19 @@ export const signin = values => {
   };
 };
 
+export const signout = () => {
+  return dispatch => {
+    request
+      .delete("/api/auth/sign_out")
+      .then(response => {
+        dispatch({ type: "SIGNOUT_SUCCESS" });
+      })
+      .catch(error => {
+        dispatch({ type: "SIGNOUT_ERROR" });
+      });
+  };
+};
+
 export const getOAuthUrl = () => {
   client
     .get("/api/github_oauth_url")
