@@ -25,6 +25,7 @@ const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
         open={open}
         handleDrawerOpen={handleDrawerOpen}
         workspaces={workspaces}
+        isLoading={isLoading}
       />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
       {isLoading ? <ProgressBar /> : <AddWorkspace />}
