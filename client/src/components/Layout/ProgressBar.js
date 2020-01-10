@@ -12,7 +12,7 @@ const CssCircularProgress = withStyles({
 
 const ProgressBar = () => {
   return (
-    <div className="center">
+    <div className="center-content">
       <CssCircularProgress disableShrink />
     </div>
   );
