@@ -1,18 +1,36 @@
 import { request, client } from "../config/axios";
 
+const signupSuccess = response => ({
+  type: "SIGNUP_SUCCESS",
+  payload: response.data,
+  meta: response.headers
+});
+
+const signupError = error => ({
+  type: "SIGNUP_ERROR",
+  payload: error
+});
+
+const signinSuccess = response => ({
+  type: "SIGNIN_SUCCESS",
+  payload: response.data,
+  meta: response.headers
+});
+
+const signinError = error => ({
+  type: "SIGNIN_SUCCESS",
+  payload: error
+});
+
 export const signup = values => {
   return dispatch => {
     request
       .post("/api/auth", values)
       .then(response => {
-        dispatch({
-          type: "SIGNUP_SUCCESS",
-          payload: response.data,
-          meta: response.headers
-        });
+        dispatch(signupSuccess(response));
       })
       .catch(error => {
-        dispatch({ type: "SIGNUP_ERROR", error: error });
+        dispatch(signupError(error));
       });
   };
 };
@@ -22,14 +40,10 @@ export const signin = values => {
     request
       .post("/api/auth/sign_in", values)
       .then(response => {
-        dispatch({
-          type: "SIGNIN_SUCCESS",
-          payload: response.data,
-          meta: response.headers
-        });
+        dispatch(signinSuccess(response));
       })
       .catch(error => {
-        dispatch({ type: "SIGNIN_ERROR", error: error });
+        dispatch(signinError(error));
       });
   };
 };
