@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SignedinNavbar from "../Layout/SignedinNavbar";
 import Sidebar from "./Sidebar";
-import CreateWorkspace from "../../containers/Workspace/CreateWorkspace";
+import AddWorkspace from "./AddWorkspace";
 
 const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
@@ -29,13 +29,7 @@ const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
         workspaces={workspaces}
       />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
-      <div className="none-workspace">
-        <div className="workspace-description">
-          <p>まだworkspaceがありません。</p>
-          <p>まずはworkspaceを作成しましょう！</p>
-        </div>
-        <CreateWorkspace />
-      </div>
+      <AddWorkspace />
     </div>
   );
 };
