@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SignedinNavbar from "../Layout/SignedinNavbar";
 import Sidebar from "./Sidebar";
 import AddWorkspace from "./AddWorkspace";
+import ProgressBar from "../Layout/ProgressBar";
 
 const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
@@ -18,9 +19,6 @@ const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
     getWorkspaces();
   }, [getWorkspaces]);
 
-  if (isLoading) {
-    return <div>isLoading</div>;
-  }
   return (
     <div>
       <SignedinNavbar
@@ -29,7 +27,7 @@ const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
         workspaces={workspaces}
       />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
-      <AddWorkspace />
+      {isLoading ? <ProgressBar /> : <AddWorkspace />}
     </div>
   );
 };
