@@ -6,8 +6,12 @@
   background-color: $primary-color;
 }
 
-.header-content {
-  padding: 0 160px;
+.header-signedout {
+  padding: 0 100px;
+}
+
+.header-signedin {
+  padding-right: 30px;
 }
 
 .header-menu {
@@ -23,4 +27,36 @@
 
 .nav-link {
   color: #ffffff;
+}
+
+.profile {
+  margin-left: auto;
+}
+
+.nav-profile {
+  display: flex;
+  align-items: center;
+  line-height: 70px;
+  cursor: pointer;
+}
+
+.avatar-small {
+  display: inline-block;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.dropdown-caret {
+  display: inline-block;
+  vertical-align: middle;
+  color: #ffffff;
+  width: 0;
+  height: 0;
+  content: "";
+  border-top-style: solid;
+  border-top-width: 5px;
+  border-right: 5px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-left: 5px solid transparent;
 }
