@@ -7,6 +7,7 @@ import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const SignedinLinks = () => {
+const SignedinLinks = ({ logout, signout }) => {
   const user = JSON.parse(localStorage.getItem("user")); // parse => 値をJSONとして解析し、jsオブジェクトを構築する
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -33,6 +34,18 @@ const SignedinLinks = () => {
 
     setOpen(false);
   };
+
+  const handleClick = () => {
+    signout();
+  };
+
+  if (logout) {
+    localStorage.removeItem("access-token");
+    localStorage.removeItem("client");
+    localStorage.removeItem("uid");
+    localStorage.removeItem("user");
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="profile">
@@ -59,7 +72,7 @@ const SignedinLinks = () => {
               <MenuItem onClick={handleClose}>Account</MenuItem>
               <MenuItem onClick={handleClose}>Setting</MenuItem>
               <Divider />
-              <MenuItem onClick={handleClose}>Signout</MenuItem>
+              <MenuItem onClick={handleClick}>Signout</MenuItem>
             </MenuList>
           </ClickAwayListener>
         </Paper>

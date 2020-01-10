@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import SignedinLinks from "../../components/Layout/SignedinLinks";
 
 const mapStateToProps = state => ({
-  loggedIn: state.auth.loggedIn
+  logout: state.auth.logout
 });
 
 const mapDispatchToProps = dispatch => ({
