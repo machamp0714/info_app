@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SignedinNavbar from "../Layout/SignedinNavbar";
 import Sidebar from "./Sidebar";
-import CreateWorkspace from "../../containers/Workspace/CreateWorkspace";
+import AddWorkspace from "./AddWorkspace";
+import ProgressBar from "../Layout/ProgressBar";
 
 const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
@@ -15,27 +16,24 @@ const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
   };
 
   useEffect(() => {
-    getWorkspaces();
+    const headers = {
+      "access-token": localStorage.getItem("access-token"),
+      client: localStorage.getItem("client"),
+      uid: localStorage.getItem("uid")
+    };
+    getWorkspaces(headers);
   }, [getWorkspaces]);
 
-  if (isLoading) {
-    return <div>isLoading</div>;
-  }
   return (
     <div>
       <SignedinNavbar
         open={open}
         handleDrawerOpen={handleDrawerOpen}
         workspaces={workspaces}
+        isLoading={isLoading}
       />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
-      <div className="none-workspace">
-        <div className="workspace-description">
-          <p>まだworkspaceがありません。</p>
-          <p>まずはworkspaceを作成しましょう！</p>
-        </div>
-        <CreateWorkspace />
-      </div>
+      {isLoading ? <ProgressBar /> : <AddWorkspace />}
     </div>
   );
 };

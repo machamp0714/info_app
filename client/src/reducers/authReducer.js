@@ -9,7 +9,8 @@ const initState = {
     client: "",
     uid: ""
   },
-  loggedIn: false
+  loggedIn: false,
+  logout: false
 };
 
 const authReducer = (state = initState, action) => {
@@ -35,6 +36,16 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         loggedIn: false
+      };
+    case "SIGNOUT_SUCCESS":
+      return {
+        ...state,
+        logout: true
+      };
+    case "SIGNOUT_ERROR":
+      return {
+        ...state,
+        logout: false
       };
     default:
       return state;

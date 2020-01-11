@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
-import SignedinLinks from "./SignedinLinks";
+import SignedinLinks from "../../containers/Auth/SignedinLinks";
+import WorkspaceSelectBox from "../Form/WorkspaceSelectBox";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
 
 const drawerWidth = 400;
 
@@ -41,45 +40,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CssTextField = withStyles({
-  root: {
-    backgroundColor: "#fff",
-    borderRadius: 4,
-    minWidth: 250,
-    "& .MuiFilledInput-root": {
-      backgroundColor: "#fff",
-      borderRadius: 4,
-      "&:hover": {
-        backgroundColor: "#fff"
-      }
-    },
-    "& .MuiFilledInput-input": {
-      padding: 12
-    },
-    "& .MuiFilledInput-underline": {
-      "&:before": {
-        borderBottom: "none"
-      },
-      "&:after": {
-        borderBottom: "none"
-      }
-    },
-    "& .MuiSelect-select": {
-      "&:focus": {
-        backgroundColor: "#fff",
-        borderRadius: 4
-      }
-    }
-  }
-})(TextField);
-
-const SignedinNavbar = ({ workspaces, open, handleDrawerOpen }) => {
+const SignedinNavbar = ({ workspaces, open, handleDrawerOpen, isLoading }) => {
   const classes = useStyles();
-  const [value, setValue] = useState(workspaces[0]);
-
-  const handleChange = e => {
-    setValue(e.target.value);
-  };
 
   return (
     <AppBar
@@ -100,19 +62,9 @@ const SignedinNavbar = ({ workspaces, open, handleDrawerOpen }) => {
         >
           <MenuIcon />
         </IconButton>
-        <CssTextField
-          id="workspaces"
-          select
-          value={value}
-          onChange={handleChange}
-          variant="filled"
-        >
-          {workspaces.map(item => (
-            <MenuItem key={item.id} value={item}>
-              {item.name}
-            </MenuItem>
-          ))}
-        </CssTextField>
+        {!isLoading && workspaces.length > 0 && (
+          <WorkspaceSelectBox workspaces={workspaces} />
+        )}
         <SignedinLinks />
       </Toolbar>
     </AppBar>

@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getWorkspaces: () => dispatch(getWorkspaces())
+  getWorkspaces: headers => dispatch(getWorkspaces(headers))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
