@@ -20,3 +20,7 @@ export const client = axios.create({
     uid: localStorage.getItem("uid") || null
   }
 });
+
+export const instance = axios.create({
+  baseURL: process.env.REACT_APP_API_HOST
+});

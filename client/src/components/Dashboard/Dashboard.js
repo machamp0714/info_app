@@ -16,7 +16,12 @@ const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
   };
 
   useEffect(() => {
-    getWorkspaces();
+    const headers = {
+      "access-token": localStorage.getItem("access-token"),
+      client: localStorage.getItem("client"),
+      uid: localStorage.getItem("uid")
+    };
+    getWorkspaces(headers);
   }, [getWorkspaces]);
 
   return (

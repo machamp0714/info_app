@@ -1,4 +1,4 @@
-import { request, client } from "../config/axios";
+import { request, instance } from "../config/axios";
 
 const requestLoading = () => ({
   type: "GET_LOADING"
@@ -33,11 +33,11 @@ export const createWorkspace = param => {
   };
 };
 
-export const getWorkspaces = () => {
+export const getWorkspaces = headers => {
   return dispatch => {
     dispatch(requestLoading());
-    client
-      .get("/api/workspaces")
+    instance
+      .get("/api/workspaces", { headers: headers })
       .then(response => dispatch(getSuccess(response)))
       .catch(error => dispatch(getError(error)));
   };
