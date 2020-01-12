@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Validation from "../../hooks/validates";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -13,16 +14,28 @@ const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
 const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
-  const [values, setState] = useState({
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+
+  const [messages, setMessages] = useState({
     name: "",
     email: "",
     password: ""
   });
 
   const handleChange = e => {
-    setState({
+    const key = e.target.id;
+    const value = e.target.value;
+    setValues({
       ...values,
-      [e.target.id]: e.target.value
+      [key]: value
+    });
+    setMessages({
+      ...messages,
+      [key]: Validation.formValidates(key, value)
     });
   };
 
@@ -60,19 +73,15 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
                   placeholder="Name"
                   handleChange={handleChange}
                 />
-                <div className="error-message">
-                  ユーザー名を入力してください
-                </div>
+                <div className="error-message">{messages.name}</div>
                 <TextInputWithIcon
                   icon={mailIcon}
                   id="email"
-                  type="email"
+                  type="text"
                   placeholder="Email"
                   handleChange={handleChange}
                 />
-                <div className="error-message">
-                  メールアドレスは正しい形式で入力してください
-                </div>
+                <div className="error-message">{messages.email}</div>
                 <TextInputWithIcon
                   icon={pwIcon}
                   id="password"
@@ -80,9 +89,7 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
                   placeholder="Password"
                   handleChange={handleChange}
                 />
-                <div className="error-message">
-                  パスワードを入力してください
-                </div>
+                <div className="error-message">{messages.password}</div>
                 <div className="center">
                   <PrimaryButton value="sign up" />
                 </div>
