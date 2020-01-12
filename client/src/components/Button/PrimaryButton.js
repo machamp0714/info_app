@@ -6,11 +6,11 @@ const useStyles = makeStyles(theme => ({
   button: {
     width: "120px",
     height: "40px",
-    backgroundColor: "#172b4d",
+    backgroundColor: "#11CDEF",
     color: "#FFFFFF",
     boxShadow: "none",
     "&:hover": {
-      backgroundColor: "#172b4d",
+      backgroundColor: "#11CDEF",
       boxShadow: "none"
     }
   }
