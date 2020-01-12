@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Validation from "../../hooks/validates";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -14,16 +15,28 @@ const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
 const Signup = ({ user, headers, loggedIn, signup, getOAuthUrl }) => {
-  const [values, setState] = useState({
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+
+  const [messages, setMessages] = useState({
     name: "",
     email: "",
     password: ""
   });
 
   const handleChange = e => {
-    setState({
+    const key = e.target.id;
+    const value = e.target.value;
+    setValues({
       ...values,
-      [e.target.id]: e.target.value
+      [key]: value
+    });
+    setMessages({
+      ...messages,
+      [key]: Validation.formValidates(key, value)
     });
   };
 
@@ -65,21 +78,27 @@ const Signup = ({ user, headers, loggedIn, signup, getOAuthUrl }) => {
                   type="text"
                   placeholder="Name"
                   handleChange={handleChange}
+                  error={messages.name}
                 />
+                <div className="error-message">{messages.name}</div>
                 <TextInputWithIcon
                   icon={mailIcon}
                   id="email"
-                  type="email"
+                  type="text"
                   placeholder="Email"
                   handleChange={handleChange}
+                  error={messages.email}
                 />
+                <div className="error-message">{messages.email}</div>
                 <TextInputWithIcon
                   icon={pwIcon}
                   id="password"
                   type="password"
                   placeholder="Password"
                   handleChange={handleChange}
+                  error={messages.password}
                 />
+                <div className="error-message">{messages.password}</div>
                 <div className="center">
                   <PrimaryButton value="Sign up" />
                 </div>

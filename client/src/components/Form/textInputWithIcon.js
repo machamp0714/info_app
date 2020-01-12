@@ -27,7 +27,7 @@ const TextInputWithIcon = ({
   const classes = useStyles();
 
   return (
-    <div className={clsx("paper-box", { ["mb-4"]: !error })}>
+    <div className={clsx("paper-box", { "mb-4": !error })}>
       <IconButton className={classes.button}>{icon}</IconButton>
       <InputBase
         id={id}
