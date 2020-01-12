@@ -60,6 +60,9 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
                   placeholder="Name"
                   handleChange={handleChange}
                 />
+                <div className="error-message">
+                  ユーザー名を入力してください
+                </div>
                 <TextInputWithIcon
                   icon={mailIcon}
                   id="email"
@@ -67,6 +70,9 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
                   placeholder="Email"
                   handleChange={handleChange}
                 />
+                <div className="error-message">
+                  メールアドレスは正しい形式で入力してください
+                </div>
                 <TextInputWithIcon
                   icon={pwIcon}
                   id="password"
@@ -74,6 +80,9 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
                   placeholder="Password"
                   handleChange={handleChange}
                 />
+                <div className="error-message">
+                  パスワードを入力してください
+                </div>
                 <div className="center">
                   <PrimaryButton value="sign up" />
                 </div>
