@@ -45,6 +45,16 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
     signup(values);
   };
 
+  const canSubmit = () => {
+    const errorAttributes = Object.values(messages);
+    const validAttributes = Object.values(values);
+
+    const errorExist = errorAttributes.some(e => e !== "");
+    const valueExist = validAttributes.some(e => e === "");
+
+    return valueExist || errorExist;
+  };
+
   const handleClick = () => {
     getOAuthUrl();
   };
@@ -94,7 +104,7 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
                 />
                 <div className="error-message">{messages.password}</div>
                 <div className="center">
-                  <PrimaryButton value="sign up" />
+                  <PrimaryButton canSubmit={canSubmit} value="sign up" />
                 </div>
               </form>
             </div>

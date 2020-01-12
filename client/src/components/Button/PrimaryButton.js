@@ -16,10 +16,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const PrimaryButton = ({ value }) => {
+const PrimaryButton = ({ value, canSubmit }) => {
   const classes = useStyles();
   return (
-    <Button type="submit" variant="contained" className={classes.button}>
+    <Button
+      disabled={canSubmit()}
+      type="submit"
+      variant="contained"
+      className={classes.button}
+    >
       {value}
     </Button>
   );
