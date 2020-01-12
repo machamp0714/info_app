@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
+import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -15,11 +16,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TextInputWithIcon = ({ icon, id, placeholder, type, handleChange }) => {
+const TextInputWithIcon = ({
+  icon,
+  id,
+  placeholder,
+  type,
+  handleChange,
+  error
+}) => {
   const classes = useStyles();
 
   return (
-    <div className="paper-box mb-4">
+    <div className={clsx("paper-box", { ["mb-4"]: !error })}>
       <IconButton className={classes.button}>{icon}</IconButton>
       <InputBase
         id={id}

@@ -72,6 +72,7 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
                   type="text"
                   placeholder="Name"
                   handleChange={handleChange}
+                  error={messages.name}
                 />
                 <div className="error-message">{messages.name}</div>
                 <TextInputWithIcon
@@ -80,6 +81,7 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
                   type="text"
                   placeholder="Email"
                   handleChange={handleChange}
+                  error={messages.email}
                 />
                 <div className="error-message">{messages.email}</div>
                 <TextInputWithIcon
@@ -88,6 +90,7 @@ const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
                   type="password"
                   placeholder="Password"
                   handleChange={handleChange}
+                  error={messages.password}
                 />
                 <div className="error-message">{messages.password}</div>
                 <div className="center">
