@@ -13,7 +13,7 @@ const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
-const Top = ({ headers, user, loggedIn, signup, getOAuthUrl }) => {
+const Top = ({ headers, user, loggedIn, signup, errors, getOAuthUrl }) => {
   const [values, setValues] = useState({
     name: "",
     email: "",
