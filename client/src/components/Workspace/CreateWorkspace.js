@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SearchSubmit = ({ createWorkspace }) => {
+const CreateWorkspace = ({ createWorkspace, errors }) => {
   const classes = useStyles();
   const [param, setParam] = useState({ name: "" });
 
@@ -36,6 +36,8 @@ const SearchSubmit = ({ createWorkspace }) => {
     createWorkspace(param);
     e.preventDefault();
   };
+
+  console.log(errors);
 
   return (
     <Paper onSubmit={handleSubmit} component="form" className={classes.root}>
@@ -52,4 +54,4 @@ const SearchSubmit = ({ createWorkspace }) => {
   );
 };
 
-export default SearchSubmit;
+export default CreateWorkspace;

@@ -29,7 +29,7 @@ export const createWorkspace = param => {
     request
       .post("/api/workspaces", param)
       .then(response => dispatch(createSuccess(response)))
-      .catch(error => dispatch(createError(error)));
+      .catch(error => dispatch(createError(error.response.data.errors)));
   };
 };
 
