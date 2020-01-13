@@ -18,7 +18,7 @@ const signinSuccess = response => ({
 });
 
 const signinError = error => ({
-  type: "SIGNIN_SUCCESS",
+  type: "SIGNIN_ERROR",
   payload: error
 });
 
@@ -43,7 +43,7 @@ export const signin = values => {
         dispatch(signinSuccess(response));
       })
       .catch(error => {
-        dispatch(signinError(error));
+        dispatch(signinError(error.response.data));
       });
   };
 };

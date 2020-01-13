@@ -12,7 +12,7 @@ import bg from "../../images/background.png";
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
-const Signin = ({ user, headers, loggedIn, signin, getOAuthUrl }) => {
+const Signin = ({ user, headers, loggedIn, errors, signin, getOAuthUrl }) => {
   const [values, setValues] = useState({
     email: "",
     password: ""
@@ -77,6 +77,9 @@ const Signin = ({ user, headers, loggedIn, signin, getOAuthUrl }) => {
           <div className="form-content">
             <div className="description-text center">or</div>
             <div className="login-form-body">
+              <div className="error-message">
+                {errors.length > 0 && errors[0].message}
+              </div>
               <form onSubmit={handleSubmit}>
                 <TextInputWithIcon
                   icon={mailIcon}
