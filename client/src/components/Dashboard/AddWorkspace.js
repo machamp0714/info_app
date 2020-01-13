@@ -5,8 +5,8 @@ const AddWorkspace = () => {
   return (
     <div className="center-content">
       <div className="workspace-description">
-        <p>まだworkspaceがありません。</p>
-        <p>まずはworkspaceを作成しましょう！</p>
+        <p>まだワークスペースがありません。</p>
+        <p>まずはワークスペースを作成しましょう！</p>
       </div>
       <CreateWorkspace />
     </div>
