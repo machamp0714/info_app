@@ -20,7 +20,8 @@ const authReducer = (state = initState, action) => {
       return {
         user: action.payload,
         headers: action.meta,
-        loggedIn: true
+        loggedIn: true,
+        errors: []
       };
     case "SIGNUP_ERROR":
       return {
@@ -32,22 +33,26 @@ const authReducer = (state = initState, action) => {
       return {
         user: action.payload,
         headers: action.meta,
-        loggedIn: true
+        loggedIn: true,
+        errors: []
       };
     case "SIGNIN_ERROR":
       return {
         ...state,
-        loggedIn: false
+        loggedIn: false,
+        errors: action.payload
       };
     case "SIGNOUT_SUCCESS":
       return {
         ...state,
-        logout: true
+        logout: true,
+        errors: []
       };
     case "SIGNOUT_ERROR":
       return {
         ...state,
-        logout: false
+        logout: false,
+        errors: action.payload
       };
     default:
       return state;
