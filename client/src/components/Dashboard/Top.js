@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Validation from "../../hooks/validates";
+import Errors from "../../hooks/errors";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -25,6 +26,14 @@ const Top = ({ headers, user, loggedIn, signup, errors, getOAuthUrl }) => {
     email: "",
     password: ""
   });
+
+  useEffect(() => {
+    setMessages({
+      name: "",
+      email: Errors.emailMessage(errors),
+      password: ""
+    });
+  }, [errors]);
 
   const handleChange = e => {
     const key = e.target.id;
