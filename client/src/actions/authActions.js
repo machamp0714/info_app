@@ -30,7 +30,7 @@ export const signup = values => {
         dispatch(signupSuccess(response));
       })
       .catch(error => {
-        dispatch(signupError(error));
+        dispatch(signupError(error.response.data.errors));
       });
   };
 };

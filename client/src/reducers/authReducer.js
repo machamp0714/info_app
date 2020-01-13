@@ -10,7 +10,8 @@ const initState = {
     uid: ""
   },
   loggedIn: false,
-  logout: false
+  logout: false,
+  errors: []
 };
 
 const authReducer = (state = initState, action) => {
@@ -24,7 +25,8 @@ const authReducer = (state = initState, action) => {
     case "SIGNUP_ERROR":
       return {
         ...state,
-        loggedIn: false
+        loggedIn: false,
+        errors: action.payload
       };
     case "SIGNIN_SUCCESS":
       return {
