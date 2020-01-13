@@ -23,7 +23,10 @@ const workspaceReducer = (state = initState, action) => {
         workspaces: [...state.workspaces, action.payload]
       };
     case "CREATE_ERROR":
-      return action.payload;
+      return {
+        isLoading: false,
+        workspaces: []
+      };
     default:
       return state;
   }
