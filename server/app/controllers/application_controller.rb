@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
 
-  protect_from_forgery with: :exception unless Rails.env.test?
+  protect_from_forgery with: :exception if Rails.env.production?
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   def csrf_token

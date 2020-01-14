@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
     end
     get "github_oauth_url", to: "auth/omniauth_callbacks#github"
-    get "current_user", to: "users#current_user"
+    get "current_user", to: "users#currentuser"
   end
 
   get "csrf_token", to: "application#csrf_token"
