@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Validation from "../../hooks/validates";
+import Errors from "../../hooks/errors";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -13,17 +15,37 @@ const personIcon = <PersonOutlineIcon className="icon" />;
 const mailIcon = <MailOutlineIcon className="icon" />;
 const pwIcon = <LockOutlinedIcon className="icon" />;
 
-const Signup = ({ user, headers, loggedIn, signup, getOAuthUrl }) => {
-  const [values, setState] = useState({
+const Signup = ({ user, headers, loggedIn, errors, signup, getOAuthUrl }) => {
+  const [values, setValues] = useState({
     name: "",
     email: "",
     password: ""
   });
 
+  const [messages, setMessages] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
+
+  useEffect(() => {
+    setMessages({
+      name: "",
+      email: Errors.emailMessage(errors),
+      password: ""
+    });
+  }, [errors]);
+
   const handleChange = e => {
-    setState({
+    const key = e.target.id;
+    const value = e.target.value;
+    setValues({
       ...values,
-      [e.target.id]: e.target.value
+      [key]: value
+    });
+    setMessages({
+      ...messages,
+      [key]: Validation.formValidates(key, value)
     });
   };
 
@@ -31,6 +53,16 @@ const Signup = ({ user, headers, loggedIn, signup, getOAuthUrl }) => {
     e.preventDefault();
 
     signup(values);
+  };
+
+  const canSubmit = () => {
+    const errorAttributes = Object.values(messages);
+    const validAttributes = Object.values(values);
+
+    const errorExist = errorAttributes.some(e => e !== "");
+    const valueExist = validAttributes.some(e => e === "");
+
+    return valueExist || errorExist;
   };
 
   const handleClick = () => {
@@ -65,23 +97,29 @@ const Signup = ({ user, headers, loggedIn, signup, getOAuthUrl }) => {
                   type="text"
                   placeholder="Name"
                   handleChange={handleChange}
+                  error={messages.name}
                 />
+                <div className="error-message">{messages.name}</div>
                 <TextInputWithIcon
                   icon={mailIcon}
                   id="email"
-                  type="email"
+                  type="text"
                   placeholder="Email"
                   handleChange={handleChange}
+                  error={messages.email}
                 />
+                <div className="error-message">{messages.email}</div>
                 <TextInputWithIcon
                   icon={pwIcon}
                   id="password"
                   type="password"
                   placeholder="Password"
                   handleChange={handleChange}
+                  error={messages.password}
                 />
+                <div className="error-message">{messages.password}</div>
                 <div className="center">
-                  <PrimaryButton value="Sign up" />
+                  <PrimaryButton canSubmit={canSubmit} value="Sign up" />
                 </div>
               </form>
             </div>

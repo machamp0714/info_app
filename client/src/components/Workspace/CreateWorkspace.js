@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SearchSubmit = ({ createWorkspace }) => {
+const CreateWorkspace = ({ createWorkspace, errors }) => {
   const classes = useStyles();
   const [param, setParam] = useState({ name: "" });
 
@@ -37,19 +37,31 @@ const SearchSubmit = ({ createWorkspace }) => {
     e.preventDefault();
   };
 
+  const validateMessages = () => {
+    const message = errors.map(e => {
+      return "ワークスペース" + e.message;
+    });
+    return message;
+  };
+
   return (
-    <Paper onSubmit={handleSubmit} component="form" className={classes.root}>
-      <InputBase
-        id="name"
-        className={classes.input}
-        placeholder="workspace"
-        onChange={handleChange}
-      />
-      <IconButton type="submit" className={classes.icon}>
-        <ArrowForwardIosOutlinedIcon />
-      </IconButton>
-    </Paper>
+    <div>
+      <Paper onSubmit={handleSubmit} component="form" className={classes.root}>
+        <InputBase
+          id="name"
+          className={classes.input}
+          placeholder="workspace"
+          onChange={handleChange}
+        />
+        <IconButton type="submit" className={classes.icon}>
+          <ArrowForwardIosOutlinedIcon />
+        </IconButton>
+      </Paper>
+      {errors.length > 0 && (
+        <div className="error-message">{validateMessages()}</div>
+      )}
+    </div>
   );
 };
 
-export default SearchSubmit;
+export default CreateWorkspace;

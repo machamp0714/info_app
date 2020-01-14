@@ -5,7 +5,8 @@ import Signup from "../../components/Auth/Signup";
 const mapStateToProps = state => ({
   headers: state.auth.headers,
   user: state.auth.user,
-  loggedIn: state.auth.loggedIn
+  loggedIn: state.auth.loggedIn,
+  errors: state.auth.errors
 });
 
 const mapDispatchToProps = dispatch => ({

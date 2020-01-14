@@ -1,6 +1,7 @@
 const initState = {
   isLoading: true,
-  workspaces: []
+  workspaces: [],
+  errors: []
 };
 
 const workspaceReducer = (state = initState, action) => {
@@ -8,22 +9,29 @@ const workspaceReducer = (state = initState, action) => {
     case "GET_LOADING":
       return {
         isLoading: true,
-        workspaces: state.workspaces
+        workspaces: state.workspaces,
+        errors: []
       };
     case "GET_SUCCESS":
       return {
         isLoading: false,
-        workspaces: action.payload
+        workspaces: action.payload,
+        errors: []
       };
     case "GET_ERROR":
       return state;
     case "CREATE_SUCCESS":
       return {
         isLoading: false,
-        workspaces: [...state.workspaces, action.payload]
+        workspaces: [...state.workspaces, action.payload],
+        errors: []
       };
     case "CREATE_ERROR":
-      return action.payload;
+      return {
+        isLoading: false,
+        workspaces: [...state.workspaces],
+        errors: action.payload
+      };
     default:
       return state;
   }

@@ -6,20 +6,25 @@ const useStyles = makeStyles(theme => ({
   button: {
     width: "120px",
     height: "40px",
-    backgroundColor: "#172b4d",
+    backgroundColor: "#11CDEF",
     color: "#FFFFFF",
     boxShadow: "none",
     "&:hover": {
-      backgroundColor: "#172b4d",
+      backgroundColor: "#11CDEF",
       boxShadow: "none"
     }
   }
 }));
 
-const PrimaryButton = ({ value }) => {
+const PrimaryButton = ({ value, canSubmit }) => {
   const classes = useStyles();
   return (
-    <Button type="submit" variant="contained" className={classes.button}>
+    <Button
+      disabled={canSubmit()}
+      type="submit"
+      variant="contained"
+      className={classes.button}
+    >
       {value}
     </Button>
   );
