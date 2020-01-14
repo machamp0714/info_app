@@ -65,6 +65,8 @@ const Signin = ({ user, headers, loggedIn, errors, signin, getOAuthUrl }) => {
     return <LocalStorage headers={headers} user={user} />;
   }
 
+  console.log(errors);
+
   return (
     <div style={style}>
       <Navbar />
@@ -78,7 +80,9 @@ const Signin = ({ user, headers, loggedIn, errors, signin, getOAuthUrl }) => {
             <div className="description-text center">or</div>
             <div className="login-form-body">
               <div className="error-message">
-                {errors.length > 0 && errors[0].message}
+                {errors.length > 0 &&
+                  errors[0].status === 401 &&
+                  errors[0].message}
               </div>
               <form onSubmit={handleSubmit}>
                 <TextInputWithIcon
