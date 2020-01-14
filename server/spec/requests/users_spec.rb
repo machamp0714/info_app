@@ -79,4 +79,34 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe "GET /current_user" do
+    context "when no authorized" do
+      subject(:get_unauthorized) { get current_user_path }
+
+      it_behaves_like "unauthorized_error"
+    end
+
+    context "when requests with authorized header" do
+      let(:user) { create :user }
+      let(:auth_headers) { user.create_new_auth_token }
+      subject(:get_current_user) { get current_user_path, headers: auth_headers }
+
+      it "return 200 status code" do
+        get_current_user
+
+        expect(response).to have_http_status 200
+      end
+
+      it "return current user json" do
+        get_current_user
+
+        expect(json).to include({
+          "name" => user.name,
+          "email" => user.email,
+          "image" => user.image
+        })
+      end
+    end
+  end
 end
