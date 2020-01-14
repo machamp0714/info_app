@@ -82,7 +82,7 @@ RSpec.describe "Users", type: :request do
 
   describe "GET /current_user" do
     context "when no authorized" do
-      subject(:get_unauthorized) { get current_user_path }
+      subject(:get_unauthorized) { get api_current_user_path }
 
       it_behaves_like "unauthorized_error"
     end
@@ -90,7 +90,7 @@ RSpec.describe "Users", type: :request do
     context "when requests with authorized header" do
       let(:user) { create :user }
       let(:auth_headers) { user.create_new_auth_token }
-      subject(:get_current_user) { get current_user_path, headers: auth_headers }
+      subject(:get_current_user) { get api_current_user_path, headers: auth_headers }
 
       it "return 200 status code" do
         get_current_user
