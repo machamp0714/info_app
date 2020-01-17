@@ -2,7 +2,7 @@ const initState = {
   user: {
     name: "",
     email: "",
-    password: ""
+    image: ""
   },
   headers: {
     "access-token": "",
