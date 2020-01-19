@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SignedinNavbar from "../Layout/SignedinNavbar";
 import Sidebar from "./Sidebar";
 import AddWorkspace from "./AddWorkspace";
-import AddColumn from "../Column/AddColumn";
+import WorkspaceColumns from "../../containers/Column/WorkspaceColumns";
 import ProgressBar from "../Layout/ProgressBar";
 
 const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
@@ -30,8 +30,23 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
         user={user}
       />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
-      {isLoading ? <ProgressBar /> : <AddWorkspace />}
-      <AddColumn />
+      {isLoading ? (
+        <ProgressBar />
+      ) : (
+        [
+          workspaces.length === 0 ? (
+            <AddWorkspace />
+          ) : (
+            <WorkspaceColumns workspace={workspaces[0]} />
+          )
+        ]
+      )}
+      {/* {isLoading && <ProgressBar />}
+      {isLoading && workspaces.length === 0 ? (
+        <AddWorkspace />
+      ) : (
+        <WorkspaceColumns workspace={workspaces[0]} />
+      )} */}
     </div>
   );
 };
