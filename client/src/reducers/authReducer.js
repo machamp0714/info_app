@@ -18,10 +18,10 @@ const authReducer = (state = initState, action) => {
   switch (action.type) {
     case "SIGNUP_SUCCESS":
       return {
+        ...state,
         user: action.payload,
         headers: action.meta,
-        loggedIn: true,
-        errors: []
+        loggedIn: true
       };
     case "SIGNUP_ERROR":
       return {
@@ -31,21 +31,21 @@ const authReducer = (state = initState, action) => {
       };
     case "SIGNIN_SUCCESS":
       return {
+        ...state,
         user: action.payload,
         headers: action.meta,
-        loggedIn: true,
-        errors: []
+        loggedIn: true
       };
     case "SIGNIN_ERROR":
       return {
+        ...state,
         loggedIn: false,
         errors: [action.payload]
       };
     case "SIGNOUT_SUCCESS":
       return {
         ...state,
-        logout: true,
-        errors: []
+        logout: true
       };
     case "SIGNOUT_ERROR":
       return {
