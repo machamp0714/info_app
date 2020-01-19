@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import Validation from "../../hooks/validates";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
-import LocalStorage from "../Auth/LocalStorage";
 import IconButton from "../Button/IconButton";
 import bg from "../../images/background.png";
 
@@ -62,10 +62,12 @@ const Signin = ({ user, headers, loggedIn, errors, signin, getOAuthUrl }) => {
   };
 
   if (loggedIn) {
-    return <LocalStorage headers={headers} user={user} />;
-  }
+    localStorage.setItem("access-token", headers["access-token"]);
+    localStorage.setItem("client", headers["client"]);
+    localStorage.setItem("uid", headers["uid"]);
 
-  console.log(errors);
+    return <Redirect to={"/" + user.name} />;
+  }
 
   return (
     <div style={style}>
