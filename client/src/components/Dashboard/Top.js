@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import Validation from "../../hooks/validates";
 import Errors from "../../hooks/errors";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
@@ -7,7 +8,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import TextInputWithIcon from "../Form/textInputWithIcon";
 import Navbar from "../Layout/Navbar";
 import PrimaryButton from "../Button/PrimaryButton";
-import LocalStorage from "../Auth/LocalStorage";
 import IconButton from "../Button/IconButton";
 
 const personIcon = <PersonOutlineIcon className="icon" />;
@@ -69,7 +69,11 @@ const Top = ({ headers, user, loggedIn, signup, errors, getOAuthUrl }) => {
   };
 
   if (loggedIn) {
-    return <LocalStorage headers={headers} user={user} />;
+    localStorage.setItem("access-token", headers["access-token"]);
+    localStorage.setItem("client", headers["client"]);
+    localStorage.setItem("uid", headers["uid"]);
+
+    return <Redirect to={"/" + user.name} />;
   }
 
   return (

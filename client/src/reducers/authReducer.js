@@ -24,14 +24,12 @@ const authReducer = (state = initState, action) => {
         isLoading: true
       };
     case "GET_USER_SUCCESS":
-      console.log(action.payload);
       return {
         ...state,
         loggedIn: true,
         isLoading: false
       };
     case "GET_USER_ERROR":
-      console.log(action.payload);
       return {
         ...state,
         loggedIn: false,
