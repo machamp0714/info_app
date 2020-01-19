@@ -13,7 +13,7 @@ const RequiredSignin = ({
   }, [getUser]);
 
   if (isLoading) {
-    return <div>loading</div>;
+    return <div>ページを移動しています。</div>;
   } else {
     if (loggedIn) {
       return <WrappedComponent user={user} />;
