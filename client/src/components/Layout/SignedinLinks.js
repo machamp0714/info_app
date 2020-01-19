@@ -17,8 +17,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const SignedinLinks = ({ logout, signout }) => {
-  const user = JSON.parse(localStorage.getItem("user")); // parse => 値をJSONとして解析し、jsオブジェクトを構築する
+const SignedinLinks = ({ logout, signout, user }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
@@ -40,10 +39,8 @@ const SignedinLinks = ({ logout, signout }) => {
   };
 
   if (logout) {
-    localStorage.removeItem("access-token");
-    localStorage.removeItem("client");
-    localStorage.removeItem("uid");
-    localStorage.removeItem("user");
+    localStorage.clear();
+
     return <Redirect to="/" />;
   }
 

@@ -79,4 +79,47 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe "GET /current_user" do
+    context "when no authorized" do
+      subject(:get_unauthorized) { get api_current_user_path }
+
+      it "return 401 status code" do
+        get_unauthorized
+
+        expect(response).to have_http_status :unauthorized
+      end
+
+      it "return proper error json" do
+        get_unauthorized
+
+        expect(json).to include(
+          "status" => 401,
+          "message" => "アカウント登録もしくはログインしてください"
+        )
+      end
+    end
+
+    context "when requests with authorized header" do
+      let(:user) { create :user }
+      let(:auth_headers) { user.create_new_auth_token }
+      subject(:get_current_user) { get api_current_user_path, headers: auth_headers }
+
+      it "return 200 status code" do
+        get_current_user
+
+        expect(response).to have_http_status 200
+      end
+
+      it "return current user json" do
+        get_current_user
+
+        expect(json).to include({
+          "name" => user.name,
+          "email" => user.email,
+          "image" => user.image
+        })
+      end
+    end
+  end
 end

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
 
-  protect_from_forgery with: :exception unless Rails.env.test?
+  protect_from_forgery with: :exception if Rails.env.production?
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   def csrf_token
@@ -24,12 +24,16 @@ class ApplicationController < ActionController::API
     render json: response, status: :unprocessable_entity
   end
 
-  def not_found_error
-    render json: { status: 404, message: "Not found" }, status: :not_found
+  def render_authorization_error
+    render json: { status: 401, message: "アカウント登録もしくはログインしてください" }, status: :unauthorized
   end
 
   def render_permission_error
     render json: { status: 403, message: "権限がありません" }, status: :forbidden
+  end
+
+  def not_found_error
+    render json: { status: 404, message: "Not found" }, status: :not_found
   end
 
   def session_clear

@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import AddWorkspace from "./AddWorkspace";
 import ProgressBar from "../Layout/ProgressBar";
 
-const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
+const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -16,12 +16,7 @@ const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
   };
 
   useEffect(() => {
-    const headers = {
-      "access-token": localStorage.getItem("access-token"),
-      client: localStorage.getItem("client"),
-      uid: localStorage.getItem("uid")
-    };
-    getWorkspaces(headers);
+    getWorkspaces();
   }, [getWorkspaces]);
 
   return (
@@ -31,6 +26,7 @@ const Dashboard = ({ workspaces, isLoading, getWorkspaces }) => {
         handleDrawerOpen={handleDrawerOpen}
         workspaces={workspaces}
         isLoading={isLoading}
+        user={user}
       />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
       {isLoading ? <ProgressBar /> : <AddWorkspace />}
