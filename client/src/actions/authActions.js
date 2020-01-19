@@ -1,5 +1,19 @@
 import { secureHTTP, http } from "../config/axios";
 
+const getUserLoading = () => ({
+  type: "GET_USER_LOADING"
+});
+
+const getUserSuccess = response => ({
+  type: "GET_USER_SUCCESS",
+  payload: response
+});
+
+const getUserError = error => ({
+  type: "GET_USER_ERROR",
+  payload: error
+});
+
 const signupSuccess = response => ({
   type: "SIGNUP_SUCCESS",
   payload: response.data,
@@ -21,6 +35,16 @@ const signinError = error => ({
   type: "SIGNIN_ERROR",
   payload: error
 });
+
+export const getUser = () => {
+  return dispatch => {
+    dispatch(getUserLoading());
+    http
+      .get("/api/current_user")
+      .then(response => dispatch(getUserSuccess(response)))
+      .catch(error => dispatch(getUserError(error)));
+  };
+};
 
 export const signup = values => {
   return dispatch => {
