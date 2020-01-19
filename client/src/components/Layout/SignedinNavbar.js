@@ -40,7 +40,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignedinNavbar = ({ workspaces, open, handleDrawerOpen, isLoading }) => {
+const SignedinNavbar = ({
+  workspaces,
+  open,
+  handleDrawerOpen,
+  isLoading,
+  user
+}) => {
   const classes = useStyles();
 
   return (
@@ -65,7 +71,7 @@ const SignedinNavbar = ({ workspaces, open, handleDrawerOpen, isLoading }) => {
         {!isLoading && workspaces.length > 0 && (
           <WorkspaceSelectBox workspaces={workspaces} />
         )}
-        <SignedinLinks />
+        <SignedinLinks user={user} />
       </Toolbar>
     </AppBar>
   );

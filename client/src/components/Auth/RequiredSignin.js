@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 
-const RequiredSignin = ({ WrappedComponent, getUser, isLoading, loggedIn }) => {
+const RequiredSignin = ({
+  WrappedComponent,
+  getUser,
+  isLoading,
+  loggedIn,
+  user
+}) => {
   useEffect(() => {
     getUser();
   }, [getUser]);
@@ -10,7 +16,7 @@ const RequiredSignin = ({ WrappedComponent, getUser, isLoading, loggedIn }) => {
     return <div>loading</div>;
   } else {
     if (loggedIn) {
-      return <WrappedComponent />;
+      return <WrappedComponent user={user} />;
     }
 
     return <Redirect to="/signin" />;

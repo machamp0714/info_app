@@ -41,7 +41,7 @@ export const getUser = () => {
     dispatch(getUserLoading());
     http
       .get("/api/current_user")
-      .then(response => dispatch(getUserSuccess(response)))
+      .then(response => dispatch(getUserSuccess(response.data)))
       .catch(error => dispatch(getUserError(error)));
   };
 };

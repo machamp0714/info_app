@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
   isLoading: state.auth.isLoading,
-  loggedIn: state.auth.loggedIn
+  loggedIn: state.auth.loggedIn,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => ({

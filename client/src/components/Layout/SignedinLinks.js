@@ -17,8 +17,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const SignedinLinks = ({ logout, signout }) => {
-  const user = JSON.parse(localStorage.getItem("user")); // parse => 値をJSONとして解析し、jsオブジェクトを構築する
+const SignedinLinks = ({ logout, signout, user }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
@@ -50,7 +49,7 @@ const SignedinLinks = ({ logout, signout }) => {
   return (
     <div className="profile">
       <div className="nav-profile" onClick={handleToggle} ref={anchorRef}>
-        {/* {user.image ? (
+        {user.image ? (
           <div className="profile-image">
             <img
               className="avatar-small"
@@ -62,8 +61,7 @@ const SignedinLinks = ({ logout, signout }) => {
           </div>
         ) : (
           <AccountBoxIcon style={{ fontSize: 35 }} className={classes.icon} />
-        )} */}
-        <AccountBoxIcon style={{ fontSize: 35 }} className={classes.icon} />
+        )}
         <span className="dropdown-caret"></span>
       </div>
       <Popper open={open} anchorEl={anchorRef.current}>
