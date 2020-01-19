@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import RedirectDashboard from "./components/Auth/RedirectDashboard";
 import RequiredSignin from "./containers/Auth/RequiredSignin";
 import Top from "./containers/Auth/Top";
 import Signin from "./containers/Auth/Signin";
@@ -22,19 +21,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => <RedirectDashboard WrappedComponent={Top} />}
-        />
-        <Route
-          path="/signin"
-          render={() => <RedirectDashboard WrappedComponent={Signin} />}
-        />
-        <Route
-          path="/signup"
-          render={() => <RedirectDashboard WrappedComponent={Signup} />}
-        />
+        <Route exact path="/" component={Top} />
+        <Route path="/signin" component={Signin} />
+        <Route path="/signup" component={Signup} />
         <Route
           path="/:id"
           render={() => <RequiredSignin WrappedComponent={Dashboard} />}
