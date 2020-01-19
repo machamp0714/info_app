@@ -39,7 +39,7 @@ client.interceptors.request.use(config => {
   const authToken = getToken();
 
   if (authToken) {
-    return authToken;
+    config.headers = authToken;
   }
   return config;
 });
