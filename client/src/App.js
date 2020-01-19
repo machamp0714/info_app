@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import RedirectDashboard from "./components/Auth/RedirectDashboard";
-import RequiredSignin from "./components/Auth/RequiredSignin";
+import RequiredSignin from "./containers/Auth/RequiredSignin";
 import Top from "./containers/Auth/Top";
 import Signin from "./containers/Auth/Signin";
 import Signup from "./containers/Auth/Signup";
