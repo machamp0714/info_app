@@ -43,7 +43,7 @@ const SignedinLinks = ({ logout, signout }) => {
     localStorage.removeItem("access-token");
     localStorage.removeItem("client");
     localStorage.removeItem("uid");
-    localStorage.removeItem("user");
+
     return <Redirect to="/" />;
   }
 
