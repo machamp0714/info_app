@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class Api::UsersController < ApplicationController
-  before_action :authenticate_api_user!
 
   def currentuser
-    render json: current_api_user, status: :ok
+    user = current_api_user
+    if user
+      render json: user, status: :ok
+    else
+      render_authorization_error
+    end
   end
 end

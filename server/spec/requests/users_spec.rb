@@ -84,7 +84,20 @@ RSpec.describe "Users", type: :request do
     context "when no authorized" do
       subject(:get_unauthorized) { get api_current_user_path }
 
-      it_behaves_like "unauthorized_error"
+      it "return 401 status code" do
+        get_unauthorized
+
+        expect(response).to have_http_status :unauthorized
+      end
+
+      it "return proper error json" do
+        get_unauthorized
+
+        expect(json).to include(
+          "status" => 401,
+          "message" => "アカウント登録もしくはログインしてください"
+        )
+      end
     end
 
     context "when requests with authorized header" do
