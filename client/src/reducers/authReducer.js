@@ -11,11 +11,32 @@ const initState = {
   },
   loggedIn: false,
   logout: false,
+  isLoading: true,
   errors: []
 };
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
+    case "GET_USER_LOADING":
+      return {
+        ...state,
+        loggedIn: false,
+        isLoading: true
+      };
+    case "GET_USER_SUCCESS":
+      console.log(action.payload);
+      return {
+        ...state,
+        loggedIn: true,
+        isLoading: false
+      };
+    case "GET_USER_ERROR":
+      console.log(action.payload);
+      return {
+        ...state,
+        loggedIn: false,
+        isLoading: false
+      };
     case "SIGNUP_SUCCESS":
       return {
         ...state,
