@@ -1,4 +1,4 @@
-import { request, client } from "../config/axios";
+import { secureHTTP, http } from "../config/axios";
 
 const requestLoading = () => ({
   type: "GET_LOADING"
@@ -26,7 +26,7 @@ const createError = error => ({
 
 export const createWorkspace = param => {
   return dispatch => {
-    request
+    secureHTTP
       .post("/api/workspaces", param)
       .then(response => dispatch(createSuccess(response)))
       .catch(error => dispatch(createError(error.response.data.errors)));
@@ -36,7 +36,7 @@ export const createWorkspace = param => {
 export const getWorkspaces = () => {
   return dispatch => {
     dispatch(requestLoading());
-    client
+    http
       .get("/api/workspaces")
       .then(response => dispatch(getSuccess(response)))
       .catch(error => dispatch(getError(error)));

@@ -15,14 +15,14 @@ const getToken = () => {
   return null;
 };
 
-export const request = axios.create({
+export const secureHTTP = axios.create({
   xsrfCookieName: "CSRF_TOKEN",
   xsrfHeaderName: "X-CSRF-Token",
   withCredentials: true,
   baseURL: process.env.REACT_APP_API_HOST
 });
 
-request.interceptors.request.use(config => {
+secureHTTP.interceptors.request.use(config => {
   const authToken = getToken();
 
   if (authToken) {
@@ -31,19 +31,15 @@ request.interceptors.request.use(config => {
   return config;
 });
 
-export const client = axios.create({
+export const http = axios.create({
   baseURL: process.env.REACT_APP_API_HOST
 });
 
-client.interceptors.request.use(config => {
+http.interceptors.request.use(config => {
   const authToken = getToken();
 
   if (authToken) {
     config.headers = authToken;
   }
   return config;
-});
-
-export const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_HOST
 });

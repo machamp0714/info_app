@@ -1,4 +1,4 @@
-import { request, client } from "../config/axios";
+import { secureHTTP, http } from "../config/axios";
 
 const signupSuccess = response => ({
   type: "SIGNUP_SUCCESS",
@@ -24,7 +24,7 @@ const signinError = error => ({
 
 export const signup = values => {
   return dispatch => {
-    request
+    secureHTTP
       .post("/api/auth", values)
       .then(response => {
         dispatch(signupSuccess(response));
@@ -37,7 +37,7 @@ export const signup = values => {
 
 export const signin = values => {
   return dispatch => {
-    request
+    secureHTTP
       .post("/api/auth/sign_in", values)
       .then(response => {
         dispatch(signinSuccess(response));
@@ -50,7 +50,7 @@ export const signin = values => {
 
 export const signout = () => {
   return dispatch => {
-    request
+    secureHTTP
       .delete("/api/auth/sign_out")
       .then(response => {
         dispatch({ type: "SIGNOUT_SUCCESS" });
@@ -62,7 +62,7 @@ export const signout = () => {
 };
 
 export const getOAuthUrl = () => {
-  client
+  http
     .get("/api/github_oauth_url")
     .then(response => {
       const loginWindow = openLoginWindow(response.data.url);
