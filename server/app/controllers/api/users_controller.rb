@@ -4,6 +4,7 @@ class Api::UsersController < ApplicationController
 
   def currentuser
     user = current_api_user
+    session_clear
     if user
       render json: user, status: :ok
     else
