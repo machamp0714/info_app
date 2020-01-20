@@ -43,7 +43,7 @@ class Api::ColumnsController < ApplicationController
   private
 
   def column_params
-    params.permit(:name)
+    params.require(:column).permit(:name)
   end
 
   def verify_permission

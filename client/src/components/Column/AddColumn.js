@@ -98,7 +98,6 @@ const AddColumn = ({ createColumn }) => {
             <InputBase
               className={classes.input}
               id="name"
-              value={value}
               palaceholder="Enter column name"
               autoFocus
             />

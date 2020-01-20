@@ -37,7 +37,7 @@ RSpec.describe "Columns", type: :request do
       subject(:post_no_permission) do
         post(
           api_workspace_columns_path(workspace),
-          params: { name: "column" },
+          params: { column: { name: "column" } },
           headers: auth_headers
         )
       end
@@ -52,7 +52,7 @@ RSpec.describe "Columns", type: :request do
       subject(:post_invalid_params) do
         post(
           api_workspace_columns_path(workspace),
-          params: { name: "" },
+          params: { column: { name: "" } },
           headers: auth_headers
         )
       end
@@ -82,7 +82,7 @@ RSpec.describe "Columns", type: :request do
       subject(:post_valid_params) do
         post(
           api_workspace_columns_path(workspace),
-          params: { name: "column" },
+          params: { column: { name: "column" } },
           headers: auth_headers
         )
       end
@@ -118,7 +118,7 @@ RSpec.describe "Columns", type: :request do
       subject(:patch_no_permission) do
         patch(
           api_column_path(column),
-          params: { name: "update column" },
+          params: { column: { name: "update column" } },
           headers: auth_headers
         )
       end
@@ -133,7 +133,7 @@ RSpec.describe "Columns", type: :request do
       subject(:patch_invalid_params) do
         patch(
           api_column_path(column),
-          params: { name: "" },
+          params: { column: { name: "" } },
           headers: auth_headers
         )
       end
@@ -163,7 +163,7 @@ RSpec.describe "Columns", type: :request do
       subject(:patch_valid_params) do
         patch(
           api_column_path(column),
-          params: { name: "update column" },
+          params: { column: { name: "update column" } },
           headers: auth_headers
         )
       end
