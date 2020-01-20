@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddColumn = () => {
+const AddColumn = ({ createColumn }) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -98,6 +98,7 @@ const AddColumn = () => {
             <InputBase
               className={classes.input}
               id="name"
+              value={value}
               palaceholder="Enter column name"
               autoFocus
             />

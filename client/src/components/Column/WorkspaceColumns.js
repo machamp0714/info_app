@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import AddColumn from "./AddColumn";
+import AddColumn from "../../containers/Column/AddColumn";
 
 const WorkspaceColumns = ({ columns, getColumns, workspace }) => {
   useEffect(() => {
