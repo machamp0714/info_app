@@ -2,8 +2,8 @@
 
 class Api::WorkspacesController < ApplicationController
   before_action :authenticate_api_user!
+  before_action :verify_permission, only: %i[show update destroy]
   before_action :session_clear
-  before_action :verify_permission, only: %i[update destroy]
 
   def index
     workspaces = current_api_user.workspaces
@@ -18,6 +18,12 @@ class Api::WorkspacesController < ApplicationController
     else
       render_errors(workspace)
     end
+  end
+
+  def show
+    workspace = current_api_user.workspaces.find(params[:id])
+
+    render json: workspace, status: :ok
   end
 
   def update
