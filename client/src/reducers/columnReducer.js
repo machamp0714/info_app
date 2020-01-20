@@ -1,5 +1,6 @@
 const initState = {
-  columns: []
+  columns: [],
+  errors: []
 };
 
 const columnReducer = (state = initState, action) => {
@@ -10,6 +11,16 @@ const columnReducer = (state = initState, action) => {
       };
     case "GET_COLUMNS_ERROR":
       return state;
+    case "CREATE_SUCCESS":
+      return {
+        ...state,
+        columns: [...state.columns, action.payload]
+      };
+    case "CREATE_ERROR":
+      return {
+        ...state,
+        errors: action.payload
+      };
     default:
       return state;
   }
