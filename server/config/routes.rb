@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       omniauth_callbacks: "api/auth/omniauth_callbacks"
     }
 
-    resources :workspaces, only: %i[index create update destroy], shallow: true do
+    resources :workspaces, only: %i[index create show update destroy], shallow: true do
       resources :columns, only: %i[index create update destroy] do
         resources :tasks, only: %i[create update destroy]
       end
