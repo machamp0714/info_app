@@ -4,9 +4,11 @@ import Sidebar from "./Sidebar";
 import AddWorkspace from "./AddWorkspace";
 import WorkspaceColumns from "../../containers/Column/WorkspaceColumns";
 import ProgressBar from "../Layout/ProgressBar";
+import { http } from "../../config/axios";
 
 const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
+  const [workspace, setWorkspace] = useState(null);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -19,6 +21,15 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   useEffect(() => {
     getWorkspaces();
   }, [getWorkspaces]);
+
+  useEffect(() => {
+    const getDefaultWorkspace = async () => {
+      const result = await http.get("/api/default_workspace");
+      setWorkspace(result.data);
+    };
+
+    getDefaultWorkspace();
+  }, [workspaces]);
 
   return (
     <div>
@@ -37,10 +48,11 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
           workspaces.length === 0 ? (
             <AddWorkspace />
           ) : (
-            <WorkspaceColumns
-              workspace={workspaces[0]}
-              key={workspaces[0].id}
-            />
+            [
+              workspace !== null && (
+                <WorkspaceColumns workspace={workspace} key={workspace.id} />
+              )
+            ]
           )
         ]
       )}
