@@ -43,6 +43,12 @@ class Api::WorkspacesController < ApplicationController
     head :no_content
   end
 
+  def default_workspace
+    workspace = current_api_user.workspaces.first
+
+    render json: workspace, status: :ok
+  end
+
   private
 
   def workspace_params
