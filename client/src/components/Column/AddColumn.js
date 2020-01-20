@@ -1,13 +1,47 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import Typography from "@material-ui/core/Typography";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import Textfield from "@material-ui/core/TextField";
+import Paper from "@material-ui/core/Paper";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles(theme => ({
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500]
+  },
+  paper: {
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
+    width: 400,
+    height: 45,
+    margin: "20px auto 0"
+  },
+  input: {
+    color: "#172b4d",
+    marginLeft: theme.spacing(1),
+    flex: 1
+  },
+  dialog: {
+    "& .MuiDialog-paperWidthSm": {
+      minWidth: 500,
+      backgroundColor: "#F7FAFC"
+    }
+  },
+  title: {
+    padding: 16,
+    color: "#4D4F5C",
+    margin: 0
+  },
   button: {
     width: 125,
     height: 40,
@@ -47,27 +81,31 @@ const AddColumn = () => {
         Add Column
       </Button>
       <Dialog
+        className={classes.dialog}
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="dialog-title">Add Column</DialogTitle>
+        <MuiDialogTitle disableTypography className={classes.title}>
+          <Typography variant="h6">Add Column</Typography>
+          <IconButton className={classes.closeButton} onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+        </MuiDialogTitle>
+        <Divider />
         <DialogContent>
-          <Textfield
-            autoFocus
-            margin="dense"
-            id="name"
-            label="column name"
-            type="text"
-            fullWidth
-          />
+          <Paper className={classes.paper}>
+            <InputBase
+              className={classes.input}
+              id="name"
+              palaceholder="Enter column name"
+              autoFocus
+            />
+          </Paper>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            cancel
-          </Button>
-          <Button color="primary">Add Column</Button>
-        </DialogActions>
+        <div className="center m-tb">
+          <Button className={classes.button}>Add Column</Button>
+        </div>
       </Dialog>
     </div>
   );
