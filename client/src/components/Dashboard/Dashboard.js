@@ -37,16 +37,13 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
           workspaces.length === 0 ? (
             <AddWorkspace />
           ) : (
-            <WorkspaceColumns workspace={workspaces[0]} />
+            <WorkspaceColumns
+              workspace={workspaces[0]}
+              key={workspaces[0].id}
+            />
           )
         ]
       )}
-      {/* {isLoading && <ProgressBar />}
-      {isLoading && workspaces.length === 0 ? (
-        <AddWorkspace />
-      ) : (
-        <WorkspaceColumns workspace={workspaces[0]} />
-      )} */}
     </div>
   );
 };
