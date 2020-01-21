@@ -6,9 +6,13 @@ const WorkspaceColumns = ({ columns, getColumns, workspace }) => {
     getColumns(workspace.id);
   }, [getColumns, workspace.id]);
 
+  const columnsExist = () => {
+    return workspace.columns.length > 0;
+  };
+
   return (
     <div className="center-content">
-      {columns.length > 0 ? (
+      {columnsExist() ? (
         <div>columns</div>
       ) : (
         <AddColumn workspace={workspace} />
