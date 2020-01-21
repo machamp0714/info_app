@@ -45,7 +45,7 @@ const SignedinNavbar = ({
   workspace,
   open,
   handleDrawerOpen,
-  handleChange,
+  handleSelectWorkspace,
   isLoading,
   user
 }) => {
@@ -74,7 +74,7 @@ const SignedinNavbar = ({
           <WorkspaceSelectBox
             workspaces={workspaces}
             workspace={workspace}
-            handleChange={handleChange}
+            handleSelectWorkspace={handleSelectWorkspace}
           />
         )}
         <SignedinLinks user={user} />

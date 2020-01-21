@@ -4,7 +4,6 @@ import Sidebar from "./Sidebar";
 import AddWorkspace from "./AddWorkspace";
 import WorkspaceColumns from "../../containers/Column/WorkspaceColumns";
 import ProgressBar from "../Layout/ProgressBar";
-import { http } from "../../config/axios";
 
 const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
@@ -18,7 +17,7 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     setOpen(false);
   };
 
-  const handleChange = e => {
+  const handleSelectWorkspace = e => {
     setWorkspace(e.target.value);
   };
 
@@ -48,7 +47,7 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
         handleDrawerOpen={handleDrawerOpen}
         workspaces={workspaces}
         workspace={workspace}
-        handleChange={handleChange}
+        handleSelectWorkspace={handleSelectWorkspace}
         isLoading={isLoading}
         user={user}
       />

@@ -35,13 +35,17 @@ const CssTextField = withStyles({
   }
 })(TextField);
 
-const WorkspaceSelectBox = ({ workspaces, workspace, handleChange }) => {
+const WorkspaceSelectBox = ({
+  workspaces,
+  workspace,
+  handleSelectWorkspace
+}) => {
   return (
     <CssTextField
       id="workspaces"
       select
       value={workspace}
-      onChange={handleChange}
+      onChange={handleSelectWorkspace}
       variant="filled"
     >
       {workspaces.map(workspace => (
