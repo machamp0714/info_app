@@ -8,7 +8,11 @@ const WorkspaceColumns = ({ columns, getColumns, workspace }) => {
 
   return (
     <div className="center-content">
-      {columns.length > 0 ? <div>columns</div> : <AddColumn />}
+      {columns.length > 0 ? (
+        <div>columns</div>
+      ) : (
+        <AddColumn workspace={workspace} />
+      )}
     </div>
   );
 };

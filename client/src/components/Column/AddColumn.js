@@ -55,10 +55,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddColumn = ({ createColumn }) => {
+const AddColumn = ({ workspace, createColumn }) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -66,6 +67,26 @@ const AddColumn = ({ createColumn }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleChange = e => {
+    setName(e.target.value);
+  };
+
+  const handleClick = () => {
+    const params = {
+      name: name
+    };
+    createColumn(workspace.id, params);
+  };
+
+  const handleSubmit = e => {
+    const params = {
+      name: name
+    };
+    createColumn(workspace.id, params);
+
+    e.preventDefault();
   };
 
   return (
@@ -94,17 +115,25 @@ const AddColumn = ({ createColumn }) => {
         </MuiDialogTitle>
         <Divider />
         <DialogContent>
-          <Paper className={classes.paper}>
+          <Paper
+            onSubmit={handleSubmit}
+            component="form"
+            className={classes.paper}
+          >
             <InputBase
               className={classes.input}
               id="name"
+              value={name}
               palaceholder="Enter column name"
               autoFocus
+              onChange={handleChange}
             />
           </Paper>
         </DialogContent>
         <div className="center m-tb">
-          <Button className={classes.button}>Add Column</Button>
+          <Button className={classes.button} onClick={handleClick}>
+            Add Column
+          </Button>
         </div>
       </Dialog>
     </div>
