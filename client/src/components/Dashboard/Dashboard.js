@@ -41,7 +41,7 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   }, [workspaces]);
 
   return (
-    <div>
+    <div id="dashboard">
       <SignedinNavbar
         open={open}
         handleDrawerOpen={handleDrawerOpen}
