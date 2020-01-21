@@ -18,17 +18,27 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     setOpen(false);
   };
 
+  const handleChange = e => {
+    setWorkspace(e.target.value);
+  };
+
   useEffect(() => {
     getWorkspaces();
   }, [getWorkspaces]);
 
-  useEffect(() => {
-    const getDefaultWorkspace = async () => {
-      const result = await http.get("/api/default_workspace");
-      setWorkspace(result.data);
-    };
+  // useEffect(() => {
+  //   const getDefaultWorkspace = async () => {
+  //     const result = await http.get("/api/default_workspace");
+  //     setWorkspace(result.data);
+  //   };
 
-    getDefaultWorkspace();
+  //   getDefaultWorkspace();
+  // }, [workspaces]);
+
+  useEffect(() => {
+    if (workspaces.length > 0) {
+      setWorkspace(workspaces[0]);
+    }
   }, [workspaces]);
 
   return (
@@ -37,6 +47,8 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
         open={open}
         handleDrawerOpen={handleDrawerOpen}
         workspaces={workspaces}
+        workspace={workspace}
+        handleChange={handleChange}
         isLoading={isLoading}
         user={user}
       />

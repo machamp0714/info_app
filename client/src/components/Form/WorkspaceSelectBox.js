@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -35,24 +35,18 @@ const CssTextField = withStyles({
   }
 })(TextField);
 
-const WorkspaceSelectBox = ({ workspaces }) => {
-  const [value, setValue] = useState(workspaces[0]);
-
-  const handleChange = e => {
-    setValue(e.target.value);
-  };
-
+const WorkspaceSelectBox = ({ workspaces, workspace, handleChange }) => {
   return (
     <CssTextField
       id="workspaces"
       select
-      value={value}
+      value={workspace}
       onChange={handleChange}
       variant="filled"
     >
-      {workspaces.map(item => (
-        <MenuItem key={item.id} value={item}>
-          {item.name}
+      {workspaces.map(workspace => (
+        <MenuItem key={workspace.id} value={workspace}>
+          {workspace.name}
         </MenuItem>
       ))}
     </CssTextField>
