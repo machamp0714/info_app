@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import AddColumn from "../../containers/Column/AddColumn";
+import ColumnList from "./ColumnList";
 
 const WorkspaceColumns = ({ columns, getColumns, workspace }) => {
   useEffect(() => {
@@ -13,7 +14,7 @@ const WorkspaceColumns = ({ columns, getColumns, workspace }) => {
   return (
     <div className="center-content">
       {columnsExist() ? (
-        <div>columns</div>
+        <ColumnList columns={columns} />
       ) : (
         <AddColumn workspace={workspace} />
       )}
