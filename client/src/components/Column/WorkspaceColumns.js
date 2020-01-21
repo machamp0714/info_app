@@ -11,15 +11,11 @@ const WorkspaceColumns = ({ columns, getColumns, workspace }) => {
     return workspace.columns.length > 0;
   };
 
-  return (
-    <div className="center-content">
-      {columnsExist() ? (
-        <ColumnList columns={columns} />
-      ) : (
-        <AddColumn workspace={workspace} />
-      )}
-    </div>
-  );
+  if (columnsExist()) {
+    return <ColumnList columns={columns} />;
+  } else {
+    return <AddColumn workspace={workspace} />;
+  }
 };
 
 export default WorkspaceColumns;
