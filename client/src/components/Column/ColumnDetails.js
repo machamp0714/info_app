@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ColumnDetails = ({ column }) => {
+const ColumnDetails = ({ column, deleteColumn }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -40,6 +40,12 @@ const ColumnDetails = ({ column }) => {
       return;
     }
     setOpen(false);
+  };
+
+  const handleDeleteClick = () => {
+    deleteColumn(column.id);
+
+    handleToggle();
   };
 
   return (
@@ -70,7 +76,10 @@ const ColumnDetails = ({ column }) => {
                   <MenuItem className={classes.item} onClick={handleClose}>
                     Edit Column
                   </MenuItem>
-                  <MenuItem className={classes.item} onClick={handleClose}>
+                  <MenuItem
+                    className={classes.item}
+                    onClick={handleDeleteClick}
+                  >
                     Delete Column
                   </MenuItem>
                 </MenuList>

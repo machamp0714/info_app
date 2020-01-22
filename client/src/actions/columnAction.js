@@ -20,8 +20,9 @@ const createError = error => ({
   payload: error.response.data
 });
 
-const deleteSuccess = () => ({
-  type: "DELETE_COLUMN_SUCCESS"
+const deleteSuccess = column_id => ({
+  type: "DELETE_COLUMN_SUCCESS",
+  payload: column_id
 });
 
 const deleteError = error => ({
@@ -51,7 +52,7 @@ export const deleteColumn = column_id => {
   return dispatch => {
     secureHTTP
       .delete(`/api/columns/${column_id}`)
-      .then(response => dispatch(deleteSuccess(response)))
+      .then(response => dispatch(deleteSuccess(column_id)))
       .catch(error => dispatch(deleteError(error)));
   };
 };

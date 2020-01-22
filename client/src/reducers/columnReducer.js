@@ -24,7 +24,7 @@ const columnReducer = (state = initState, action) => {
     case "DELETE_COLUMN_SUCCESS":
       return {
         ...state,
-        columns: state.columns
+        columns: state.columns.filter(column => column.id !== action.payload)
       };
     case "DELETE_COLUMN_ERROR":
       return {
