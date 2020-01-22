@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ColumnDetails = ({ column, deleteColumn }) => {
+const ColumnDetails = ({ column, editColumn, deleteColumn }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -65,10 +65,19 @@ const ColumnDetails = ({ column, deleteColumn }) => {
   };
 
   const handleEditClick = () => {
+    const params = {
+      name: name
+    };
+    editColumn(column.id, params);
     handleModalClose();
   };
 
   const handleSubmit = e => {
+    const params = {
+      name: name
+    };
+    editColumn(column.id, params);
+
     handleModalClose();
     e.preventDefault();
   };

@@ -24,7 +24,9 @@ const columnReducer = (state = initState, action) => {
     case "EDIT_COLUMN_SUCCESS":
       return {
         ...state,
-        columns: state.columns
+        columns: state.columns.map(column =>
+          column.id === action.meta ? action.payload : column
+        )
       };
     case "EDIT_COLUMN_ERROR":
       return {

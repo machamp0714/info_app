@@ -20,9 +20,10 @@ const createError = error => ({
   payload: error.response.data
 });
 
-const editSuccess = response => ({
+const editSuccess = (response, column_id) => ({
   type: "EDIT_COLUMN_SUCCESS",
-  payload: response.data
+  payload: response.data,
+  meta: column_id
 });
 
 const editError = error => ({
@@ -62,7 +63,7 @@ export const editColumn = (column_id, params) => {
   return dispatch => {
     secureHTTP
       .patch(`/api/columns/${column_id}`, params)
-      .then(response => dispatch(editSuccess(response)))
+      .then(response => dispatch(editSuccess(response, column_id)))
       .catch(error => dispatch(editError(error)));
   };
 };
