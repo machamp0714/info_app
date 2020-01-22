@@ -20,6 +20,16 @@ const createError = error => ({
   payload: error.response.data
 });
 
+const editSuccess = response => ({
+  type: "EDIT_COLUMN_SUCCESS",
+  payload: response.data
+});
+
+const editError = error => ({
+  type: "EDIT_COLUMN_ERROR",
+  payload: error.response.data
+});
+
 const deleteSuccess = column_id => ({
   type: "DELETE_COLUMN_SUCCESS",
   payload: column_id
@@ -45,6 +55,15 @@ export const createColumn = (workspace_id, params) => {
       .post(`/api/workspaces/${workspace_id}/columns`, params)
       .then(response => dispatch(createSuccess(response)))
       .catch(error => dispatch(createError(error)));
+  };
+};
+
+export const editColumn = (column_id, params) => {
+  return dispatch => {
+    secureHTTP
+      .patch(`/api/columns/${column_id}`, params)
+      .then(response => dispatch(editSuccess(response)))
+      .catch(error => dispatch(editError(error)));
   };
 };
 
