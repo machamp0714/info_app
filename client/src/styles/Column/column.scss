@@ -1,0 +1,85 @@
+.column-description {
+  margin-bottom: 20px;
+}
+
+.column-dashboard {
+  display: flex;
+  position: absolute;
+  top: 90px;
+  left: 96px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.column-list {
+  display: flex;
+}
+
+.add-column-body {
+  min-width: 350px;
+  height: 97px;
+  border: 1px dotted #aeafb5;
+  border-radius: 10px;
+}
+
+.column-box {
+  min-width: 350px;
+  max-width: 350px;
+  border: 1px solid #aeafb5;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  padding: 14px;
+  margin-right: 16px;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+}
+
+.column-name {
+  color: #24292e;
+}
+
+.column-menu {
+  margin-left: auto;
+}
+
+.column-menu-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 7px;
+  cursor: pointer;
+  &:hover {
+    path {
+      color: #11cdef;
+    }
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.add-column-button {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: 600;
+  color: #586069;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+
+.column-button-value {
+  display: inline-block;
+}

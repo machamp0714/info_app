@@ -86,6 +86,46 @@ RSpec.describe "Workspaces", type: :request do
     end
   end
 
+  describe "GET /workspace/:id" do
+    let(:user) { create :user }
+    let(:auth_headers) { user.create_new_auth_token }
+    let(:workspace) { create :workspace, user: user }
+
+    context "when no authorized headers provided" do
+      subject(:get_unauthorized) { get api_workspace_path(workspace) }
+
+      it_behaves_like "unauthorized_error"
+    end
+
+    context "when don't have permission" do
+      subject(:get_no_permission) { get api_workspace_path(workspace), headers: auth_headers }
+
+      let(:other_user) { create :user }
+      let(:auth_headers) { other_user.create_new_auth_token }
+
+      it_behaves_like "forbidden_error"
+    end
+
+    context " when authorized" do
+      subject(:get_workspace) { get api_workspace_path(workspace), headers: auth_headers }
+
+      it "return 200 status code" do
+        get_workspace
+
+        expect(response).to have_http_status :ok
+      end
+
+      it "return proper json" do
+        get_workspace
+
+        expect(json).to include(
+          "id" => workspace.id,
+          "name" => workspace.name
+        )
+      end
+    end
+  end
+
   describe "PATCH /workspace/:id" do
     let(:user) { create :user }
     let(:auth_headers) { user.create_new_auth_token }

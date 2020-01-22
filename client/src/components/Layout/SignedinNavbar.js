@@ -42,8 +42,10 @@ const useStyles = makeStyles(theme => ({
 
 const SignedinNavbar = ({
   workspaces,
+  workspace,
   open,
   handleDrawerOpen,
+  handleSelectWorkspace,
   isLoading,
   user
 }) => {
@@ -68,8 +70,12 @@ const SignedinNavbar = ({
         >
           <MenuIcon />
         </IconButton>
-        {!isLoading && workspaces.length > 0 && (
-          <WorkspaceSelectBox workspaces={workspaces} />
+        {!isLoading && workspaces.length > 0 && workspace !== null && (
+          <WorkspaceSelectBox
+            workspaces={workspaces}
+            workspace={workspace}
+            handleSelectWorkspace={handleSelectWorkspace}
+          />
         )}
         <SignedinLinks user={user} />
       </Toolbar>
