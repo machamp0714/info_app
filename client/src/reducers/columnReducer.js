@@ -21,6 +21,16 @@ const columnReducer = (state = initState, action) => {
         ...state,
         errors: action.payload
       };
+    case "EDIT_COLUMN_SUCCESS":
+      return {
+        ...state,
+        columns: state.columns
+      };
+    case "EDIT_COLUMN_ERROR":
+      return {
+        ...state,
+        errors: [action.payload]
+      };
     case "DELETE_COLUMN_SUCCESS":
       return {
         ...state,
