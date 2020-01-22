@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -10,6 +9,7 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Divider from "@material-ui/core/Divider";
+import Modal from "../Layout/Modal";
 
 const useStyles = makeStyles(theme => ({
   closeButton: {
@@ -30,12 +30,6 @@ const useStyles = makeStyles(theme => ({
     color: "#172b4d",
     marginLeft: theme.spacing(1),
     flex: 1
-  },
-  dialog: {
-    "& .MuiDialog-paperWidthSm": {
-      minWidth: 500,
-      backgroundColor: "#F7FAFC"
-    }
   },
   title: {
     padding: 16,
@@ -101,12 +95,7 @@ const AddColumn = ({ workspace, createColumn }) => {
       >
         Add Column
       </Button>
-      <Dialog
-        className={classes.dialog}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
+      <Modal open={open} handleClose={handleClose}>
         <MuiDialogTitle disableTypography className={classes.title}>
           <Typography variant="h6">Add Column</Typography>
           <IconButton className={classes.closeButton} onClick={handleClose}>
@@ -135,7 +124,7 @@ const AddColumn = ({ workspace, createColumn }) => {
             Add Column
           </Button>
         </div>
-      </Dialog>
+      </Modal>
     </div>
   );
 };
