@@ -12,7 +12,6 @@ const columnReducer = (state = initState, action) => {
     case "GET_COLUMNS_ERROR":
       return state;
     case "CREATE_COLUMN_SUCCESS":
-      console.log(action.payload);
       return {
         ...state,
         columns: [...state.columns, action.payload]
