@@ -4,7 +4,6 @@ import ColumnList from "./ColumnList";
 
 const WorkspaceColumns = ({ columns, getColumns, createColumn, workspace }) => {
   const [open, setOpen] = useState(false);
-  console.log(columns);
 
   useEffect(() => {
     getColumns(workspace.id);
