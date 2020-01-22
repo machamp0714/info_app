@@ -68,6 +68,7 @@ const AddColumn = ({
       name: name
     };
     createColumn(workspace.id, params);
+    setName("");
   };
 
   const handleSubmit = e => {
@@ -75,7 +76,7 @@ const AddColumn = ({
       name: name
     };
     createColumn(workspace.id, params);
-
+    setName("");
     e.preventDefault();
   };
 

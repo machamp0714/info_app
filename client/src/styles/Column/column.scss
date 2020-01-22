@@ -7,11 +7,17 @@
   position: absolute;
   top: 90px;
   left: 96px;
+  padding-right: 20px;
   padding-bottom: 20px;
+}
+
+.column-list {
+  display: flex;
 }
 
 .add-column-body {
   min-width: 350px;
+  height: 97px;
   border: 1px dotted #aeafb5;
   border-radius: 10px;
 }

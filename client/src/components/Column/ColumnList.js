@@ -71,6 +71,7 @@ const ColumnList = ({
       name: name
     };
     createColumn(workspace.id, params);
+    setName("");
     handleClose();
   };
 
@@ -79,7 +80,7 @@ const ColumnList = ({
       name: name
     };
     createColumn(workspace.id, params);
-
+    setName("");
     e.preventDefault();
     handleClose();
   };
