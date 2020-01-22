@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import AddColumn from "../../containers/Column/AddColumn";
+import AddColumn from "./AddColumn";
 import ColumnList from "./ColumnList";
 
-const WorkspaceColumns = ({ columns, getColumns, workspace }) => {
+const WorkspaceColumns = ({ columns, getColumns, createColumn, workspace }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -22,7 +22,16 @@ const WorkspaceColumns = ({ columns, getColumns, workspace }) => {
   };
 
   if (columnsExist()) {
-    return <ColumnList columns={columns} />;
+    return (
+      <ColumnList
+        workspace={workspace}
+        columns={columns}
+        open={open}
+        handleClose={handleClose}
+        handleClickOpen={handleClickOpen}
+        createColumn={createColumn}
+      />
+    );
   } else {
     return (
       <AddColumn
@@ -30,6 +39,7 @@ const WorkspaceColumns = ({ columns, getColumns, workspace }) => {
         open={open}
         handleClose={handleClose}
         handleClickOpen={handleClickOpen}
+        createColumn={createColumn}
       />
     );
   }

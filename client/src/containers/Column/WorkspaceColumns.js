@@ -1,5 +1,5 @@
 import WorkspaceColumns from "../../components/Column/WorkspaceColumns";
-import { getColumns } from "../../actions/columnAction";
+import { getColumns, createColumn } from "../../actions/columnAction";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
@@ -7,7 +7,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getColumns: workspace_id => dispatch(getColumns(workspace_id))
+  getColumns: workspace_id => dispatch(getColumns(workspace_id)),
+  createColumn: (workspace_id, params) =>
+    dispatch(createColumn(workspace_id, params))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkspaceColumns);
