@@ -49,19 +49,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddColumn = ({ workspace, createColumn }) => {
+const AddColumn = ({
+  workspace,
+  createColumn,
+  open,
+  handleClose,
+  handleClickOpen
+}) => {
   const classes = useStyles();
-
-  const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const handleChange = e => {
     setName(e.target.value);
