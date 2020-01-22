@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -17,7 +18,16 @@ const iconStyle = {
   }
 };
 
+const useStyles = makeStyles(theme => ({
+  item: {
+    fontSize: 14,
+    paddingLeft: 10,
+    paddingRight: 10
+  }
+}));
+
 const ColumnDetails = ({ column }) => {
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -48,12 +58,21 @@ const ColumnDetails = ({ column }) => {
           >
             <MenuIcon style={iconStyle} />
           </button>
-          <Popper open={open} anchorEl={anchorRef.current} role={undefined}>
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            placement="bottom-end"
+            role={undefined}
+          >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open}>
-                  <MenuItem onClick={handleClose}>Edit Column</MenuItem>
-                  <MenuItem onClick={handleClose}>Delete Column</MenuItem>
+                  <MenuItem className={classes.item} onClick={handleClose}>
+                    Edit Column
+                  </MenuItem>
+                  <MenuItem className={classes.item} onClick={handleClose}>
+                    Delete Column
+                  </MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
