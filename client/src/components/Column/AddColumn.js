@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import ColumnModal from "./ColumnModal";
 import Button from "@material-ui/core/Button";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import Typography from "@material-ui/core/Typography";
-import DialogContent from "@material-ui/core/DialogContent";
-import Paper from "@material-ui/core/Paper";
-import InputBase from "@material-ui/core/InputBase";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import Divider from "@material-ui/core/Divider";
-import Modal from "../Layout/Modal";
 
 const useStyles = makeStyles(theme => ({
   closeButton: {
@@ -94,36 +86,15 @@ const AddColumn = ({
       >
         Add Column
       </Button>
-      <Modal open={open} handleClose={handleClose}>
-        <MuiDialogTitle disableTypography className={classes.title}>
-          <Typography variant="h6">Add Column</Typography>
-          <IconButton className={classes.closeButton} onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
-        </MuiDialogTitle>
-        <Divider />
-        <DialogContent>
-          <Paper
-            onSubmit={handleSubmit}
-            component="form"
-            className={classes.paper}
-          >
-            <InputBase
-              className={classes.input}
-              id="name"
-              value={name}
-              palaceholder="Enter column name"
-              autoFocus
-              onChange={handleChange}
-            />
-          </Paper>
-        </DialogContent>
-        <div className="center m-tb">
-          <Button className={classes.button} onClick={handleClick}>
-            Add Column
-          </Button>
-        </div>
-      </Modal>
+      <ColumnModal
+        open={open}
+        name={name}
+        title="Add Column"
+        handleChange={handleChange}
+        handleClick={handleClick}
+        handleSubmit={handleSubmit}
+        handleClose={handleClose}
+      />
     </div>
   );
 };
