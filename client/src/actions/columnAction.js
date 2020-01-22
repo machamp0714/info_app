@@ -20,6 +20,15 @@ const createError = error => ({
   payload: error.response.data
 });
 
+const deleteSuccess = () => ({
+  type: "DELETE_COLUMN_SUCCESS"
+});
+
+const deleteError = error => ({
+  type: "DELETE_COLUMN_ERROR",
+  payload: error.response.data
+});
+
 export const getColumns = workspace_id => {
   return dispatch => {
     http
@@ -35,5 +44,14 @@ export const createColumn = (workspace_id, params) => {
       .post(`/api/workspaces/${workspace_id}/columns`, params)
       .then(response => dispatch(createSuccess(response)))
       .catch(error => dispatch(createError(error)));
+  };
+};
+
+export const deleteColumn = column_id => {
+  return dispatch => {
+    secureHTTP
+      .delete(`/api/columns/${column_id}`)
+      .then(response => dispatch(deleteSuccess(response)))
+      .catch(error => dispatch(deleteError(error)));
   };
 };
