@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import ColumnModal from "./ColumnModal";
 import AddIcon from "@material-ui/icons/Add";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -29,6 +30,8 @@ const useStyles = makeStyles(theme => ({
 const ColumnDetails = ({ column, deleteColumn }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [name, setName] = useState("");
   const anchorRef = useRef(null);
 
   const handleToggle = () => {
@@ -46,6 +49,28 @@ const ColumnDetails = ({ column, deleteColumn }) => {
     deleteColumn(column.id);
 
     handleToggle();
+  };
+
+  const handleModalOpen = () => {
+    handleToggle();
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
+  const handleChange = e => {
+    setName(e.target.value);
+  };
+
+  const handleEditClick = () => {
+    handleModalClose();
+  };
+
+  const handleSubmit = e => {
+    handleModalClose();
+    e.preventDefault();
   };
 
   return (
@@ -73,7 +98,7 @@ const ColumnDetails = ({ column, deleteColumn }) => {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open}>
-                  <MenuItem className={classes.item} onClick={handleClose}>
+                  <MenuItem className={classes.item} onClick={handleModalOpen}>
                     Edit Column
                   </MenuItem>
                   <MenuItem
@@ -88,6 +113,15 @@ const ColumnDetails = ({ column, deleteColumn }) => {
           </Popper>
         </div>
       </div>
+      <ColumnModal
+        open={modalOpen}
+        name={name}
+        title="Edit Column"
+        handleChange={handleChange}
+        handleClick={handleEditClick}
+        handleSubmit={handleSubmit}
+        handleClose={handleModalClose}
+      />
     </li>
   );
 };
