@@ -11,12 +11,12 @@ const getColumnsError = error => ({
 });
 
 const createSuccess = response => ({
-  type: "CREATE_SUCCESS",
+  type: "CREATE_COLUMN_SUCCESS",
   payload: response.data
 });
 
 const createError = error => ({
-  type: "CRAEAT_ERROR",
+  type: "CRAEAT_COLUMN_ERROR",
   payload: error.response.data
 });
 

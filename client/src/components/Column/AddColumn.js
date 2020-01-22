@@ -68,6 +68,7 @@ const AddColumn = ({
       name: name
     };
     createColumn(workspace.id, params);
+    handleClose();
     setName("");
   };
 
@@ -77,6 +78,7 @@ const AddColumn = ({
     };
     createColumn(workspace.id, params);
     setName("");
+    handleClose();
     e.preventDefault();
   };
 
