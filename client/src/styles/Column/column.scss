@@ -5,14 +5,14 @@
 .column-dashboard {
   display: flex;
   position: absolute;
-  top: 90px;
-  left: 96px;
-  padding-right: 20px;
-  padding-bottom: 20px;
+  top: 70px;
+  left: 73px;
+  padding: 20px;
 }
 
 .column-list {
   display: flex;
+  margin-right: 16px;
 }
 
 .add-column-body {
@@ -25,11 +25,15 @@
 .column-box {
   min-width: 350px;
   max-width: 350px;
-  border: 1px solid #aeafb5;
+  height: calc(100vh - 150px);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   background-color: #f4f4f4;
   padding: 14px;
   margin-right: 16px;
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
 .column-header {
