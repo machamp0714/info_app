@@ -31,7 +31,7 @@ const ColumnDetails = ({ column, editColumn, deleteColumn }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(column.name);
   const anchorRef = useRef(null);
 
   const handleToggle = () => {
