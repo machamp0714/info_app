@@ -32,6 +32,18 @@ const workspaceReducer = (state = initState, action) => {
         workspaces: [...state.workspaces],
         errors: action.payload
       };
+    case "DELETE_WORKSPACE_SUCCESS":
+      return {
+        ...state,
+        workspaces: state.workspaces.filter(
+          workspace => workspace.id !== action.payload
+        )
+      };
+    case "DELETE_WORKSPACE_ERROR":
+      return {
+        ...state,
+        errors: [action.payload]
+      };
     default:
       return state;
   }
