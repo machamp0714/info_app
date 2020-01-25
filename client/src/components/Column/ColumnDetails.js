@@ -1,6 +1,6 @@
 import React from "react";
 import AddIcon from "@material-ui/icons/Add";
-import MenuIcon from "@material-ui/icons/Menu";
+import ColumnMenu from "../../containers/Column/ColumnMenu";
 
 const iconStyle = {
   color: "#24292e",
@@ -21,9 +21,7 @@ const ColumnDetails = ({ column }) => {
           <button type="button" className="column-menu-button">
             <AddIcon style={iconStyle} />
           </button>
-          <button type="button" className="column-menu-button">
-            <MenuIcon style={iconStyle} />
-          </button>
+          <ColumnMenu column={column} />
         </div>
       </div>
     </li>
