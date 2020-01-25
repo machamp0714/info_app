@@ -2,6 +2,7 @@
 @import "./Dashboard/all.scss";
 @import "./Auth//auth.scss";
 @import "./Column/all.scss";
+@import "./Account/acount.scss";
 @import "./variables.scss";
 
 body {
@@ -13,4 +14,7 @@ p {
 }
 ul {
   padding: 0;
+}
+h3 {
+  margin: 0;
 }
