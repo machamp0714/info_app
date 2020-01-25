@@ -24,6 +24,16 @@ const createError = error => ({
   payload: error
 });
 
+const deleteSuccess = workspace_id => ({
+  type: "DELETE_WORKSPACE_SUCCESS",
+  payload: workspace_id
+});
+
+const deleteError = error => ({
+  type: "DELETE_WORKSPACE_ERROR",
+  payload: error.response.error
+});
+
 export const createWorkspace = param => {
   return dispatch => {
     secureHTTP
@@ -40,5 +50,14 @@ export const getWorkspaces = () => {
       .get("/api/workspaces")
       .then(response => dispatch(getSuccess(response)))
       .catch(error => dispatch(getError(error)));
+  };
+};
+
+export const deleteWorkspace = workspace_id => {
+  return dispatch => {
+    secureHTTP
+      .delete(`/api/workspaces/${workspace_id}`)
+      .then(() => dispatch(deleteSuccess(workspace_id)))
+      .catch(error => dispatch(deleteError(error)));
   };
 };
