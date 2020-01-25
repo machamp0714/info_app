@@ -1,12 +1,9 @@
 import React, { useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
 import ColumnModal from "./ColumnModal";
+import DropDownMenu from "../Shared/DropDownMenu";
 
 const iconStyle = {
   color: "#24292e",
@@ -92,25 +89,18 @@ const ColumnMenu = ({ column, editColumn, deleteColumn }) => {
       >
         <MenuIcon style={iconStyle} />
       </button>
-      <Popper
+      <DropDownMenu
         open={open}
         anchorEl={anchorRef.current}
-        placement="bottom-end"
-        role={undefined}
+        handleClose={handleClose}
       >
-        <Paper>
-          <ClickAwayListener onClickAway={handleClose}>
-            <MenuList autoFocusItem={open}>
-              <MenuItem className={classes.item} onClick={handleModalOpen}>
-                Edit Column
-              </MenuItem>
-              <MenuItem className={classes.item} onClick={handleDeleteClick}>
-                Delete Column
-              </MenuItem>
-            </MenuList>
-          </ClickAwayListener>
-        </Paper>
-      </Popper>
+        <MenuItem className={classes.item} onClick={handleModalOpen}>
+          Edit Column
+        </MenuItem>
+        <MenuItem className={classes.item} onClick={handleDeleteClick}>
+          Delete Column
+        </MenuItem>
+      </DropDownMenu>
       <ColumnModal
         open={modalOpen}
         name={name}

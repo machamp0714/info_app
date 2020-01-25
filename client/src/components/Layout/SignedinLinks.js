@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Divider from "@material-ui/core/Divider";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Redirect } from "react-router-dom";
+import DropDownMenu from "../Shared/DropDownMenu";
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -62,18 +59,16 @@ const SignedinLinks = ({ logout, signout, user }) => {
         )}
         <span className="dropdown-caret"></span>
       </div>
-      <Popper open={open} anchorEl={anchorRef.current}>
-        <Paper>
-          <ClickAwayListener onClickAway={handleClose}>
-            <MenuList>
-              <MenuItem onClick={handleClose}>Account</MenuItem>
-              <MenuItem onClick={handleClose}>Setting</MenuItem>
-              <Divider />
-              <MenuItem onClick={handleClick}>Signout</MenuItem>
-            </MenuList>
-          </ClickAwayListener>
-        </Paper>
-      </Popper>
+      <DropDownMenu
+        open={open}
+        anchorEl={anchorRef.current}
+        handleClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Account</MenuItem>
+        <MenuItem onClick={handleClose}>Setting</MenuItem>
+        <Divider />
+        <MenuItem onClick={handleClick}>Signout</MenuItem>
+      </DropDownMenu>
     </div>
   );
 };
