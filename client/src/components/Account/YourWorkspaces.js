@@ -13,10 +13,19 @@ const iconStyle = {
   }
 };
 
-const YourWorkspaces = ({ user, workspaces, getWorkspaces }) => {
+const YourWorkspaces = ({
+  user,
+  workspaces,
+  getWorkspaces,
+  deleteWorkspace
+}) => {
   useEffect(() => {
     getWorkspaces();
   }, [getWorkspaces]);
+
+  const handleDeleteClick = workspace_id => {
+    deleteWorkspace(workspace_id);
+  };
 
   return (
     <AccountSettings user={user}>
@@ -30,7 +39,11 @@ const YourWorkspaces = ({ user, workspaces, getWorkspaces }) => {
               <button className="button-none column-menu-button" type="button">
                 <EditIcon style={iconStyle} />
               </button>
-              <button className="button-none column-menu-button" type="button">
+              <button
+                className="button-none column-menu-button"
+                type="button"
+                onClick={() => handleDeleteClick(workspace.id)}
+              >
                 <DeleteIcon style={iconStyle} />
               </button>
             </div>
