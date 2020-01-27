@@ -18,7 +18,7 @@ const ColumnDetails = ({ column }) => {
       <div className="column-header">
         <div className="column-name">{column.name}</div>
         <div className="column-menu">
-          <button type="button" className="column-menu-button">
+          <button type="button" className="column-menu-button button-none">
             <AddIcon style={iconStyle} />
           </button>
           <ColumnMenu column={column} />

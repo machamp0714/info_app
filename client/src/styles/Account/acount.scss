@@ -1,5 +1,4 @@
 #account-settings {
-  height: 100vh;
   background-color: #ffffff;
 }
 .account-container {
@@ -15,6 +14,7 @@
 }
 .account-sidebar {
   border: 1px solid #aeafb5;
+  max-height: 200px;
   border-radius: 10px;
   flex-grow: 0;
   max-width: 33.333333%;
@@ -26,6 +26,7 @@
   max-width: 66.666667%;
   flex-basis: 66.666667%;
   max-width: 580px;
+  padding-bottom: 30px;
 }
 .account-heading {
   color: #24292e;
@@ -58,4 +59,19 @@
 .active {
   color: #24292e;
   border-left: 2px solid #e3165c;
+}
+.your-workspace {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #aeafb5;
+}
+.workspace-name {
+  color: #122340;
+  font-size: 20px;
+}
+.workspace-meta {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
 }

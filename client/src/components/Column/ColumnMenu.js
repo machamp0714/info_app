@@ -85,7 +85,7 @@ const ColumnMenu = ({ column, editColumn, deleteColumn }) => {
         ref={anchorRef}
         onClick={handleToggle}
         type="button"
-        className="column-menu-button"
+        className="column-menu-button button-none"
       >
         <MenuIcon style={iconStyle} />
       </button>
