@@ -6,8 +6,6 @@ const YourWorkspaces = ({ user, workspaces, getWorkspaces }) => {
     getWorkspaces();
   }, [getWorkspaces]);
 
-  console.log(workspaces);
-
   return (
     <AccountSettings user={user}>
       <ul className="workspace-list">
