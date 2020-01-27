@@ -5,7 +5,7 @@ import Top from "./containers/Auth/Top";
 import Signin from "./containers/Auth/Signin";
 import Signup from "./containers/Auth/Signup";
 import Dashboard from "./containers/Workspace/Dashboard";
-import YourWorkspaces from "./components/Account/YourWorkspaces";
+import YourWorkspaces from "./containers/Account/YourWorkspaces";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
