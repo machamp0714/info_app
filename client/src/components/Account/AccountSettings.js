@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Container from "@material-ui/core/Container";
@@ -35,6 +36,9 @@ const AccountSettings = ({ user, children }) => {
           <div className="account-sidebar">
             <nav className="account-menu">
               <h3 className="account-heading">Account Settings</h3>
+              <Link to={"/" + user.name} className="account-link non-active">
+                Dashboard
+              </Link>
               <a className="account-link non-active">Profile</a>
               <a className="account-link active">Your Workspaces</a>
               <a className="account-link non-active">Settings</a>
