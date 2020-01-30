@@ -24,9 +24,10 @@ const createError = error => ({
   payload: error
 });
 
-const editSuccess = response => ({
+const editSuccess = (response, workspace_id) => ({
   type: "EDIT_WORKSPACE_SUCCESS",
-  payload: response.data
+  payload: response.data,
+  meta: workspace_id
 });
 
 const editError = error => ({
@@ -57,7 +58,7 @@ export const editWorkspace = (workspace_id, params) => {
   return dispatch => {
     secureHTTP
       .patch(`/api/workspaces/${workspace_id}`, params)
-      .then(response => dispatch(editSuccess(response)))
+      .then(response => dispatch(editSuccess(response, workspace_id)))
       .catch(error => dispatch(editError(error)));
   };
 };

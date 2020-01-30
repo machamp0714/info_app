@@ -32,6 +32,15 @@ const workspaceReducer = (state = initState, action) => {
         workspaces: [...state.workspaces],
         errors: action.payload
       };
+    case "EDIT_WORKSPACE_SUCCESS":
+      return {
+        ...state,
+        workspaces: state.workspaces.map(workspace =>
+          workspace.id === action.meta ? action.payload : workspace
+        )
+      };
+    case "EDIT_WORKSPACE_ERROR":
+      return state;
     case "DELETE_WORKSPACE_SUCCESS":
       return {
         ...state,
