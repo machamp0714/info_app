@@ -68,8 +68,10 @@
   display: flex;
   align-items: center;
   padding: 20px 0;
-  border-top: 1px solid #aeafb5;
   border-bottom: 1px solid #aeafb5;
+  &:first-child {
+    border-top: 1px solid #aeafb5;
+  }
 }
 .workspace-name {
   color: $base-font-color;

@@ -1,4 +1,8 @@
-import { getWorkspaces, deleteWorkspace } from "../../actions/workspaceActions";
+import {
+  getWorkspaces,
+  createWorkspace,
+  deleteWorkspace
+} from "../../actions/workspaceActions";
 import { connect } from "react-redux";
 import YourWorkspaces from "../../components/Account/YourWorkspaces";
 
@@ -7,6 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  createWorkspace: params => dispatch(createWorkspace(params)),
   getWorkspaces: () => dispatch(getWorkspaces()),
   deleteWorkspace: workspace_id => dispatch(deleteWorkspace(workspace_id))
 });

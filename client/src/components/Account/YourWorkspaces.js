@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AccountSettings from "./AccountSettings";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
+import StandardModal from "../Shared/StandardModal";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -33,9 +34,41 @@ const YourWorkspaces = ({
   user,
   workspaces,
   getWorkspaces,
+  createWorkspace,
   deleteWorkspace
 }) => {
   const classes = useStyles();
+
+  const [name, setName] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleChange = e => {
+    setName(e.target.value);
+  };
+
+  const clearState = () => {
+    setName("");
+    handleClose();
+  };
+
+  const handleClick = () => {
+    createWorkspace({ name: name });
+    clearState();
+  };
+
+  const handleSubmit = e => {
+    createWorkspace({ name: name });
+    clearState();
+    e.preventDefault();
+  };
 
   useEffect(() => {
     getWorkspaces();
@@ -48,9 +81,23 @@ const YourWorkspaces = ({
   return (
     <AccountSettings user={user}>
       <div className="d-flex mb-2">
-        <Button className={classes.button} variant="contained">
+        <Button
+          onClick={handleOpenModal}
+          className={classes.button}
+          variant="contained"
+        >
           New Workspace
         </Button>
+        <StandardModal
+          name={name}
+          open={open}
+          title="Add Workspace"
+          placeholder="Enter workspace name"
+          handleClose={handleClose}
+          handleChange={handleChange}
+          handleClick={handleClick}
+          handleSubmit={handleSubmit}
+        />
       </div>
       <ul className="workspace-list">
         {workspaces.map(workspace => (

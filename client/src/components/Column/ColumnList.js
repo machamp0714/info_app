@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ColumnModal from "./ColumnModal";
+import StandardModal from "../Shared/StandardModal";
 import ColumnDetails from "../../containers/Column/ColumnDetails";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -52,10 +52,11 @@ const ColumnList = ({
           <AddIcon style={{ fontSize: 16 }} />
           <span className="column-button-value">Add Column</span>
         </button>
-        <ColumnModal
+        <StandardModal
           open={open}
           name={name}
           title="Add Column"
+          placeholder="Enter column name"
           handleChange={handleChange}
           handleClick={handleClick}
           handleSubmit={handleSubmit}
