@@ -18,3 +18,10 @@ ul {
 h3 {
   margin: 0;
 }
+a {
+  color: $base-font-color;
+  text-decoration: none;
+  &:hover {
+    color: rgba(0, 0, 0, 0.87);
+  }
+}

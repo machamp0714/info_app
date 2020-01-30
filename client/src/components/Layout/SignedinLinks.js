@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import Divider from "@material-ui/core/Divider";
 import MenuItem from "@material-ui/core/MenuItem";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import DropDownMenu from "../Shared/DropDownMenu";
 
 const useStyles = makeStyles(() => ({
@@ -64,8 +64,14 @@ const SignedinLinks = ({ logout, signout, user }) => {
         anchorEl={anchorRef.current}
         handleClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Account</MenuItem>
-        <MenuItem onClick={handleClose}>Setting</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link to={"/" + user.name}>Dashboard</Link>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link to={"/" + user.name + "/workspaces"}>Your Workspaces</Link>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>Settings</MenuItem>
         <Divider />
         <MenuItem onClick={handleClick}>Signout</MenuItem>
       </DropDownMenu>
