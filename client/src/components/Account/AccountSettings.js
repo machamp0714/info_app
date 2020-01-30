@@ -24,7 +24,16 @@ const useStyles = makeStyles(theme => ({
 const AccountSettings = withRouter(props => {
   const classes = useStyles();
   const { user, children } = props;
-  const history = props.history.location.pathname;
+
+  const linkStyle = pathname => {
+    const history = props.history.location.pathname;
+
+    if (history.includes(pathname)) {
+      return "account-link active";
+    } else {
+      return "account-link non-active";
+    }
+  };
 
   return (
     <div id="account-settings">
@@ -43,31 +52,19 @@ const AccountSettings = withRouter(props => {
               </Link>
               <Link
                 to={"/" + user.name + "/profile"}
-                className={
-                  history.includes("profile")
-                    ? "active account-link"
-                    : "non-active account-link"
-                }
+                className={linkStyle("profile")}
               >
                 Profile
               </Link>
               <Link
                 to={"/" + user.name + "/workspaces"}
-                className={
-                  history.includes("workspaces")
-                    ? "active account-link"
-                    : "non-active account-link"
-                }
+                className={linkStyle("workspaces")}
               >
                 Your Workspaces
               </Link>
               <Link
                 to={"/" + user.name + "/settings"}
-                className={
-                  history.includes("settings")
-                    ? "active account-link"
-                    : "non-active account-link"
-                }
+                className={linkStyle("settings")}
               >
                 Settings
               </Link>
