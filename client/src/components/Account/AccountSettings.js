@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Container from "@material-ui/core/Container";
@@ -21,8 +21,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AccountSettings = ({ user, children }) => {
+const AccountSettings = withRouter(props => {
   const classes = useStyles();
+  const { user, children } = props;
+  const history = props.history.location.pathname;
 
   return (
     <div id="account-settings">
@@ -39,9 +41,36 @@ const AccountSettings = ({ user, children }) => {
               <Link to={"/" + user.name} className="account-link non-active">
                 Dashboard
               </Link>
-              <a className="account-link non-active">Profile</a>
-              <a className="account-link active">Your Workspaces</a>
-              <a className="account-link non-active">Settings</a>
+              <Link
+                to={"/" + user.name + "/profile"}
+                className={
+                  history.includes("profile")
+                    ? "active account-link"
+                    : "non-active account-link"
+                }
+              >
+                Profile
+              </Link>
+              <Link
+                to={"/" + user.name + "/workspaces"}
+                className={
+                  history.includes("workspaces")
+                    ? "active account-link"
+                    : "non-active account-link"
+                }
+              >
+                Your Workspaces
+              </Link>
+              <Link
+                to={"/" + user.name + "/settings"}
+                className={
+                  history.includes("settings")
+                    ? "active account-link"
+                    : "non-active account-link"
+                }
+              >
+                Settings
+              </Link>
             </nav>
           </div>
           <div className="account-rightbar">{children}</div>
@@ -49,6 +78,6 @@ const AccountSettings = ({ user, children }) => {
       </Container>
     </div>
   );
-};
+});
 
 export default AccountSettings;

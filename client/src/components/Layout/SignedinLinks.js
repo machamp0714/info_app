@@ -67,11 +67,15 @@ const SignedinLinks = ({ logout, signout, user }) => {
         <MenuItem onClick={handleClose}>
           <Link to={"/" + user.name}>Dashboard</Link>
         </MenuItem>
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link to={"/" + user.name + "/profile"}>Profile</Link>
+        </MenuItem>
         <MenuItem onClick={handleClose}>
           <Link to={"/" + user.name + "/workspaces"}>Your Workspaces</Link>
         </MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link to={"/" + user.name + "/settings"}>Settings</Link>
+        </MenuItem>
         <Divider />
         <MenuItem onClick={handleClick}>Signout</MenuItem>
       </DropDownMenu>

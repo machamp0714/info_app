@@ -5,6 +5,8 @@ import Top from "./containers/Auth/Top";
 import Signin from "./containers/Auth/Signin";
 import Signup from "./containers/Auth/Signup";
 import Dashboard from "./containers/Workspace/Dashboard";
+import Profile from "./components/Account/Profile";
+import Settings from "./components/Account/Settings";
 import YourWorkspaces from "./containers/Account/YourWorkspaces";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -26,8 +28,16 @@ const App = () => {
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
         <Route
+          path="/:id/profile"
+          render={() => <RequiredSignin WrappedComponent={Profile} />}
+        />
+        <Route
           path="/:id/workspaces"
           render={() => <RequiredSignin WrappedComponent={YourWorkspaces} />}
+        />
+        <Route
+          path="/:id/settings"
+          render={() => <RequiredSignin WrappedComponent={Settings} />}
         />
         <Route
           path="/:id"
