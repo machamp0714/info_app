@@ -34,12 +34,22 @@ const WorkspaceMenu = ({ workspace, editWorkspace, deleteWorkspace }) => {
   };
 
   const handleClick = () => {
-    editWorkspace(workspace.id, { name: name });
+    const params = {
+      workspace: {
+        name: name
+      }
+    };
+    editWorkspace(workspace.id, params);
     setOpen(false);
   };
 
   const handleSubmit = e => {
-    editWorkspace(workspace.id, { name: name });
+    const params = {
+      workspace: {
+        name: name
+      }
+    };
+    editWorkspace(workspace.id, params);
     setOpen(false);
     e.preventDefault();
   };

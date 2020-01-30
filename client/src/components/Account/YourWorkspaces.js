@@ -52,12 +52,22 @@ const YourWorkspaces = ({
   };
 
   const handleClick = () => {
-    createWorkspace({ name: name });
+    const params = {
+      workspace: {
+        name: name
+      }
+    };
+    createWorkspace(params);
     clearState();
   };
 
   const handleSubmit = e => {
-    createWorkspace({ name: name });
+    const params = {
+      workspace: {
+        name: name
+      }
+    };
+    createWorkspace(params);
     clearState();
     e.preventDefault();
   };
