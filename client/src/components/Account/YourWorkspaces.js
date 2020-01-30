@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AccountSettings from "./AccountSettings";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import StandardModal from "../Shared/StandardModal";
+import WorkspaceMenu from "../../containers/Account/WorkspaceMenu";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -20,27 +19,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const iconStyle = {
-  color: "#4E545A",
-  fontSize: 20,
-  "&:hover": {
-    path: {
-      color: "#11CDEF"
-    }
-  }
-};
-
 const YourWorkspaces = ({
   user,
   workspaces,
   getWorkspaces,
-  createWorkspace,
-  deleteWorkspace
+  createWorkspace
 }) => {
   const classes = useStyles();
 
   const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    getWorkspaces();
+  }, [getWorkspaces]);
 
   const handleOpenModal = () => {
     setOpen(true);
@@ -70,14 +62,6 @@ const YourWorkspaces = ({
     e.preventDefault();
   };
 
-  useEffect(() => {
-    getWorkspaces();
-  }, [getWorkspaces]);
-
-  const handleDeleteClick = workspace_id => {
-    deleteWorkspace(workspace_id);
-  };
-
   return (
     <AccountSettings user={user}>
       <div className="d-flex mb-2">
@@ -105,18 +89,7 @@ const YourWorkspaces = ({
             <div className="workspace-info">
               <span className="workspace-name">{workspace.name}</span>
             </div>
-            <div className="workspace-meta">
-              <button className="button-none column-menu-button" type="button">
-                <EditIcon style={iconStyle} />
-              </button>
-              <button
-                className="button-none column-menu-button"
-                type="button"
-                onClick={() => handleDeleteClick(workspace.id)}
-              >
-                <DeleteIcon style={iconStyle} />
-              </button>
-            </div>
+            <WorkspaceMenu workspace={workspace} />
           </li>
         ))}
       </ul>
