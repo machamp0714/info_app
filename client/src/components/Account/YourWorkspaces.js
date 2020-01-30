@@ -1,7 +1,23 @@
 import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import AccountSettings from "./AccountSettings";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Button from "@material-ui/core/Button";
+
+const useStyles = makeStyles(theme => ({
+  button: {
+    height: "40px",
+    backgroundColor: "#11CDEF",
+    color: "#FFFFFF",
+    boxShadow: "none",
+    marginLeft: "auto",
+    "&:hover": {
+      backgroundColor: "#11CDEF",
+      boxShadow: "none"
+    }
+  }
+}));
 
 const iconStyle = {
   color: "#4E545A",
@@ -19,6 +35,8 @@ const YourWorkspaces = ({
   getWorkspaces,
   deleteWorkspace
 }) => {
+  const classes = useStyles();
+
   useEffect(() => {
     getWorkspaces();
   }, [getWorkspaces]);
@@ -29,6 +47,11 @@ const YourWorkspaces = ({
 
   return (
     <AccountSettings user={user}>
+      <div className="d-flex mb-2">
+        <Button className={classes.button} variant="contained">
+          New Workspace
+        </Button>
+      </div>
       <ul className="workspace-list">
         {workspaces.map(workspace => (
           <li className="your-workspace" key={workspace.id}>
