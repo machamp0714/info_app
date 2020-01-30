@@ -64,18 +64,18 @@ const SignedinLinks = ({ logout, signout, user }) => {
         anchorEl={anchorRef.current}
         handleClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>
-          <Link to={"/" + user.name}>Dashboard</Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link to={"/" + user.name + "/profile"}>Profile</Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link to={"/" + user.name + "/workspaces"}>Your Workspaces</Link>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link to={"/" + user.name + "/settings"}>Settings</Link>
-        </MenuItem>
+        <Link to={"/" + user.name}>
+          <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+        </Link>
+        <Link to={"/" + user.name + "/profile"}>
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+        </Link>
+        <Link to={"/" + user.name + "/workspaces"}>
+          <MenuItem onClick={handleClose}>Your Workspaces</MenuItem>
+        </Link>
+        <Link to={"/" + user.name + "/settings"}>
+          <MenuItem onClick={handleClose}>Settings</MenuItem>
+        </Link>
         <Divider />
         <MenuItem onClick={handleClick}>Signout</MenuItem>
       </DropDownMenu>
