@@ -27,9 +27,10 @@ RSpec.describe "Workspaces", type: :request do
   describe "POST /workspaces" do
     let(:user) { create :user }
     let(:auth_headers) { user.create_new_auth_token }
+    let(:valid_params) { { workspace: { name: "workspace" } } }
 
     context "when no authorization header provided" do
-      subject(:post_no_authorization) { post api_workspaces_path, params: { name: "workspace" } }
+      subject(:post_no_authorization) { post api_workspaces_path, params: valid_params }
 
       it_behaves_like "unauthorized_error"
     end
@@ -37,7 +38,7 @@ RSpec.describe "Workspaces", type: :request do
     context "when invalid params" do
       subject(:post_invalid_params) { post api_workspaces_path, params: invalid_params, headers: auth_headers }
 
-      let(:invalid_params) { { name: "" } }
+      let(:invalid_params) { { workspace: { name: "" } } }
 
       it "return 422 status code" do
         post_invalid_params
@@ -62,8 +63,6 @@ RSpec.describe "Workspaces", type: :request do
 
     context "when valid params" do
       subject(:post_valid_params) { post api_workspaces_path, params: valid_params, headers: auth_headers }
-
-      let(:valid_params) { { name: "workspace" } }
 
       it "return 201 status code" do
         post_valid_params
@@ -130,6 +129,7 @@ RSpec.describe "Workspaces", type: :request do
     let(:user) { create :user }
     let(:auth_headers) { user.create_new_auth_token }
     let(:workspace) { create :workspace, user: user }
+    let(:valid_params) { { workspace: { name: "update workspace" } } }
 
     context "when no authorized headers provided" do
       subject(:patch_no_authorization) { patch api_workspace_path(workspace) }
@@ -141,7 +141,7 @@ RSpec.describe "Workspaces", type: :request do
       subject(:patch_no_permission) do
         patch(
           api_workspace_path(workspace),
-          params: { name: "update workspace" },
+          params: valid_params,
           headers: auth_headers
         )
       end
@@ -156,7 +156,7 @@ RSpec.describe "Workspaces", type: :request do
       subject(:patch_invalid_params) do
         patch(
           api_workspace_path(workspace),
-          params: { name: "" },
+          params: { workspace: { name: "" } },
           headers: auth_headers
         )
       end
@@ -186,7 +186,7 @@ RSpec.describe "Workspaces", type: :request do
       subject(:patch_valid_params) do
         patch(
           api_workspace_path(workspace),
-          params: { name: "update workspace" },
+          params: valid_params,
           headers: auth_headers
         )
       end
