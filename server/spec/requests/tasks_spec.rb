@@ -11,6 +11,46 @@ RSpec.describe "Tasks", type: :request do
   let(:valid_params) { { task: { content: "task content" } } }
   let(:task) { create :task, column: column, user: user }
 
+  describe "GET /tasks" do
+    context "when no authorization headers provided" do
+      subject(:get_no_authorization) { get api_column_tasks_path(column) }
+
+      it_behaves_like "unauthorized_error"
+    end
+
+    context "when no permission" do
+      subject(:get_no_permission) { get api_column_tasks_path(column), headers: auth_headers }
+
+      let(:other_user) { create :user }
+      let(:auth_headers) { other_user.create_new_auth_token }
+
+      it_behaves_like "forbidden_error"
+    end
+
+    context "when requests with auth headers" do
+      subject(:get_tasks) { get api_column_tasks_path(column), headers: auth_headers }
+
+      it "return 200 status code" do
+        get_tasks
+
+        expect(response).to have_http_status :ok
+      end
+
+      it "return proper json" do
+        get_tasks
+
+        expect(json).to include(
+          [
+            {
+              "id" => task.id,
+              "content" => task.content
+            }
+          ]
+        )
+      end
+    end
+  end
+
   describe "POST /tasks" do
     context "when no authorization headers provided" do
       subject(:post_no_authorization) { post api_column_tasks_path(column) }
