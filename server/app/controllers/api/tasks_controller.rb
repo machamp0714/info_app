@@ -2,8 +2,15 @@
 
 class Api::TasksController < ApplicationController
   before_action :authenticate_api_user!
-  before_action :verify_permission, only: %i[create]
+  before_action :verify_permission, only: %i[index create]
   before_action :verify_task, only: %i[update destroy]
+
+  def index
+    column = Column.find(params[:column_id])
+    tasks = column.tasks
+
+    render json: tasks, status: :ok
+  end
 
   def create
     column = Column.find(params[:column_id])

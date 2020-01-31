@@ -9,7 +9,7 @@ RSpec.describe "Tasks", type: :request do
   let(:column) { create :column, workspace: workspace, user: user }
   let(:invalid_params) { { task: { content: "" } } }
   let(:valid_params) { { task: { content: "task content" } } }
-  let(:task) { create :task, column: column, user: user }
+  let!(:task) { create :task, column: column, user: user }
 
   describe "GET /tasks" do
     context "when no authorization headers provided" do
@@ -40,12 +40,10 @@ RSpec.describe "Tasks", type: :request do
         get_tasks
 
         expect(json).to include(
-          [
-            {
-              "id" => task.id,
-              "content" => task.content
-            }
-          ]
+          {
+            "id" => task.id,
+            "content" => task.content
+          }
         )
       end
     end
