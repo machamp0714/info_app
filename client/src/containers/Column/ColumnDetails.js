@@ -1,5 +1,5 @@
 import ColumnDetails from "../../components/Column/ColumnDetails";
-import { editColumn, deleteColumn } from "../../actions/columnAction";
+import { getTasks } from "../../actions/taskActions";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
@@ -7,8 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteColumn: column_id => dispatch(deleteColumn(column_id)),
-  editColumn: (column_id, params) => dispatch(editColumn(column_id, params))
+  getTasks: column_id => dispatch(getTasks(column_id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColumnDetails);

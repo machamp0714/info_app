@@ -38,7 +38,7 @@ const AddTask = ({ column, createTask, handleToggle }) => {
     setContent(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleClick = () => {
     const params = {
       task: {
         content: content
@@ -59,7 +59,7 @@ const AddTask = ({ column, createTask, handleToggle }) => {
 
   return (
     <div className="task-form-area">
-      <form onSubmit={handleSubmit}>
+      <form>
         <textarea
           onChange={handleChange}
           className="task-input"
@@ -73,6 +73,8 @@ const AddTask = ({ column, createTask, handleToggle }) => {
       </form>
       <div className="d-flex mt-1">
         <Button
+          type="submit"
+          onClick={handleClick}
           variant="contained"
           className={classes.submit}
           disabled={canSubmit()}

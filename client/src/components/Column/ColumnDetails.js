@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import AddTask from "../../containers/Task/AddTask";
 import ColumnMenu from "../../containers/Column/ColumnMenu";
@@ -13,8 +13,12 @@ const iconStyle = {
   }
 };
 
-const ColumnDetails = ({ column, tasks }) => {
+const ColumnDetails = ({ column, tasks, getTasks }) => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    getTasks(column.id);
+  }, [getTasks]);
 
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
@@ -36,6 +40,11 @@ const ColumnDetails = ({ column, tasks }) => {
         </div>
       </div>
       {open && <AddTask column={column} handleToggle={handleToggle} />}
+      <div className="task-list">
+        {tasks.map(task => (
+          <div key={task.id}>{task.content}</div>
+        ))}
+      </div>
     </li>
   );
 };
