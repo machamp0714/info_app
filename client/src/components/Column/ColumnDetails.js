@@ -35,7 +35,7 @@ const ColumnDetails = ({ column, tasks }) => {
           <ColumnMenu column={column} />
         </div>
       </div>
-      {open && <AddTask handleToggle={handleToggle} />}
+      {open && <AddTask column={column} handleToggle={handleToggle} />}
     </li>
   );
 };
