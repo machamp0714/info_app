@@ -80,9 +80,9 @@ RSpec.describe "Tasks", type: :request do
 
       it "return proper json" do
         post_valid_params
-
+        puts valid_params
         expect(json).to include(
-          "content" => valid_params[:content]
+          "content" => valid_params[:task][:content]
         )
       end
 
@@ -165,7 +165,7 @@ RSpec.describe "Tasks", type: :request do
         patch_valid_params
 
         expect(json).to include(
-          "content" => valid_params[:content]
+          "content" => valid_params[:task][:content]
         )
       end
     end

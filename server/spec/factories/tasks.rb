@@ -2,8 +2,7 @@
 
 FactoryBot.define do
   factory :task do
-    title { "MyString" }
-    description { "MyString" }
+    content { "sample task" }
     association :user
     association :column
   end
