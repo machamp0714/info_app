@@ -7,7 +7,7 @@ RSpec.describe Task, type: :model do
     let(:task) { build_stubbed :task }
 
     it "is invalid when title blank" do
-      task.title = nil
+      task.content = nil
 
       expect(task).to be_invalid
     end
