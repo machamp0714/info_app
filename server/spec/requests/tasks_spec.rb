@@ -7,8 +7,8 @@ RSpec.describe "Tasks", type: :request do
   let(:auth_headers) { user.create_new_auth_token }
   let(:workspace) { create :workspace, user: user }
   let(:column) { create :column, workspace: workspace, user: user }
-  let(:invalid_params) { { title: "" } }
-  let(:valid_params) { { title: "task", description: "task memo" } }
+  let(:invalid_params) { { task: { content: "" } } }
+  let(:valid_params) { { task: { content: "task content" } } }
   let(:task) { create :task, column: column, user: user }
 
   describe "POST /tasks" do
@@ -55,7 +55,7 @@ RSpec.describe "Tasks", type: :request do
           "status" => 422,
           "errors" => [
             {
-              "source" => "title",
+              "source" => "content",
               "message" => "を入力してください"
             }
           ]
@@ -82,12 +82,7 @@ RSpec.describe "Tasks", type: :request do
         post_valid_params
 
         expect(json).to include(
-          "title" => valid_params[:title],
-          "description" => valid_params[:description],
-          "column" => {
-            "id" => column.id,
-            "name" => column.name
-          }
+          "content" => valid_params[:content]
         )
       end
 
@@ -141,7 +136,7 @@ RSpec.describe "Tasks", type: :request do
           "status" => 422,
           "errors" => [
             {
-              "source" => "title",
+              "source" => "content",
               "message" => "を入力してください"
             }
           ]
@@ -158,7 +153,7 @@ RSpec.describe "Tasks", type: :request do
         )
       end
 
-      let(:valid_params) { { title: "update", description: "update" } }
+      let(:valid_params) { { task: { content: "update task content" } } }
 
       it "return 200 status code" do
         patch_valid_params
@@ -170,12 +165,7 @@ RSpec.describe "Tasks", type: :request do
         patch_valid_params
 
         expect(json).to include(
-          "title" => valid_params[:title],
-          "description" => valid_params[:description],
-          "column" => {
-            "id" => column.id,
-            "name" => column.name
-          }
+          "content" => valid_params[:content]
         )
       end
     end
