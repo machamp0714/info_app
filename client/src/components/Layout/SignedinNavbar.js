@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import SignedinLinks from "../../containers/Auth/SignedinLinks";
-import WorkspaceSelectBox from "../Form/WorkspaceSelectBox";
+import WorkspaceSelectBox from "../Workspace/WorkspaceSelectBox";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import ColumnModal from "./ColumnModal";
+import StandardModal from "../Shared/StandardModal";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
@@ -86,10 +86,11 @@ const AddColumn = ({
       >
         Add Column
       </Button>
-      <ColumnModal
+      <StandardModal
         open={open}
         name={name}
         title="Add Column"
+        placeholder="Enter column name"
         handleChange={handleChange}
         handleClick={handleClick}
         handleSubmit={handleSubmit}

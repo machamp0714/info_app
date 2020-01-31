@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "../../components/Layout/Modal";
+import Modal from "../Layout/Modal";
 import Button from "@material-ui/core/Button";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import Typography from "@material-ui/core/Typography";
@@ -37,7 +37,6 @@ const useStyles = makeStyles(theme => ({
     margin: 0
   },
   button: {
-    width: 125,
     height: 40,
     backgroundColor: "#11CDEF",
     color: "#FFFFFF",
@@ -49,10 +48,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ColumnModal = ({
+const StandardModal = ({
   name,
   open,
   title,
+  placeholder,
   handleClose,
   handleChange,
   handleClick,
@@ -79,7 +79,7 @@ const ColumnModal = ({
             className={classes.input}
             id="name"
             value={name}
-            palaceholder="Enter column name"
+            placeholder={placeholder}
             autoFocus
             onChange={handleChange}
           />
@@ -94,4 +94,4 @@ const ColumnModal = ({
   );
 };
 
-export default ColumnModal;
+export default StandardModal;

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import ColumnModal from "./ColumnModal";
+import StandardModal from "../Shared/StandardModal";
 import DropDownMenu from "../Shared/DropDownMenu";
 
 const iconStyle = {
@@ -85,7 +85,7 @@ const ColumnMenu = ({ column, editColumn, deleteColumn }) => {
         ref={anchorRef}
         onClick={handleToggle}
         type="button"
-        className="column-menu-button"
+        className="column-menu-button button-none"
       >
         <MenuIcon style={iconStyle} />
       </button>
@@ -101,10 +101,11 @@ const ColumnMenu = ({ column, editColumn, deleteColumn }) => {
           Delete Column
         </MenuItem>
       </DropDownMenu>
-      <ColumnModal
+      <StandardModal
         open={modalOpen}
         name={name}
         title="Edit Column"
+        placeholder="Enter column name"
         handleChange={handleChange}
         handleClick={handleEditClick}
         handleSubmit={handleSubmit}

@@ -52,7 +52,7 @@ class Api::WorkspacesController < ApplicationController
   private
 
   def workspace_params
-    params.permit(:name)
+    params.require(:workspace).permit(:name)
   end
 
   def verify_permission
