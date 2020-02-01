@@ -7,9 +7,47 @@ RSpec.describe "Tasks", type: :request do
   let(:auth_headers) { user.create_new_auth_token }
   let(:workspace) { create :workspace, user: user }
   let(:column) { create :column, workspace: workspace, user: user }
-  let(:invalid_params) { { title: "" } }
-  let(:valid_params) { { title: "task", description: "task memo" } }
-  let(:task) { create :task, column: column, user: user }
+  let(:invalid_params) { { task: { content: "" } } }
+  let(:valid_params) { { task: { content: "task content" } } }
+  let!(:task) { create :task, column: column, user: user }
+
+  describe "GET /tasks" do
+    context "when no authorization headers provided" do
+      subject(:get_no_authorization) { get api_column_tasks_path(column) }
+
+      it_behaves_like "unauthorized_error"
+    end
+
+    context "when no permission" do
+      subject(:get_no_permission) { get api_column_tasks_path(column), headers: auth_headers }
+
+      let(:other_user) { create :user }
+      let(:auth_headers) { other_user.create_new_auth_token }
+
+      it_behaves_like "forbidden_error"
+    end
+
+    context "when requests with auth headers" do
+      subject(:get_tasks) { get api_column_tasks_path(column), headers: auth_headers }
+
+      it "return 200 status code" do
+        get_tasks
+
+        expect(response).to have_http_status :ok
+      end
+
+      it "return proper json" do
+        get_tasks
+
+        expect(json).to include(
+          {
+            "id" => task.id,
+            "content" => task.content
+          }
+        )
+      end
+    end
+  end
 
   describe "POST /tasks" do
     context "when no authorization headers provided" do
@@ -55,7 +93,7 @@ RSpec.describe "Tasks", type: :request do
           "status" => 422,
           "errors" => [
             {
-              "source" => "title",
+              "source" => "content",
               "message" => "を入力してください"
             }
           ]
@@ -80,14 +118,9 @@ RSpec.describe "Tasks", type: :request do
 
       it "return proper json" do
         post_valid_params
-
+        puts valid_params
         expect(json).to include(
-          "title" => valid_params[:title],
-          "description" => valid_params[:description],
-          "column" => {
-            "id" => column.id,
-            "name" => column.name
-          }
+          "content" => valid_params[:task][:content]
         )
       end
 
@@ -141,7 +174,7 @@ RSpec.describe "Tasks", type: :request do
           "status" => 422,
           "errors" => [
             {
-              "source" => "title",
+              "source" => "content",
               "message" => "を入力してください"
             }
           ]
@@ -158,7 +191,7 @@ RSpec.describe "Tasks", type: :request do
         )
       end
 
-      let(:valid_params) { { title: "update", description: "update" } }
+      let(:valid_params) { { task: { content: "update task content" } } }
 
       it "return 200 status code" do
         patch_valid_params
@@ -170,12 +203,7 @@ RSpec.describe "Tasks", type: :request do
         patch_valid_params
 
         expect(json).to include(
-          "title" => valid_params[:title],
-          "description" => valid_params[:description],
-          "column" => {
-            "id" => column.id,
-            "name" => column.name
-          }
+          "content" => valid_params[:task][:content]
         )
       end
     end

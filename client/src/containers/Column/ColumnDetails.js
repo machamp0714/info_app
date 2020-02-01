@@ -1,10 +1,13 @@
 import ColumnDetails from "../../components/Column/ColumnDetails";
-import { editColumn, deleteColumn } from "../../actions/columnAction";
+import { getTasks } from "../../actions/taskActions";
 import { connect } from "react-redux";
 
-const mapDispatchToProps = dispatch => ({
-  deleteColumn: column_id => dispatch(deleteColumn(column_id)),
-  editColumn: (column_id, params) => dispatch(editColumn(column_id, params))
+const mapStateToProps = state => ({
+  tasks: state.task.tasks
 });
 
-export default connect(null, mapDispatchToProps)(ColumnDetails);
+const mapDispatchToProps = dispatch => ({
+  getTasks: column_id => dispatch(getTasks(column_id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ColumnDetails);

@@ -1,0 +1,21 @@
+@import "../variables.scss";
+
+.task-form-area {
+  margin-top: 10px;
+}
+.task-input {
+  display: block;
+  min-width: 326px;
+  max-width: 350px;
+  font-size: 14px;
+  color: #4e545a;
+  padding: 11px;
+  border-radius: 10px;
+  border-color: #e1e4e8;
+  &:focus {
+    outline: none;
+  }
+}
+.task-list {
+  margin-top: 10px;
+}

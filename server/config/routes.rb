@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
     resources :workspaces, only: %i[index create show update destroy], shallow: true do
       resources :columns, only: %i[index create update destroy] do
-        resources :tasks, only: %i[create update destroy]
+        resources :tasks, only: %i[index create update destroy]
       end
     end
     get "github_oauth_url", to: "auth/omniauth_callbacks#github"

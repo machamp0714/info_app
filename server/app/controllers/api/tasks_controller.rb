@@ -2,8 +2,16 @@
 
 class Api::TasksController < ApplicationController
   before_action :authenticate_api_user!
-  before_action :verify_permission, only: %i[create]
+  before_action :verify_permission, only: %i[index create]
   before_action :verify_task, only: %i[update destroy]
+  before_action :session_clear
+
+  def index
+    column = Column.find(params[:column_id])
+    tasks = column.tasks
+
+    render json: tasks, status: :ok
+  end
 
   def create
     column = Column.find(params[:column_id])
@@ -35,7 +43,7 @@ class Api::TasksController < ApplicationController
   private
 
   def task_params
-    params.permit(:title, :description)
+    params.require(:task).permit(:content)
   end
 
   def verify_permission

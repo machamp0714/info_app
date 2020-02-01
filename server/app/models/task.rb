@@ -4,5 +4,5 @@ class Task < ApplicationRecord
   belongs_to :column
   belongs_to :user
 
-  validates :title, presence: true
+  validates :content, presence: true
 end
