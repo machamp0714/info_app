@@ -17,5 +17,15 @@
   }
 }
 .task-list {
-  margin-top: 10px;
+  height: calc(100% - 47px);
+  border-radius: 10px;
+  overflow: auto;
+  padding: 0 12px;
+}
+.task-card {
+  min-height: 80px;
+  background-color: #fff;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }

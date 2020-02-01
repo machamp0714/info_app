@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TaskDetails from "./TaskDetails";
 import ProgressBar from "../Layout/ProgressBar";
 import { http } from "../../config/axios";
 
@@ -17,17 +18,15 @@ const TaskList = ({ column, taskList }) => {
     getTasks();
   }, [column.id, taskList]);
 
+  if (isLoading) {
+    return <ProgressBar />;
+  }
+
   return (
-    <div id="task-list">
-      {isLoading ? (
-        <ProgressBar />
-      ) : (
-        <ul>
-          {tasks.map(task => (
-            <li key={task.id}>{task.content}</li>
-          ))}
-        </ul>
-      )}
+    <div className="task-list position-relative">
+      {tasks.map(task => (
+        <TaskDetails key={task.id} task={task} />
+      ))}
     </div>
   );
 };

@@ -25,11 +25,10 @@
 .column-box {
   min-width: 350px;
   max-width: 350px;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 120px);
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   background-color: #f4f4f4;
-  padding: 14px;
   margin-right: 16px;
   &:last-child {
     margin-right: 0;
@@ -38,6 +37,7 @@
 
 .column-header {
   display: flex;
+  padding: 12px;
   align-items: center;
 }
 

@@ -6,6 +6,10 @@
 @import "./Task/task.scss";
 @import "./variables.scss";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #f1f3f9;
 }
