@@ -5,7 +5,6 @@ import { http } from "../../config/axios";
 const TaskList = ({ column, taskList }) => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const taskCount = taskList.length;
 
   useEffect(() => {
     const getTasks = async () => {
@@ -16,7 +15,7 @@ const TaskList = ({ column, taskList }) => {
     };
 
     getTasks();
-  }, [column.id, taskCount]);
+  }, [column.id, taskList]);
 
   return (
     <div id="task-list">
