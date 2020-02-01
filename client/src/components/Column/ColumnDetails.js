@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import AddTask from "../../containers/Task/AddTask";
 import ColumnMenu from "../../containers/Column/ColumnMenu";
-import TaskList from "../Task/TaskList";
+import TaskList from "../../containers/Task/TaskList";
 
 const iconStyle = {
   color: "#24292e",
@@ -14,7 +14,7 @@ const iconStyle = {
   }
 };
 
-const ColumnDetails = ({ column, tasks, getTasks }) => {
+const ColumnDetails = ({ column }) => {
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {
