@@ -22,7 +22,7 @@ const ColumnDetails = ({ column }) => {
   };
 
   return (
-    <li className="column-box position-relative">
+    <li className="column-box d-flex flex-column flex-auto">
       <div className="column-header">
         <div className="column-name">{column.name}</div>
         <div className="column-menu">
