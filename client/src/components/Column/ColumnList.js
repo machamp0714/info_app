@@ -38,7 +38,7 @@ const ColumnList = ({
 
   return (
     <div className="column-dashboard">
-      <ul className="column-list">
+      <ul className="column-list d-flex">
         {columns.map(column => {
           return <ColumnDetails key={column.id} column={column} />;
         })}
