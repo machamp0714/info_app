@@ -20,6 +20,16 @@ const createError = error => ({
   payload: error.response.data
 });
 
+const deleteSuccess = task_id => ({
+  type: "DELETE_TASK_SUCCESS",
+  payload: task_id
+});
+
+const deleteError = error => ({
+  type: "DELETE_TASK_ERROR",
+  payload: error.response.error
+});
+
 export const getTasks = column_id => {
   return dispatch => {
     http
@@ -35,5 +45,14 @@ export const createTask = (column_id, params) => {
       .post(`/api/columns/${column_id}/tasks`, params)
       .then(response => dispatch(createSuccess(response)))
       .catch(error => dispatch(createError(error)));
+  };
+};
+
+export const deleteTask = task_id => {
+  return dispatch => {
+    secureHTTP
+      .delete(`/api/tasks/${task_id}`)
+      .then(() => dispatch(deleteSuccess(task_id)))
+      .catch(error => dispatch(error));
   };
 };
