@@ -19,7 +19,11 @@ const TaskList = ({ column, taskList }) => {
   }, [column.id, taskList]);
 
   if (isLoading) {
-    return <ProgressBar />;
+    return (
+      <div className="center mt-1">
+        <ProgressBar />
+      </div>
+    );
   }
 
   return (
