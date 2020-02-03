@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import DropDownMenu from "../Shared/DropDownMenu";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import MenuItem from "@material-ui/core/MenuItem";
+import TaskModal from "./TaskModal";
 
 const iconStyle = {
   color: "#6a737d",
@@ -21,6 +22,7 @@ const TaskMenu = ({ task, deleteTask }) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const anchorRef = useRef(null);
 
   const handleOpen = () => {
@@ -29,6 +31,15 @@ const TaskMenu = ({ task, deleteTask }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+    handleClose();
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
   };
 
   const handleDeleteClick = () => {
@@ -50,11 +61,14 @@ const TaskMenu = ({ task, deleteTask }) => {
         anchorEl={anchorRef.current}
         handleClose={handleClose}
       >
-        <MenuItem className={classes.item}>Edit Task</MenuItem>
+        <MenuItem onClick={handleOpenModal} className={classes.item}>
+          Edit Task
+        </MenuItem>
         <MenuItem onClick={handleDeleteClick} className={classes.item}>
           Delete Task
         </MenuItem>
       </DropDownMenu>
+      <TaskModal task={task} open={modalOpen} handleClose={handleCloseModal} />
     </details>
   );
 };

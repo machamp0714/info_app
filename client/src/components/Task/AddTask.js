@@ -62,7 +62,7 @@ const AddTask = ({ column, createTask, handleToggle }) => {
       <form>
         <textarea
           onChange={handleChange}
-          className="task-input"
+          className="textarea-input full-width"
           autoFocus
           placeholder="Enter task content"
           name="content"
