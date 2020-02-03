@@ -53,6 +53,6 @@ export const deleteTask = task_id => {
     secureHTTP
       .delete(`/api/tasks/${task_id}`)
       .then(() => dispatch(deleteSuccess(task_id)))
-      .catch(error => dispatch(error));
+      .catch(error => dispatch(deleteError(error)));
   };
 };

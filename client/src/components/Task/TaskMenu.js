@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TaskMenu = () => {
+const TaskMenu = ({ task, deleteTask }) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -28,6 +28,11 @@ const TaskMenu = () => {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDeleteClick = () => {
+    deleteTask(task.id);
     setOpen(false);
   };
 
@@ -46,7 +51,9 @@ const TaskMenu = () => {
         handleClose={handleClose}
       >
         <MenuItem className={classes.item}>Edit Task</MenuItem>
-        <MenuItem className={classes.item}>Delete Task</MenuItem>
+        <MenuItem onClick={handleDeleteClick} className={classes.item}>
+          Delete Task
+        </MenuItem>
       </DropDownMenu>
     </details>
   );
