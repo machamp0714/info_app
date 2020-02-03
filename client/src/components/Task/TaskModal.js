@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "../Layout/Modal";
 import Button from "@material-ui/core/Button";
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TaskModal = ({ task, open, handleClose }) => {
+const TaskModal = ({ task, open, handleClose, editTask }) => {
   const classes = useStyles();
 
   const [content, setContent] = useState(task.content);
@@ -43,6 +43,16 @@ const TaskModal = ({ task, open, handleClose }) => {
     } else {
       return false;
     }
+  };
+
+  const handleClick = () => {
+    const params = {
+      task: {
+        content: content
+      }
+    };
+    editTask(task.id, params);
+    handleClose();
   };
 
   const handleChange = e => {
@@ -74,6 +84,7 @@ const TaskModal = ({ task, open, handleClose }) => {
         </form>
         <div className="mt-1">
           <Button
+            onClick={handleClick}
             variant="contained"
             disabled={canSubmit()}
             className={classes.button}

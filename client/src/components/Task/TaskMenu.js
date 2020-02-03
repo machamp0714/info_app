@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import DropDownMenu from "../Shared/DropDownMenu";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import MenuItem from "@material-ui/core/MenuItem";
-import TaskModal from "./TaskModal";
+import TaskModal from "../../containers/Task/TaskModal";
 
 const iconStyle = {
   color: "#6a737d",
