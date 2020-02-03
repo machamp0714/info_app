@@ -1,26 +1,37 @@
 import React, { useState, useEffect } from "react";
+import TaskDetails from "./TaskDetails";
+import ProgressBar from "../Layout/ProgressBar";
 import { http } from "../../config/axios";
 
 const TaskList = ({ column, taskList }) => {
   const [tasks, setTasks] = useState([]);
-  const taskCount = taskList.length;
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const getTasks = async () => {
       const result = await http.get(`/api/columns/${column.id}/tasks`);
 
       setTasks(result.data);
+      setLoading(false);
     };
 
     getTasks();
-  }, [column.id, taskCount]);
+  }, [column.id, taskList]);
+
+  if (isLoading) {
+    return (
+      <div className="center mt-1">
+        <ProgressBar />
+      </div>
+    );
+  }
 
   return (
-    <ul>
+    <div className="task-list position-relative">
       {tasks.map(task => (
-        <li key={task.id}>{task.content}</li>
+        <TaskDetails key={task.id} task={task} />
       ))}
-    </ul>
+    </div>
   );
 };
 

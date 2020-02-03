@@ -53,7 +53,9 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
       />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
       {isLoading ? (
-        <ProgressBar />
+        <div className="center-content">
+          <ProgressBar disableShrink />
+        </div>
       ) : (
         [
           workspaces.length === 0 ? (
