@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Api::UsersController < ApplicationController
-
   def currentuser
     user = current_api_user
     session_clear
