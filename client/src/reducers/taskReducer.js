@@ -16,6 +16,20 @@ const taskReducer = (state = initState, action) => {
       };
     case "CREATE_TASK_ERROR":
       return state;
+    case "EDIT_TASK_SUCCESS":
+      return {
+        tasks: state.tasks.map(task =>
+          task.id === action.meta ? action.payload : task
+        )
+      };
+    case "EDIT_TASK_ERROR":
+      return state;
+    case "DELETE_TASK_SUCCESS":
+      return {
+        tasks: state.tasks.filter(task => task.id !== action.payload)
+      };
+    case "DELETE_TASK_ERROR":
+      return state;
     default:
       return state;
   }

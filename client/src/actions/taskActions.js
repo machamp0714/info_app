@@ -20,6 +20,27 @@ const createError = error => ({
   payload: error.response.data
 });
 
+const editSuccess = (response, task_id) => ({
+  type: "EDIT_TASK_SUCCESS",
+  payload: response.data,
+  meta: task_id
+});
+
+const editError = error => ({
+  type: "EDIT_TASK_ERROR",
+  payload: error.response.data
+});
+
+const deleteSuccess = task_id => ({
+  type: "DELETE_TASK_SUCCESS",
+  payload: task_id
+});
+
+const deleteError = error => ({
+  type: "DELETE_TASK_ERROR",
+  payload: error.response.error
+});
+
 export const getTasks = column_id => {
   return dispatch => {
     http
@@ -35,5 +56,23 @@ export const createTask = (column_id, params) => {
       .post(`/api/columns/${column_id}/tasks`, params)
       .then(response => dispatch(createSuccess(response)))
       .catch(error => dispatch(createError(error)));
+  };
+};
+
+export const editTask = (task_id, params) => {
+  return dispatch => {
+    secureHTTP
+      .patch(`/api/tasks/${task_id}`, params)
+      .then(response => dispatch(editSuccess(response, task_id)))
+      .catch(error => dispatch(editError(error)));
+  };
+};
+
+export const deleteTask = task_id => {
+  return dispatch => {
+    secureHTTP
+      .delete(`/api/tasks/${task_id}`)
+      .then(() => dispatch(deleteSuccess(task_id)))
+      .catch(error => dispatch(deleteError(error)));
   };
 };
