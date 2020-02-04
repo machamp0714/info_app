@@ -39,7 +39,7 @@ RSpec.describe "Tasks", type: :request do
       it "return proper json" do
         get_tasks
 
-        expect(json).to include(
+        expect(json[0]).to include(
           {
             "id" => task.id,
             "content" => task.content
@@ -118,7 +118,7 @@ RSpec.describe "Tasks", type: :request do
 
       it "return proper json" do
         post_valid_params
-        puts valid_params
+
         expect(json).to include(
           "content" => valid_params[:task][:content]
         )
