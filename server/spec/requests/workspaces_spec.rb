@@ -76,6 +76,7 @@ RSpec.describe "Workspaces", type: :request do
         expect(json).to include(
           "name" => "workspace",
           "user" => {
+            "id" => user.id,
             "name" => user.name,
             "email" => user.email,
             "image" => user.image
@@ -203,6 +204,7 @@ RSpec.describe "Workspaces", type: :request do
         expect(json).to include(
           "name" => "update workspace",
           "user" => {
+            "id" => user.id,
             "name" => user.name,
             "email" => user.email,
             "image" => user.image
