@@ -1,5 +1,9 @@
 import { secureHTTP, http } from "../config/axios";
 
+const getColumnsLoading = () => ({
+  type: "GET_COLUMNS_LOADING"
+});
+
 const getColumnsSuccess = response => ({
   type: "GET_COLUMNS_SUCCESS",
   payload: response.data
@@ -43,6 +47,7 @@ const deleteError = error => ({
 
 export const getColumns = workspace_id => {
   return dispatch => {
+    dispatch(getColumnsLoading());
     http
       .get(`/api/workspaces/${workspace_id}/columns`)
       .then(response => dispatch(getColumnsSuccess(response)))

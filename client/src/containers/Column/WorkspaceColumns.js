@@ -3,7 +3,8 @@ import { getColumns, createColumn } from "../../actions/columnAction";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-  columns: state.column.columns
+  columns: state.column.columns,
+  isLoading: state.column.isLoading
 });
 
 const mapDispatchToProps = dispatch => ({

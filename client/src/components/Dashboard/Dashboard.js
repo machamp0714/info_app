@@ -25,15 +25,6 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     getWorkspaces();
   }, [getWorkspaces]);
 
-  // useEffect(() => {
-  //   const getDefaultWorkspace = async () => {
-  //     const result = await http.get("/api/default_workspace");
-  //     setWorkspace(result.data);
-  //   };
-
-  //   getDefaultWorkspace();
-  // }, [workspaces]);
-
   useEffect(() => {
     if (workspaces.length > 0) {
       setWorkspace(workspaces[0]);
