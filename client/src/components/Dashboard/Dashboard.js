@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SignedinNavbar from "../Layout/SignedinNavbar";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Drawer/Sidebar";
 import AddWorkspace from "./AddWorkspace";
 import WorkspaceColumns from "../../containers/Column/WorkspaceColumns";
 import ProgressBar from "../Layout/ProgressBar";
