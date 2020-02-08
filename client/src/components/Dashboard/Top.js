@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import Validation from "../../hooks/validates";
-import Errors from "../../hooks/errors";
+import Validation from "../../utils/validates";
+import Errors from "../../utils/errors";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
