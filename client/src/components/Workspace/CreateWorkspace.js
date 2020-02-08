@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     alignItems: "center",
     width: 400,
-    height: 45,
+    height: 55,
     margin: "20px auto 0"
   },
   input: {
@@ -50,7 +50,7 @@ const CreateWorkspace = ({ createWorkspace, errors }) => {
         <InputBase
           id="name"
           className={classes.input}
-          placeholder="workspace"
+          placeholder="Create Workspace"
           onChange={handleChange}
         />
         <IconButton type="submit" className={classes.icon}>
@@ -58,7 +58,7 @@ const CreateWorkspace = ({ createWorkspace, errors }) => {
         </IconButton>
       </Paper>
       {errors.length > 0 && (
-        <div className="error-message">{validateMessages()}</div>
+        <div className="error-message center">{validateMessages()}</div>
       )}
     </div>
   );

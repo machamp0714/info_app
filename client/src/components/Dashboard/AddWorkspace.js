@@ -3,8 +3,8 @@ import CreateWorkspace from "../../containers/Workspace/CreateWorkspace";
 
 const AddWorkspace = () => {
   return (
-    <div className="center-content">
-      <div className="workspace-description">
+    <div className="add-workspace m-auto">
+      <div className="center">
         <p>まだワークスペースがありません。</p>
         <p>まずはワークスペースを作成しましょう！</p>
       </div>
