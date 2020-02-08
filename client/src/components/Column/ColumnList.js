@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import StandardModal from "../Shared/StandardModal";
 import ColumnDetails from "../../containers/Column/ColumnDetails";
 import AddIcon from "@material-ui/icons/Add";
+import DashboardContext from "../../contexts/DashboardContext";
+import clsx from "clsx";
 
 const ColumnList = ({
   workspace,
@@ -11,6 +13,7 @@ const ColumnList = ({
   handleClickOpen,
   createColumn
 }) => {
+  const state = useContext(DashboardContext);
   const [name, setName] = useState("");
 
   const handleChange = e => {
@@ -37,7 +40,11 @@ const ColumnList = ({
   };
 
   return (
-    <div className="column-dashboard">
+    <div
+      className={clsx("column-dashboard d-flex position-absolute", {
+        "drawer-open": state.open
+      })}
+    >
       <ul className="column-list d-flex">
         {columns.map(column => {
           return <ColumnDetails key={column.id} column={column} />;
