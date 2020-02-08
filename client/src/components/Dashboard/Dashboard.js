@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import AddWorkspace from "./AddWorkspace";
 import WorkspaceColumns from "../../containers/Column/WorkspaceColumns";
 import ProgressBar from "../Layout/ProgressBar";
+import DashboardContext from "../../contexts/DashboardContext";
 
 const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
@@ -25,51 +26,43 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     getWorkspaces();
   }, [getWorkspaces]);
 
-  // useEffect(() => {
-  //   const getDefaultWorkspace = async () => {
-  //     const result = await http.get("/api/default_workspace");
-  //     setWorkspace(result.data);
-  //   };
-
-  //   getDefaultWorkspace();
-  // }, [workspaces]);
-
   useEffect(() => {
     if (workspaces.length > 0) {
       setWorkspace(workspaces[0]);
     }
   }, [workspaces]);
 
+  const value = {
+    open,
+    workspaces,
+    workspace,
+    isLoading,
+    user,
+    handleDrawerOpen,
+    handleDrawerClose,
+    handleSelectWorkspace
+  };
+
   return (
-    <div id="dashboard">
-      <SignedinNavbar
-        open={open}
-        handleDrawerOpen={handleDrawerOpen}
-        workspaces={workspaces}
-        workspace={workspace}
-        handleSelectWorkspace={handleSelectWorkspace}
-        isLoading={isLoading}
-        user={user}
-      />
-      <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
-      {isLoading ? (
-        <div className="center-content">
-          <ProgressBar disableShrink />
-        </div>
-      ) : (
-        [
-          workspaces.length === 0 ? (
-            <AddWorkspace />
-          ) : (
-            [
-              workspace !== null && (
-                <WorkspaceColumns workspace={workspace} key={workspace.id} />
-              )
-            ]
-          )
-        ]
-      )}
-    </div>
+    <DashboardContext.Provider value={value}>
+      <div id="dashboard">
+        <SignedinNavbar />
+        <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
+        {isLoading ? (
+          <div className="center-content">
+            <ProgressBar disableShrink />
+          </div>
+        ) : (
+          [
+            workspaces.length === 0 ? (
+              <AddWorkspace />
+            ) : (
+              [workspace !== null && <WorkspaceColumns key={workspace.id} />]
+            )
+          ]
+        )}
+      </div>
+    </DashboardContext.Provider>
   );
 };
 

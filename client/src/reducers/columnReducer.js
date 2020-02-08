@@ -1,16 +1,25 @@
 const initState = {
+  isLoading: true,
   columns: [],
   errors: []
 };
 
 const columnReducer = (state = initState, action) => {
   switch (action.type) {
+    case "GET_COLUMNS_LOADING":
+      return state;
     case "GET_COLUMNS_SUCCESS":
       return {
+        ...state,
+        isLoading: false,
         columns: action.payload
       };
     case "GET_COLUMNS_ERROR":
-      return state;
+      return {
+        ...state,
+        isLoading: false,
+        errors: [action.payload]
+      };
     case "CREATE_COLUMN_SUCCESS":
       return {
         ...state,

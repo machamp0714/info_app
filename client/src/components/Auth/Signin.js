@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import Validation from "../../hooks/validates";
+import Validation from "../../utils/validates";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import TextInputWithIcon from "../Form/textInputWithIcon";

@@ -8,14 +8,21 @@ const TaskList = ({ column, taskList }) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
     const getTasks = async () => {
       const result = await http.get(`/api/columns/${column.id}/tasks`);
 
-      setTasks(result.data);
-      setLoading(false);
+      if (isMounted) {
+        setTasks(result.data);
+        setLoading(false);
+      }
     };
 
     getTasks();
+
+    return () => {
+      isMounted = false;
+    };
   }, [column.id, taskList]);
 
   if (isLoading) {
