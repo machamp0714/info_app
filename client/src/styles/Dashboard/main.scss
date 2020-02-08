@@ -1,3 +1,22 @@
+@import "../variables.scss";
+
 .add-workspace {
   margin-top: 200px;
+}
+.sidebar-icon {
+  width: 43px;
+  height: 43px;
+}
+.sidebar-item {
+  padding: 0 15px;
+  cursor: pointer;
+  &:hover {
+    background-color: $top-background-color;
+  }
+}
+.sidebar-item-content {
+  color: $primary-color;
+  letter-spacing: 1.1px;
+  margin: auto 10px;
+  white-space: nowrap;
 }

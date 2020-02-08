@@ -8,6 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import clsx from "clsx";
 import { Typography } from "@material-ui/core";
 import DashboardContext from "../../contexts/DashboardContext";
+import qiitaIcon from "../../images/qiita.png";
 
 const drawerWidth = 400;
 
@@ -75,6 +76,26 @@ const Sidebar = () => {
         </IconButton>
       </div>
       <Divider />
+      <ul className="mt-1">
+        <li className="sidebar-item d-flex mb-2">
+          <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
+          {open && <div className="sidebar-item-content">Workspace</div>}
+        </li>
+        <li className="sidebar-item d-flex mb-2">
+          <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
+          {open && <div className="sidebar-item-content">Qiita</div>}
+        </li>
+        <li className="sidebar-item d-flex mb-2">
+          <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
+          {open && <div className="sidebar-item-content">Evernote</div>}
+        </li>
+        <li className="sidebar-item d-flex mb-2">
+          <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
+          {open && (
+            <div className="sidebar-item-content">はてなブックマーク</div>
+          )}
+        </li>
+      </ul>
     </Drawer>
   );
 };
