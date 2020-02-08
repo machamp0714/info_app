@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,6 +7,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Divider from "@material-ui/core/Divider";
 import clsx from "clsx";
 import { Typography } from "@material-ui/core";
+import DashboardContext from "../../contexts/DashboardContext";
 
 const drawerWidth = 400;
 
@@ -42,9 +43,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Sidebar = ({ open, handleDrawerClose }) => {
+const Sidebar = () => {
   const classes = useStyles();
   const theme = useTheme();
+  const { open, handleDrawerClose } = useContext(DashboardContext);
 
   return (
     <Drawer

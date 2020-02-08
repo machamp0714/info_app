@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import SignedinLinks from "../../containers/Auth/SignedinLinks";
@@ -7,6 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import DashboardContext from "../../contexts/DashboardContext";
 
 const drawerWidth = 400;
 
@@ -40,16 +41,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignedinNavbar = ({
-  workspaces,
-  workspace,
-  open,
-  handleDrawerOpen,
-  handleSelectWorkspace,
-  isLoading,
-  user
-}) => {
+const SignedinNavbar = () => {
   const classes = useStyles();
+  const {
+    open,
+    workspaces,
+    workspace,
+    isLoading,
+    handleDrawerOpen,
+    user,
+    handleSelectWorkspace
+  } = useContext(DashboardContext);
 
   return (
     <AppBar

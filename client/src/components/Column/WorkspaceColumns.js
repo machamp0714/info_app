@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AddColumn from "./AddColumn";
 import ColumnList from "./ColumnList";
+import DashboardContext from "../../contexts/DashboardContext";
 
-const WorkspaceColumns = ({
-  columns,
-  isLoading,
-  getColumns,
-  createColumn,
-  workspace
-}) => {
+const WorkspaceColumns = ({ columns, isLoading, getColumns, createColumn }) => {
   const [open, setOpen] = useState(false);
+  const { workspace } = useContext(DashboardContext);
 
   useEffect(() => {
     getColumns(workspace.id);
@@ -31,6 +27,7 @@ const WorkspaceColumns = ({
         [
           columns.length > 0 ? (
             <ColumnList
+              key={workspace.id}
               workspace={workspace}
               columns={columns}
               open={open}
@@ -40,6 +37,7 @@ const WorkspaceColumns = ({
             />
           ) : (
             <AddColumn
+              key={workspace.id}
               workspace={workspace}
               open={open}
               handleClose={handleClose}
