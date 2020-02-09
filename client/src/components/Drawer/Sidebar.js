@@ -5,9 +5,11 @@ import IconButton from "@material-ui/core/IconButton";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Divider from "@material-ui/core/Divider";
-import clsx from "clsx";
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import DashboardContext from "../../contexts/DashboardContext";
+import clsx from "clsx";
 import qiitaIcon from "../../images/qiita.png";
 
 const drawerWidth = 400;
@@ -40,6 +42,23 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar
+  },
+  input: {
+    width: 330,
+    paddingLeft: 10
+  },
+  button: {
+    transition: "none",
+    "&:hover": {
+      borderRadius: 0,
+      backgroundColor: "#172b4d",
+      "& .MuiSvgIcon-root": {
+        color: "#fff"
+      }
+    }
+  },
+  icon: {
+    color: "#172b4d"
   }
 }));
 
@@ -52,6 +71,10 @@ const Sidebar = () => {
     handleDrawerClose,
     handleWorkspaceClick
   } = useContext(DashboardContext);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
 
   return (
     <Drawer
@@ -81,7 +104,18 @@ const Sidebar = () => {
       </div>
       <Divider />
       {clickedWorkspace ? (
-        <div>workspace create</div>
+        <div className="mt-1 p-1">
+          <form onSubmit={handleSubmit} className="d-flex form-group">
+            <InputBase
+              autoFocus
+              className={classes.input}
+              placeholder="Create Workspace"
+            />
+            <IconButton className={classes.button} type="submit">
+              <PlayArrowIcon className={classes.icon} />
+            </IconButton>
+          </form>
+        </div>
       ) : (
         <ul className="mt-1">
           <li
