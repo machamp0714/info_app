@@ -13,6 +13,8 @@
 .sidebar-item {
   padding: 10px 15px;
   cursor: pointer;
+}
+.sidebar-item-open {
   &:hover {
     background-color: $top-background-color;
   }

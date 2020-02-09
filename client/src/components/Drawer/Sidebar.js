@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import WorkspaceItem from "./WorkspaceItem";
+import WorkspaceItem from "../../containers/Drawer/WorkspaceItem";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -87,7 +87,9 @@ const Sidebar = () => {
         <ul className="mt-1">
           <li
             onClick={handleWorkspaceClick}
-            className="sidebar-item d-flex mb-2"
+            className={clsx("sidebar-item d-flex mb-2", {
+              "sidebar-item-open": open
+            })}
           >
             <img
               src={qiitaIcon}
@@ -96,7 +98,11 @@ const Sidebar = () => {
             />
             {open && <div className="sidebar-item-content">Workspace</div>}
           </li>
-          <li className="sidebar-item d-flex mb-2">
+          <li
+            className={clsx("sidebar-item d-flex mb-2", {
+              "sidebar-item-open": open
+            })}
+          >
             <img
               src={qiitaIcon}
               className="sidebar-icon"
@@ -104,7 +110,11 @@ const Sidebar = () => {
             />
             {open && <div className="sidebar-item-content">Qiita</div>}
           </li>
-          <li className="sidebar-item d-flex mb-2">
+          <li
+            className={clsx("sidebar-item d-flex mb-2", {
+              "sidebar-item-open": open
+            })}
+          >
             <img
               src={qiitaIcon}
               className="sidebar-icon"
@@ -112,7 +122,11 @@ const Sidebar = () => {
             />
             {open && <div className="sidebar-item-content">Evernote</div>}
           </li>
-          <li className="sidebar-item d-flex mb-2">
+          <li
+            className={clsx("sidebar-item d-flex mb-2", {
+              "sidebar-item-open": open
+            })}
+          >
             <img
               src={qiitaIcon}
               className="sidebar-icon"

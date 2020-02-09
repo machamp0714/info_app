@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
@@ -25,11 +25,23 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const WorkspaceItem = () => {
+const WorkspaceItem = ({ createWorkspace }) => {
   const classes = useStyles();
   const { handleWorkspaceBack } = useContext(DashboardContext);
+  const [name, setName] = useState("");
+
+  const handleChange = e => {
+    setName(e.target.value);
+  };
 
   const handleSubmit = e => {
+    const param = {
+      workspace: {
+        name: name
+      }
+    };
+    createWorkspace(param);
+    setName("");
     e.preventDefault();
   };
 
@@ -44,10 +56,16 @@ const WorkspaceItem = () => {
       <form onSubmit={handleSubmit} className="d-flex form-group">
         <InputBase
           autoFocus
+          onChange={handleChange}
+          value={name}
           className={classes.input}
           placeholder="Create Workspace"
         />
-        <IconButton className={classes.button} type="submit">
+        <IconButton
+          onClick={handleSubmit}
+          className={classes.button}
+          type="submit"
+        >
           <PlayArrowIcon className={classes.icon} />
         </IconButton>
       </form>
