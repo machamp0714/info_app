@@ -69,7 +69,8 @@ const Sidebar = () => {
     open,
     clickedWorkspace,
     handleDrawerClose,
-    handleWorkspaceClick
+    handleWorkspaceClick,
+    handleWorkspaceBack
   } = useContext(DashboardContext);
 
   const handleSubmit = e => {
@@ -105,6 +106,12 @@ const Sidebar = () => {
       <Divider />
       {clickedWorkspace ? (
         <div className="mt-1 p-1">
+          <div
+            onClick={handleWorkspaceBack}
+            className="text-gray under-decoration mb-1 back-link"
+          >
+            Back
+          </div>
           <form onSubmit={handleSubmit} className="d-flex form-group">
             <InputBase
               autoFocus

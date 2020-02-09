@@ -31,6 +31,10 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     setClickedWorkspace(true);
   };
 
+  const handleWorkspaceBack = () => {
+    setClickedWorkspace(false);
+  };
+
   useEffect(() => {
     getWorkspaces();
   }, [getWorkspaces]);
@@ -51,7 +55,8 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     handleDrawerOpen,
     handleDrawerClose,
     handleSelectWorkspace,
-    handleWorkspaceClick
+    handleWorkspaceClick,
+    handleWorkspaceBack
   };
 
   return (
