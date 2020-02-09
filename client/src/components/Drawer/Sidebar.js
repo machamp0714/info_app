@@ -14,8 +14,7 @@ const drawerWidth = 400;
 
 const useStyles = makeStyles(theme => ({
   content: {
-    marginRight: "auto",
-    fontWeight: "bold"
+    marginRight: "auto"
   },
   drawerOpen: {
     width: drawerWidth,
