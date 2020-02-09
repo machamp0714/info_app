@@ -46,7 +46,12 @@ const useStyles = makeStyles(theme => ({
 const Sidebar = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const { open, handleDrawerClose } = useContext(DashboardContext);
+  const {
+    open,
+    clickedWorkspace,
+    handleDrawerClose,
+    handleWorkspaceClick
+  } = useContext(DashboardContext);
 
   return (
     <Drawer
@@ -75,26 +80,49 @@ const Sidebar = () => {
         </IconButton>
       </div>
       <Divider />
-      <ul className="mt-1">
-        <li className="sidebar-item d-flex mb-2">
-          <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
-          {open && <div className="sidebar-item-content">Workspace</div>}
-        </li>
-        <li className="sidebar-item d-flex mb-2">
-          <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
-          {open && <div className="sidebar-item-content">Qiita</div>}
-        </li>
-        <li className="sidebar-item d-flex mb-2">
-          <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
-          {open && <div className="sidebar-item-content">Evernote</div>}
-        </li>
-        <li className="sidebar-item d-flex mb-2">
-          <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
-          {open && (
-            <div className="sidebar-item-content">はてなブックマーク</div>
-          )}
-        </li>
-      </ul>
+      {clickedWorkspace ? (
+        <div>workspace create</div>
+      ) : (
+        <ul className="mt-1">
+          <li
+            onClick={handleWorkspaceClick}
+            className="sidebar-item d-flex mb-2"
+          >
+            <img
+              src={qiitaIcon}
+              className="sidebar-icon"
+              alt="workspace icon"
+            />
+            {open && <div className="sidebar-item-content">Workspace</div>}
+          </li>
+          <li className="sidebar-item d-flex mb-2">
+            <img
+              src={qiitaIcon}
+              className="sidebar-icon"
+              alt="workspace icon"
+            />
+            {open && <div className="sidebar-item-content">Qiita</div>}
+          </li>
+          <li className="sidebar-item d-flex mb-2">
+            <img
+              src={qiitaIcon}
+              className="sidebar-icon"
+              alt="workspace icon"
+            />
+            {open && <div className="sidebar-item-content">Evernote</div>}
+          </li>
+          <li className="sidebar-item d-flex mb-2">
+            <img
+              src={qiitaIcon}
+              className="sidebar-icon"
+              alt="workspace icon"
+            />
+            {open && (
+              <div className="sidebar-item-content">はてなブックマーク</div>
+            )}
+          </li>
+        </ul>
+      )}
     </Drawer>
   );
 };

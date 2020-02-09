@@ -8,6 +8,7 @@ import DashboardContext from "../../contexts/DashboardContext";
 
 const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
+  const [clickedWorkspace, setClickedWorkspace] = useState(false);
   const [workspace, setWorkspace] = useState(null);
 
   const handleDrawerOpen = () => {
@@ -16,10 +17,18 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+    if (clickedWorkspace) {
+      setClickedWorkspace(false);
+    }
   };
 
   const handleSelectWorkspace = e => {
     setWorkspace(e.target.value);
+  };
+
+  const handleWorkspaceClick = () => {
+    setOpen(true);
+    setClickedWorkspace(true);
   };
 
   useEffect(() => {
@@ -38,9 +47,11 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     workspace,
     isLoading,
     user,
+    clickedWorkspace,
     handleDrawerOpen,
     handleDrawerClose,
-    handleSelectWorkspace
+    handleSelectWorkspace,
+    handleWorkspaceClick
   };
 
   return (
