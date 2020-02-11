@@ -1,4 +1,38 @@
+@import "../variables.scss";
 .center-content {
   margin-top: 200px;
   text-align: center;
+}
+.add-workspace {
+  margin-top: 200px;
+}
+.sidebar-icon {
+  width: 43px;
+  height: 43px;
+}
+.sidebar-item {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.sidebar-item-open {
+  &:hover {
+    background-color: $top-background-color;
+  }
+}
+.sidebar-item-content {
+  color: $primary-color;
+  letter-spacing: 1.1px;
+  margin: auto 10px;
+  white-space: nowrap;
+}
+.form-group {
+  border-radius: 2px;
+  background-color: #f2f3f5;
+}
+.back-link {
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    color: #172b4d;
+  }
 }
