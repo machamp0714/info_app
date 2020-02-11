@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import WorkspaceItem from "../../containers/Drawer/WorkspaceItem";
+import DrawerMenu from "./DrawerMenu";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -9,7 +10,6 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import DashboardContext from "../../contexts/DashboardContext";
 import clsx from "clsx";
-import qiitaIcon from "../../images/qiita.png";
 
 const drawerWidth = 400;
 
@@ -47,12 +47,9 @@ const useStyles = makeStyles(theme => ({
 const Sidebar = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const {
-    open,
-    clickedWorkspace,
-    handleDrawerClose,
-    handleWorkspaceClick
-  } = useContext(DashboardContext);
+  const { open, clickedWorkspace, handleDrawerClose } = useContext(
+    DashboardContext
+  );
 
   return (
     <Drawer
@@ -81,63 +78,7 @@ const Sidebar = () => {
         </IconButton>
       </div>
       <Divider />
-      {clickedWorkspace ? (
-        <WorkspaceItem />
-      ) : (
-        <ul className="mt-1">
-          <li
-            onClick={handleWorkspaceClick}
-            className={clsx("sidebar-item d-flex mb-2", {
-              "sidebar-item-open": open
-            })}
-          >
-            <img
-              src={qiitaIcon}
-              className="sidebar-icon"
-              alt="workspace icon"
-            />
-            {open && <div className="sidebar-item-content">Workspace</div>}
-          </li>
-          <li
-            className={clsx("sidebar-item d-flex mb-2", {
-              "sidebar-item-open": open
-            })}
-          >
-            <img
-              src={qiitaIcon}
-              className="sidebar-icon"
-              alt="workspace icon"
-            />
-            {open && <div className="sidebar-item-content">Qiita</div>}
-          </li>
-          <li
-            className={clsx("sidebar-item d-flex mb-2", {
-              "sidebar-item-open": open
-            })}
-          >
-            <img
-              src={qiitaIcon}
-              className="sidebar-icon"
-              alt="workspace icon"
-            />
-            {open && <div className="sidebar-item-content">Evernote</div>}
-          </li>
-          <li
-            className={clsx("sidebar-item d-flex mb-2", {
-              "sidebar-item-open": open
-            })}
-          >
-            <img
-              src={qiitaIcon}
-              className="sidebar-icon"
-              alt="workspace icon"
-            />
-            {open && (
-              <div className="sidebar-item-content">はてなブックマーク</div>
-            )}
-          </li>
-        </ul>
-      )}
+      {clickedWorkspace ? <WorkspaceItem /> : <DrawerMenu />}
     </Drawer>
   );
 };
