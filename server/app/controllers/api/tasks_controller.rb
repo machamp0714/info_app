@@ -8,7 +8,7 @@ class Api::TasksController < ApplicationController
 
   def index
     column = Column.find(params[:column_id])
-    tasks = column.tasks
+    tasks = column.tasks.rank
 
     render json: tasks, status: :ok
   end

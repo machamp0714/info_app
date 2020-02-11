@@ -5,4 +5,6 @@ class Task < ApplicationRecord
   belongs_to :user
 
   validates :content, presence: true
+
+  scope :rank, -> { order(:rank).order(updated_at: :desc) }
 end
