@@ -15,7 +15,13 @@ class Api::TasksController < ApplicationController
 
   def create
     column = Column.find(params[:column_id])
-    task = column.tasks.build(task_params.merge(user_id: current_api_user.id))
+    tasks = column.tasks
+    task = tasks.build(task_params.merge(user_id: current_api_user.id))
+    task.rank = if tasks.exists?
+                  tasks.maximum(:rank) + 1
+                else
+                  1
+                end
 
     if task.save
       render json: task, status: :created
