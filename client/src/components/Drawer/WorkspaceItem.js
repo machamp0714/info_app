@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import Divider from "@material-ui/core/Divider";
 import DashboardContext from "../../contexts/DashboardContext";
 
 const useStyles = makeStyles(() => ({
@@ -46,30 +47,37 @@ const WorkspaceItem = ({ createWorkspace }) => {
   };
 
   return (
-    <div className="mt-1 p-1">
-      <span
-        onClick={handleWorkspaceBack}
-        className="text-gray under-decoration mb-1 d-inline-block back-link"
-      >
-        Back
-      </span>
-      <form onSubmit={handleSubmit} className="d-flex form-group">
-        <InputBase
-          autoFocus
-          onChange={handleChange}
-          value={name}
-          className={classes.input}
-          placeholder="Create Workspace"
-        />
-        <IconButton
-          onClick={handleSubmit}
-          className={classes.button}
-          type="submit"
+    <>
+      <div className="mt-1 mb-1 p-1">
+        <span
+          onClick={handleWorkspaceBack}
+          className="text-gray under-decoration mb-1 d-inline-block back-link"
         >
-          <PlayArrowIcon className={classes.icon} />
-        </IconButton>
-      </form>
-    </div>
+          Back
+        </span>
+        <form onSubmit={handleSubmit} className="d-flex  form-group">
+          <InputBase
+            autoFocus
+            onChange={handleChange}
+            value={name}
+            className={classes.input}
+            placeholder="Create Workspace"
+          />
+          <IconButton
+            onClick={handleSubmit}
+            className={classes.button}
+            type="submit"
+          >
+            <PlayArrowIcon className={classes.icon} />
+          </IconButton>
+        </form>
+      </div>
+      <Divider />
+      <div className="p-1">
+        <div className="text-gray drawer-menu-head">workspaces</div>
+        <div className="workspace-list"></div>
+      </div>
+    </>
   );
 };
 

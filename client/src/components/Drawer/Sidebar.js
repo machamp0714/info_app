@@ -78,7 +78,8 @@ const Sidebar = () => {
         </IconButton>
       </div>
       <Divider />
-      {clickedWorkspace ? <WorkspaceItem /> : <DrawerMenu />}
+      {clickedWorkspace && <WorkspaceItem />}
+      {!clickedWorkspace && <DrawerMenu />}
     </Drawer>
   );
 };
