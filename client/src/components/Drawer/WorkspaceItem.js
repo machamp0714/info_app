@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import Divider from "@material-ui/core/Divider";
 import DashboardContext from "../../contexts/DashboardContext";
+import WorkspaceDetails from "../Workspace/WorkspaceDetails";
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -26,10 +27,14 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const WorkspaceItem = ({ createWorkspace }) => {
+const WorkspaceItem = ({ workspaces, getWorkspaces, createWorkspace }) => {
   const classes = useStyles();
   const { handleWorkspaceBack } = useContext(DashboardContext);
   const [name, setName] = useState("");
+
+  useEffect(() => {
+    getWorkspaces();
+  }, [getWorkspaces]);
 
   const handleChange = e => {
     setName(e.target.value);
@@ -75,7 +80,11 @@ const WorkspaceItem = ({ createWorkspace }) => {
       <Divider />
       <div className="p-1">
         <div className="text-gray drawer-menu-head">workspaces</div>
-        <div className="workspace-list"></div>
+        <ul className="mt-1">
+          {workspaces.map(workspace => (
+            <WorkspaceDetails key={workspace.id} workspace={workspace} />
+          ))}
+        </ul>
       </div>
     </>
   );
