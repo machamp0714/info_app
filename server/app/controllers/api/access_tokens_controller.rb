@@ -8,6 +8,5 @@ class Api::AccessTokensController < ApplicationController
   end
 
   def qiita
-
   end
 end
