@@ -1,4 +1,5 @@
 import { secureHTTP, http } from "../config/axios";
+import { openWindow } from "../utils/actions";
 
 const getUserLoading = () => ({
   type: "GET_USER_LOADING"
@@ -89,23 +90,10 @@ export const getOAuthUrl = () => {
   http
     .get("/api/github_oauth_url")
     .then(response => {
-      const loginWindow = openLoginWindow(response.data.url);
+      const loginWindow = openWindow(response.data.url, "Github");
       loginWindow.focus();
     })
     .catch(error => {
       console.log(error);
     });
-};
-
-const openLoginWindow = url => {
-  const width = 500;
-  const height = 600;
-  const windowX = (window.screen.width - width) / 2;
-  const windowY = (window.screen.height - height) / 2;
-  const title = "ログイン - Githubアカウント";
-  window.open(
-    url,
-    title,
-    `top=${windowY},left=${windowX},width=${width},height=${height}`
-  );
 };
