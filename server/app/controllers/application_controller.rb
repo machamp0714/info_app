@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  before_action :session_clear
+
   include DeviseTokenAuth::Concerns::SetUserByToken
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
@@ -37,6 +39,6 @@ class ApplicationController < ActionController::API
   end
 
   def session_clear
-    session["warden.user.user.key"] = nil if session["warden.user.user.key"]
+    request.session_options[:skip] = true
   end
 end

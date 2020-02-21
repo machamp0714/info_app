@@ -4,7 +4,6 @@ class Api::TasksController < ApplicationController
   before_action :authenticate_api_user!
   before_action :verify_permission, only: %i[index create]
   before_action :verify_task, only: %i[update destroy]
-  before_action :session_clear
 
   def index
     column = Column.find(params[:column_id])
