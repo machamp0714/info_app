@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationController < ActionController::API
-  before_action :session_clear
-
+class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
