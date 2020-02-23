@@ -1,10 +1,14 @@
 import React from "react";
 import AccountSettings from "../Account/AccountSettings";
 
-const Settings = ({ user }) => {
+const Settings = ({ user, getAuthorizeURL }) => {
+  const handleClick = () => {
+    getAuthorizeURL();
+  };
+
   return (
     <AccountSettings user={user}>
-      <div>settings</div>
+      <button onClick={handleClick}>Qiitaと連携</button>
     </AccountSettings>
   );
 };

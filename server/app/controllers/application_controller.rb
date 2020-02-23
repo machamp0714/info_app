@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
@@ -37,6 +37,14 @@ class ApplicationController < ActionController::API
   end
 
   def session_clear
-    session["warden.user.user.key"] = nil if session["warden.user.user.key"]
+    request.session_options[:skip] = true
+  end
+
+  def https_client(uri)
+    https = Net::HTTP.new(uri.host, uri.port)
+    https.use_ssl = true
+    https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    return https
   end
 end
