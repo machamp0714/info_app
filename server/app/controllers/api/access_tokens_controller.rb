@@ -3,9 +3,6 @@
 class Api::AccessTokensController < ApplicationController
   def qiita_token
     authorized_url = "https://qiita.com/api/v2/oauth/authorize?client_id=#{ENV['QIITA_KEY']}&scope=read_qiita&state=#{ENV['QIITA_STATE']}"
-    session[:user_id] = current_api_user.id
-
-    session["warden.user.user.key"] = nil
 
     render json: authorized_url, status: :ok
   end
@@ -28,7 +25,32 @@ class Api::AccessTokensController < ApplicationController
       "content-type" => "application/json"
     )
     json = JSON.parse(response.body)
+    token = json["token"]
 
-    render json: json, status: :ok
+    authorize_uri = URI.parse("https://qiita.com/api/v2/authenticated_user")
+
+    https = https_client(authorize_uri)
+
+    response = https.get(authorize_uri.path, authorization: "Bearer #{token}")
+    result = JSON.parse(response.body)
+    user_id = result["id"]
+
+    page = 1
+    items = []
+
+    loop do
+      stocks_uri = URI.parse("https://qiita.com/api/v2/users/#{user_id}/stocks?page=#{page}&per_page=100")
+
+      https = https_client(stocks_uri)
+      response = https.get(stocks_uri)
+      stocks = JSON.parse(response.body)
+
+      break if stocks.length.zero?
+
+      items << stocks
+      page += 1
+    end
+
+    render json: items.flatten, status: :ok
   end
 end
