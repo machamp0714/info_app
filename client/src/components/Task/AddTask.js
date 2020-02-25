@@ -44,6 +44,7 @@ const AddTask = ({ column, createTask, handleToggle }) => {
         content: content
       }
     };
+    const regex = /^(http|https):\/\/([\w-]+\.)+[\w-]+(\/[\w-./?%#&=]*)?$/;
 
     createTask(column.id, params);
     setContent("");
