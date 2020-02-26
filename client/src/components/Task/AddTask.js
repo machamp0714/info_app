@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
@@ -34,6 +34,22 @@ const AddTask = ({ column, createTask, handleToggle }) => {
   const classes = useStyles();
   const [content, setContent] = useState("");
 
+  useEffect(() => {
+    const regex = /^(http|https):\/\/([\w-]+\.)+[\w-]+(\/[\w-./?%#&=]*)?$/;
+    const match = regex.test(content);
+
+    if (match) {
+      alert("ブログカードを生成しますか？");
+      const params = {
+        task: {
+          content: content
+        }
+      };
+      createTask(column.id, params);
+      setContent("");
+    }
+  }, [content]);
+
   const handleChange = e => {
     setContent(e.target.value);
   };
@@ -44,7 +60,6 @@ const AddTask = ({ column, createTask, handleToggle }) => {
         content: content
       }
     };
-    const regex = /^(http|https):\/\/([\w-]+\.)+[\w-]+(\/[\w-./?%#&=]*)?$/;
 
     createTask(column.id, params);
     setContent("");
