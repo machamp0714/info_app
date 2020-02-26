@@ -16,13 +16,21 @@ class Api::TasksController < ApplicationController
   def create
     column = Column.find(params[:column_id])
     tasks = column.tasks
-    task = tasks.build(task_params.merge(user_id: current_api_user.id))
+    if task_params[:confirm]
+      response = Faraday.get(task_params[:content])
+      ogp = OGP::OpenGraph.new(response.body)
+      task = tasks.build(
+        content: ogp.title,
+        user_id: current_api_user.id
+      )
+    else
+      task = tasks.build(task_params.merge(user_id: current_api_user.id))
+    end
     task.rank = if tasks.exists?
                   tasks.maximum(:rank) + 1
                 else
                   1
                 end
-
     if task.save
       render json: task, status: :created
     else
@@ -49,7 +57,7 @@ class Api::TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:content)
+    params.require(:task).permit(:content, :confirm)
   end
 
   def verify_permission

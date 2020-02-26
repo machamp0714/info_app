@@ -39,10 +39,11 @@ const AddTask = ({ column, createTask, handleToggle }) => {
     const match = regex.test(content);
 
     if (match) {
-      alert("ブログカードを生成しますか？");
+      const result = window.confirm("ブログカードを生成しますか？");
       const params = {
         task: {
-          content: content
+          content: content,
+          confirm: result
         }
       };
       createTask(column.id, params);
@@ -57,7 +58,8 @@ const AddTask = ({ column, createTask, handleToggle }) => {
   const handleClick = () => {
     const params = {
       task: {
-        content: content
+        content: content,
+        confirm: false
       }
     };
 
