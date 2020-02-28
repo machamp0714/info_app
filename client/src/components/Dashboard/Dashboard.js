@@ -8,6 +8,7 @@ import DashboardContext from "../../contexts/DashboardContext";
 
 const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
+  const [drawerTask, setDrawerTask] = useState(null);
   const [clickedWorkspace, setClickedWorkspace] = useState(false);
   const [workspace, setWorkspace] = useState(null);
 
@@ -19,6 +20,9 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     setOpen(false);
     if (clickedWorkspace) {
       setClickedWorkspace(false);
+    }
+    if (drawerTask !== null) {
+      setDrawerTask(null);
     }
   };
 
@@ -51,12 +55,15 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     workspace,
     isLoading,
     user,
+    drawerTask,
     clickedWorkspace,
     handleDrawerOpen,
     handleDrawerClose,
     handleSelectWorkspace,
     handleWorkspaceClick,
-    handleWorkspaceBack
+    handleWorkspaceBack,
+    setDrawerTask,
+    setOpen
   };
 
   return (
