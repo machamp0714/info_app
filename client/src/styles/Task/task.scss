@@ -46,8 +46,12 @@ details > summary::-webkit-details-marker {
   display: none;
 }
 .task-content {
+  font-size: 14px;
   font-weight: bold;
   color: #0366d6;
   cursor: pointer;
   word-break: break-all;
+  &:hover {
+    text-decoration: underline;
+  }
 }
