@@ -45,6 +45,9 @@
 details > summary::-webkit-details-marker {
   display: none;
 }
-.task-content-p {
+.task-content {
+  font-weight: bold;
+  color: #0366d6;
+  cursor: pointer;
   word-break: break-all;
 }

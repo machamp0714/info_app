@@ -10,9 +10,7 @@ const TaskDetails = ({ task }) => {
           <div className="pl-5 p-2">
             <TaskMenu task={task} />
             <div className="mr-4 d-flex align-content-between flex-column">
-              <div className="task-content">
-                <p className="mb-1 task-content-p">{task.content}</p>
-              </div>
+              <p className="mb-1 task-content">{task.content}</p>
               <small className="text-gray">
                 {diffCreatedAt(task.created_at)}
               </small>
