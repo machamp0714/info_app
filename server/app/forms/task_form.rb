@@ -25,7 +25,12 @@ class TaskForm
     response = Faraday.get(content)
     ogp = OGP::OpenGraph.new(response.body)
 
-    task.assign_attributes(content: ogp.title, user_id: user_id)
+    task.assign_attributes(
+      content: ogp.title,
+      url: ogp.url,
+      description: ogp.description,
+      user_id: user_id
+    )
   end
 
   def merge_rank

@@ -49,7 +49,7 @@ const AddTask = ({ column, createTask, handleToggle }) => {
       createTask(column.id, params);
       setContent("");
     }
-  }, [content]);
+  }, [content, column.id, createTask]);
 
   const handleChange = e => {
     setContent(e.target.value);
