@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import clsx from "clsx";
 import TaskMenu from "../../containers/Task/TaskMenu";
 import { diffCreatedAt } from "../../utils/timestamp";
 import DashboardContext from "../../contexts/DashboardContext";
@@ -21,7 +22,12 @@ const TaskDetails = ({ task }) => {
           <div className="pl-5 p-1">
             <TaskMenu task={task} />
             <div className="mr-4 d-flex align-content-between flex-column">
-              <p onClick={handleTaskOpen} className="mb-1 task-content">
+              <p
+                onClick={handleTaskOpen}
+                className={clsx("mb-1 task-content", {
+                  ["task-link"]: task.url !== null
+                })}
+              >
                 {task.content}
               </p>
               <small className="text-gray">
