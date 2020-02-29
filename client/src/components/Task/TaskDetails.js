@@ -15,7 +15,7 @@ const TaskDetails = ({ task }) => {
     <article className="task-card">
       <div className="d-flex flex-row">
         <div className="flex-auto min-width-0 position-relative">
-          <div className="pl-5 p-2">
+          <div className="pl-5 p-1">
             <TaskMenu task={task} />
             <div className="mr-4 d-flex align-content-between flex-column">
               <p onClick={handleTaskOpen} className="mb-1 task-content">
