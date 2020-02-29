@@ -27,14 +27,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const WorkspaceItem = ({ workspaces, getWorkspaces, createWorkspace }) => {
+const WorkspaceItem = ({ createWorkspace }) => {
   const classes = useStyles();
-  const { handleWorkspaceBack } = useContext(DashboardContext);
+  const { workspaces, handleWorkspaceBack } = useContext(DashboardContext);
   const [name, setName] = useState("");
-
-  useEffect(() => {
-    getWorkspaces();
-  }, [getWorkspaces]);
 
   const handleChange = e => {
     setName(e.target.value);
