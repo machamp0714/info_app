@@ -4,10 +4,13 @@ import { diffCreatedAt } from "../../utils/timestamp";
 import DashboardContext from "../../contexts/DashboardContext";
 
 const TaskDetails = ({ task }) => {
-  const { setOpen, setDrawerTask } = useContext(DashboardContext);
+  const { setOpen, setDrawerTask, setClickedWorkspace } = useContext(
+    DashboardContext
+  );
 
   const handleTaskOpen = () => {
     setOpen(true);
+    setClickedWorkspace(false);
     setDrawerTask(task);
   };
 

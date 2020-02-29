@@ -63,6 +63,7 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     handleWorkspaceClick,
     handleWorkspaceBack,
     setDrawerTask,
+    setClickedWorkspace,
     setOpen
   };
 
