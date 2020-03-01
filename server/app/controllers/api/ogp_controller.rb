@@ -1,14 +1,17 @@
 class Api::OgpController < ApplicationController
   def ogp
     response = Faraday.get(params[:url])
-    ogp = OGP::OpenGraph.new(response.body)
+    begin
+      ogp = OGP::OpenGraph.new(response.body)
+      result = {
+        title: ogp.title,
+        url: ogp.url,
+        description: ogp.description
+      }
 
-    result = {
-      title: ogp.title,
-      url: ogp.url,
-      description: ogp.description
-    }
-
-    render json: result, status: :ok
+      render json: result, status: :ok
+    rescue OGP::MissingAttributeError, OGP::MalformedSourceError
+      render json: {}, status: :not_found
+    end
   end
 end
