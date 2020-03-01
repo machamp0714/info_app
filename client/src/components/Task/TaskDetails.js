@@ -25,7 +25,7 @@ const TaskDetails = ({ task }) => {
               <p
                 onClick={handleTaskOpen}
                 className={clsx("mb-1 task-content", {
-                  ["task-link"]: task.url !== null
+                  "task-link": task.url !== null
                 })}
               >
                 {task.content}
