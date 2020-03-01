@@ -67,3 +67,15 @@ details > summary::-webkit-details-marker {
     color: #0854aa;
   }
 }
+.modal-header {
+  font-size: 13px;
+  color: #586069;
+}
+.select-box {
+  border: 1px solid $border-color;
+  border-radius: 4px;
+}
+.url-style {
+  font-size: 14px;
+  word-break: break-all;
+}
