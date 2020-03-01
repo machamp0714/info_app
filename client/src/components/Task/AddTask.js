@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import OgpModal from "./ogpModal";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   submit: {
     width: 165,
     backgroundColor: "#11CDEF",
@@ -30,26 +31,28 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddTask = ({ column, createTask, handleToggle }) => {
+const AddTask = ({
+  column,
+  isLoading,
+  data,
+  url,
+  createTask,
+  getOgp,
+  handleToggle
+}) => {
   const classes = useStyles();
   const [content, setContent] = useState("");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const regex = /^(http|https):\/\/([\w-]+\.)+[\w-]+(\/[\w-./?%#&=]*)?$/;
     const match = regex.test(content);
 
     if (match) {
-      const result = window.confirm("ブログカードを生成しますか？");
-      const params = {
-        task: {
-          content: content,
-          confirm: result
-        }
-      };
-      createTask(column.id, params);
-      setContent("");
+      setOpen(true);
+      getOgp(content);
     }
-  }, [content, column.id, createTask]);
+  }, [getOgp, content]);
 
   const handleChange = e => {
     setContent(e.target.value);
@@ -65,6 +68,10 @@ const AddTask = ({ column, createTask, handleToggle }) => {
 
     createTask(column.id, params);
     setContent("");
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const canSubmit = () => {
@@ -107,6 +114,13 @@ const AddTask = ({ column, createTask, handleToggle }) => {
           cancel
         </Button>
       </div>
+      <OgpModal
+        isLoading={isLoading}
+        data={data}
+        open={open}
+        url={url}
+        handleClose={handleClose}
+      />
     </div>
   );
 };
