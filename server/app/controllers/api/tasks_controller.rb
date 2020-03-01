@@ -43,7 +43,7 @@ class Api::TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:content, :confirm)
+    params.require(:task).permit(:content, :url, :description)
   end
 
   def verify_permission

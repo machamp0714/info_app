@@ -6,12 +6,14 @@ class TaskForm
   attr_accessor :content, :user_id, :confirm, :tasks
 
   def build
-    if confirm
-      create_blog_card
-    else
-      task.assign_attributes(content: content, user_id: user_id)
-    end
+    task.assign_attributes(
+      content: content,
+      url: url,
+      description: description,
+      user_id: user_id
+    )
     merge_rank
+
     task
   end
 
@@ -19,18 +21,6 @@ class TaskForm
 
   def task
     @task ||= tasks.build
-  end
-
-  def create_blog_card
-    response = Faraday.get(content)
-    ogp = OGP::OpenGraph.new(response.body)
-
-    task.assign_attributes(
-      content: ogp.title,
-      url: ogp.url,
-      description: ogp.description,
-      user_id: user_id
-    )
   end
 
   def merge_rank
