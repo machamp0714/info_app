@@ -9,9 +9,9 @@ class Api::OgpController < ApplicationController
         description: ogp.description
       }
 
-      render json: result, status: :ok
+      render json: { data: result, url: params[:url] }, status: :ok
     rescue OGP::MissingAttributeError, OGP::MalformedSourceError
-      render json: {}, status: :not_found
+      render json: { url: params[:url] }, status: :not_found
     end
   end
 end
