@@ -3,7 +3,7 @@
 class TaskForm
   include ActiveModel::Model
 
-  attr_accessor :content, :user_id, :confirm, :tasks
+  attr_accessor :content, :description, :url, :tasks, :user_id
 
   def build
     task.assign_attributes(
