@@ -1,7 +1,7 @@
 class Api::OgpController < ApplicationController
   def ogp
-    response = Faraday.get(params[:url])
     begin
+      response = Faraday.get(params[:url])
       ogp = OGP::OpenGraph.new(response.body)
       result = {
         title: ogp.title,
@@ -10,7 +10,7 @@ class Api::OgpController < ApplicationController
       }
 
       render json: { data: result, url: params[:url] }, status: :ok
-    rescue OGP::MissingAttributeError, OGP::MalformedSourceError
+    rescue OGP::MissingAttributeError, OGP::MalformedSourceError, ArgumentError, Faraday::ConnectionFailed
       render json: { url: params[:url] }, status: :not_found
     end
   end
