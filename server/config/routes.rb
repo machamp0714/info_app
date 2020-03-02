@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get "qiita_callback", to: "access_tokens#qiita"
     get "current_user", to: "users#currentuser"
     get "default_workspace", to: "workspaces#default_workspace"
+    post "ogp", to: "ogp#ogp"
   end
 
   get "csrf_token", to: "application#csrf_token"

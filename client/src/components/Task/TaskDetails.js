@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
+import clsx from "clsx";
 import TaskMenu from "../../containers/Task/TaskMenu";
 import { diffCreatedAt } from "../../utils/timestamp";
+import DashboardContext from "../../contexts/DashboardContext";
 
 const TaskDetails = ({ task }) => {
+  const { setOpen, setDrawerTask, setClickedWorkspace } = useContext(
+    DashboardContext
+  );
+
+  const handleTaskOpen = () => {
+    setOpen(true);
+    setClickedWorkspace(false);
+    setDrawerTask(task);
+  };
+
   return (
     <article className="task-card">
       <div className="d-flex flex-row">
         <div className="flex-auto min-width-0 position-relative">
-          <div className="pl-5 p-2">
+          <div className="pl-5 p-1">
             <TaskMenu task={task} />
             <div className="mr-4 d-flex align-content-between flex-column">
-              <div className="task-content">
-                <p className="mb-1">{task.content}</p>
-              </div>
+              <p
+                onClick={handleTaskOpen}
+                className={clsx("mb-1 task-content", {
+                  "task-link": task.url !== null
+                })}
+              >
+                {task.content}
+              </p>
               <small className="text-gray">
                 {diffCreatedAt(task.created_at)}
               </small>

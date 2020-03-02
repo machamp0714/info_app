@@ -25,22 +25,6 @@ const DrawerMenu = () => {
         <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
         {open && <div className="sidebar-item-content">Qiita</div>}
       </li>
-      <li
-        className={clsx("sidebar-item d-flex mb-2", {
-          "sidebar-item-open": open
-        })}
-      >
-        <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
-        {open && <div className="sidebar-item-content">Evernote</div>}
-      </li>
-      <li
-        className={clsx("sidebar-item d-flex mb-2", {
-          "sidebar-item-open": open
-        })}
-      >
-        <img src={qiitaIcon} className="sidebar-icon" alt="workspace icon" />
-        {open && <div className="sidebar-item-content">はてなブックマーク</div>}
-      </li>
     </ul>
   );
 };

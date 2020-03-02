@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
@@ -27,14 +27,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const WorkspaceItem = ({ workspaces, getWorkspaces, createWorkspace }) => {
+const WorkspaceItem = ({ createWorkspace }) => {
   const classes = useStyles();
-  const { handleWorkspaceBack } = useContext(DashboardContext);
+  const { workspaces, handleWorkspaceBack } = useContext(DashboardContext);
   const [name, setName] = useState("");
-
-  useEffect(() => {
-    getWorkspaces();
-  }, [getWorkspaces]);
 
   const handleChange = e => {
     setName(e.target.value);

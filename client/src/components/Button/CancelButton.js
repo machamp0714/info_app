@@ -3,30 +3,30 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(() => ({
-  button: {
-    height: "40px",
-    backgroundColor: "#11CDEF",
+  cancel: {
+    backgroundColor: "#A5A5AA",
     color: "#FFFFFF",
     boxShadow: "none",
+    marginLeft: 10,
     "&:hover": {
-      backgroundColor: "#11CDEF",
+      backgroundColor: "#A5A5AA",
       boxShadow: "none"
     }
   }
 }));
 
-const PrimaryButton = ({ value, canSubmit }) => {
+const CancelButton = ({ handleClick }) => {
   const classes = useStyles();
+
   return (
     <Button
-      disabled={canSubmit()}
-      type="submit"
       variant="contained"
-      className={classes.button}
+      className={classes.cancel}
+      onClick={handleClick}
     >
-      {value}
+      cancel
     </Button>
   );
 };
 
-export default PrimaryButton;
+export default CancelButton;
