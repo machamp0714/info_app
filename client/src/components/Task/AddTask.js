@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import SubmitButton from "../Button/SubmitButton";
 import CancelButton from "../Button/CancelButton";
 import OgpModal from "./ogpModal";
@@ -85,7 +84,10 @@ const AddTask = ({
         value={value}
         url={url}
         setValue={setValue}
+        setContent={setContent}
         handleClose={handleClose}
+        createTask={createTask}
+        column={column}
       />
     </div>
   );

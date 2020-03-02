@@ -7,7 +7,7 @@ import Radio from "@material-ui/core/Radio";
 import Divider from "@material-ui/core/Divider";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import CloseIcon from "@material-ui/icons/Close";
-import PrimaryButton from "../Button/PrimaryButton";
+import SubmitButton from "../Button/SubmitButton";
 import CancelButton from "../Button/CancelButton";
 
 const iconStyle = {
@@ -54,12 +54,38 @@ const OgpModal = ({
   data,
   url,
   handleClose,
-  setValue
+  setValue,
+  setContent,
+  createTask,
+  column
 }) => {
   const classes = useStyles();
 
   const handleChange = e => {
     setValue(e.target.value);
+  };
+
+  const handleClick = () => {
+    let params;
+    if (value === "ogp") {
+      params = {
+        task: {
+          content: data.title,
+          url: data.url,
+          description: data.description
+        }
+      };
+    } else {
+      params = {
+        task: {
+          content: url
+        }
+      };
+    }
+
+    createTask(column.id, params);
+    handleClose();
+    setContent("");
   };
 
   const getSuccess = () => {
@@ -130,7 +156,11 @@ const OgpModal = ({
             </RadioGroup>
           </div>
           <div className="mt-1 d-flex">
-            <PrimaryButton canSubmit={canSubmit} value="この形式で送信する" />
+            <SubmitButton
+              handleClick={handleClick}
+              canSubmit={canSubmit}
+              value="この形式で送信する"
+            />
             <CancelButton handleClick={handleClose} />
           </div>
         </div>
