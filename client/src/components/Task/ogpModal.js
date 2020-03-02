@@ -32,9 +32,16 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const OgpModal = ({ open, handleClose, isLoading, data, url }) => {
+const OgpModal = ({
+  open,
+  value,
+  isLoading,
+  data,
+  url,
+  handleClose,
+  setValue
+}) => {
   const classes = useStyles();
-  const [value, setValue] = useState("");
 
   const handleChange = e => {
     setValue(e.target.value);

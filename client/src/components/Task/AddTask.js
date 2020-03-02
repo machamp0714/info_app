@@ -42,6 +42,7 @@ const AddTask = ({
 }) => {
   const classes = useStyles();
   const [content, setContent] = useState("");
+  const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -72,6 +73,7 @@ const AddTask = ({
 
   const handleClose = () => {
     setOpen(false);
+    setValue("");
   };
 
   const canSubmit = () => {
@@ -118,7 +120,9 @@ const AddTask = ({
         isLoading={isLoading}
         data={data}
         open={open}
+        value={value}
         url={url}
+        setValue={setValue}
         handleClose={handleClose}
       />
     </div>
