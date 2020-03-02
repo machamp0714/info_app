@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Radio from "@material-ui/core/Radio";
 import Divider from "@material-ui/core/Divider";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import CloseIcon from "@material-ui/icons/Close";
+import PrimaryButton from "../Button/PrimaryButton";
+import CancelButton from "../Button/CancelButton";
 
 const iconStyle = {
   color: "#6a737d",
@@ -49,6 +50,10 @@ const OgpModal = ({
 
   const getSuccess = () => {
     return Object.keys(data).length !== 0;
+  };
+
+  const canSubmit = () => {
+    return value === "";
   };
 
   return (
@@ -109,6 +114,10 @@ const OgpModal = ({
                 <div className="url-style">{url}</div>
               </div>
             </RadioGroup>
+          </div>
+          <div className="mt-1 d-flex">
+            <PrimaryButton canSubmit={canSubmit} value="この形式で送信する" />
+            <CancelButton handleClick={handleClose} />
           </div>
         </div>
       )}

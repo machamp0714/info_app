@@ -1,35 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import SubmitButton from "../Button/SubmitButton";
+import CancelButton from "../Button/CancelButton";
 import OgpModal from "./ogpModal";
-
-const useStyles = makeStyles(() => ({
-  submit: {
-    width: 165,
-    backgroundColor: "#11CDEF",
-    color: "#FFFFFF",
-    boxShadow: "none",
-    "&:hover": {
-      backgroundColor: "#11CDEF",
-      boxShadow: "none"
-    },
-    "&.MuiButton-contained.Mui-disabled": {
-      backgroundColor: "#96EFFF",
-      color: "#fff"
-    }
-  },
-  cancel: {
-    width: 165,
-    backgroundColor: "#A5A5AA",
-    color: "#FFFFFF",
-    boxShadow: "none",
-    marginLeft: 20,
-    "&:hover": {
-      backgroundColor: "#A5A5AA",
-      boxShadow: "none"
-    }
-  }
-}));
 
 const AddTask = ({
   column,
@@ -40,7 +13,6 @@ const AddTask = ({
   getOgp,
   handleToggle
 }) => {
-  const classes = useStyles();
   const [content, setContent] = useState("");
   const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
@@ -99,22 +71,12 @@ const AddTask = ({
         ></textarea>
       </form>
       <div className="d-flex mt-1">
-        <Button
-          type="submit"
-          onClick={handleClick}
-          variant="contained"
-          className={classes.submit}
-          disabled={canSubmit()}
-        >
-          add task
-        </Button>
-        <Button
-          variant="contained"
-          className={classes.cancel}
-          onClick={handleToggle}
-        >
-          cancel
-        </Button>
+        <SubmitButton
+          handleClick={handleClick}
+          canSubmit={canSubmit}
+          value="add task"
+        />
+        <CancelButton handleClick={handleToggle} />
       </div>
       <OgpModal
         isLoading={isLoading}
