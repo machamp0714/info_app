@@ -33,8 +33,7 @@ const AddTask = ({
   const handleClick = () => {
     const params = {
       task: {
-        content: content,
-        confirm: false
+        content: content
       }
     };
 
