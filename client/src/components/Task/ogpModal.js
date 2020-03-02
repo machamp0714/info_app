@@ -9,6 +9,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import CloseIcon from "@material-ui/icons/Close";
 import SubmitButton from "../Button/SubmitButton";
 import CancelButton from "../Button/CancelButton";
+import ProgressBar from "../Layout/ProgressBar";
 
 const iconStyle = {
   color: "#6a737d",
@@ -98,73 +99,79 @@ const OgpModal = ({
 
   return (
     <Dialog className={classes.root} open={open} onClose={handleClose}>
-      {isLoading ? (
-        <div>loading</div>
-      ) : (
-        <div className="p-2">
-          <div className="d-flex align-center mb-1">
-            <div className="modal-header">
-              URLを入力すると、形式を選択することが出来ます。
-            </div>
-            <button className="button-none ml-auto" onClick={handleClose}>
-              <CloseIcon className={classes.icon} />
-            </button>
+      <div className="p-2">
+        <div className="d-flex align-center mb-1">
+          <div className="modal-header">
+            URLを入力すると、形式を選択することが出来ます。
           </div>
-          <div className="select-box">
-            <RadioGroup value={value} onChange={handleChange}>
-              {getSuccess() && (
-                <>
-                  <div className="p-1">
-                    <FormControlLabel
-                      label="埋め込み"
-                      value="ogp"
-                      control={<PrimaryRadio />}
-                      className={classes.label}
-                    />
-                    <article className="task-card">
-                      <div className="d-flex flex-row">
-                        <div className="flex-auto min-width-0 position-relative">
-                          <div className="pl-5 p-1">
-                            <details className="position-static outline-none">
-                              <summary className="task-menu position-absolute right-0 top-0 outline-none">
-                                <MoreHorizIcon style={iconStyle} />
-                              </summary>
-                            </details>
-                            <div className="mr-4 d-flex align-content-between flex-column">
-                              <p className="mb-1 task-content task-link">
-                                {data.title}
-                              </p>
-                              <small className="text-gray">1 minute ago</small>
+          <button className="button-none ml-auto" onClick={handleClose}>
+            <CloseIcon className={classes.icon} />
+          </button>
+        </div>
+        {isLoading ? (
+          <div className="center">
+            <ProgressBar />
+          </div>
+        ) : (
+          <>
+            <div className="select-box">
+              <RadioGroup value={value} onChange={handleChange}>
+                {getSuccess() && (
+                  <>
+                    <div className="p-1">
+                      <FormControlLabel
+                        label="埋め込み"
+                        value="ogp"
+                        control={<PrimaryRadio />}
+                        className={classes.label}
+                      />
+                      <article className="task-card">
+                        <div className="d-flex flex-row">
+                          <div className="flex-auto min-width-0 position-relative">
+                            <div className="pl-5 p-1">
+                              <details className="position-static outline-none">
+                                <summary className="task-menu position-absolute right-0 top-0 outline-none">
+                                  <MoreHorizIcon style={iconStyle} />
+                                </summary>
+                              </details>
+                              <div className="mr-4 d-flex align-content-between flex-column">
+                                <p className="mb-1 task-content task-link">
+                                  {data.title}
+                                </p>
+                                <small className="text-gray">
+                                  1 minute ago
+                                </small>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </article>
-                  </div>
-                  <Divider />
-                </>
-              )}
-              <div className="p-1">
-                <FormControlLabel
-                  label="URL"
-                  value="url"
-                  control={<PrimaryRadio />}
-                  className={classes.label}
-                />
-                <div className="url-style">{url}</div>
-              </div>
-            </RadioGroup>
-          </div>
-          <div className="mt-1 d-flex">
-            <SubmitButton
-              handleClick={handleClick}
-              canSubmit={canSubmit}
-              value="この形式で送信する"
-            />
-            <CancelButton handleClick={handleClose} />
-          </div>
-        </div>
-      )}
+                      </article>
+                    </div>
+                    <Divider />
+                  </>
+                )}
+                <div className="p-1">
+                  <FormControlLabel
+                    label="URL"
+                    value="url"
+                    control={<PrimaryRadio />}
+                    className={classes.label}
+                  />
+                  <div className="url-style">{url}</div>
+                </div>
+              </RadioGroup>
+            </div>
+            <div className="mt-1 d-flex">
+              <SubmitButton
+                handleClick={handleClick}
+                canSubmit={canSubmit}
+                value="この形式で送信する"
+              />
+              <CancelButton handleClick={handleClose} />
+            </div>
+          </>
+        )}
+      </div>
     </Dialog>
   );
 };
