@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -25,6 +25,11 @@ const useStyles = makeStyles(() => ({
     "& .MuiTypography-body1": {
       fontSize: 12,
       fontWeight: 600
+    },
+    "& .MuiIconButton-root": {
+      "&:hover": {
+        backgroundColor: "transparent"
+      }
     }
   },
   icon: {
@@ -32,6 +37,15 @@ const useStyles = makeStyles(() => ({
     height: 20
   }
 }));
+
+const PrimaryRadio = withStyles({
+  root: {
+    "&$checked": {
+      color: "#11CDEF"
+    }
+  },
+  checked: {}
+})(props => <Radio color="default" {...props} />);
 
 const OgpModal = ({
   open,
@@ -78,7 +92,7 @@ const OgpModal = ({
                     <FormControlLabel
                       label="埋め込み"
                       value="ogp"
-                      control={<Radio color="primary" />}
+                      control={<PrimaryRadio />}
                       className={classes.label}
                     />
                     <article className="task-card">
@@ -108,7 +122,7 @@ const OgpModal = ({
                 <FormControlLabel
                   label="URL"
                   value="url"
-                  control={<Radio color="primary" />}
+                  control={<PrimaryRadio />}
                   className={classes.label}
                 />
                 <div className="url-style">{url}</div>
