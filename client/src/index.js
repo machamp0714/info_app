@@ -6,13 +6,17 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers/rootReducer";
+import { DndProvider } from "react-dnd";
+import Backend from "react-dnd-html5-backend";
 import * as serviceWorker from "./serviceWorker";
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <DndProvider backend={Backend}>
+      <App />
+    </DndProvider>
   </Provider>,
   document.getElementById("root")
 );
