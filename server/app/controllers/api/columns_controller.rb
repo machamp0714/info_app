@@ -4,7 +4,6 @@ class Api::ColumnsController < ApplicationController
   before_action :authenticate_api_user!
   before_action :verify_permission, only: %i[create]
   before_action :verify_column, only: %i[update destroy]
-  before_action :session_clear
 
   def index
     workspace = Workspace.find(params[:workspace_id])
