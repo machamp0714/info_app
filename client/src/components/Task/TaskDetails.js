@@ -11,7 +11,7 @@ const TaskDetails = ({ task, editTask }) => {
     DashboardContext
   );
 
-  const [{ isDragging }, drag] = useDrag({
+  const [, drag] = useDrag({
     item: { type: ItemTypes.TASK, task: task },
     end: (item, monitor) => {
       const result = monitor.getDropResult();

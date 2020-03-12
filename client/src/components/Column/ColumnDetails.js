@@ -19,7 +19,7 @@ const iconStyle = {
 const ColumnDetails = ({ column }) => {
   const [open, setOpen] = useState(false);
 
-  const [{ isOver }, drop] = useDrop({
+  const [, drop] = useDrop({
     accept: ItemTypes.TASK,
     drop: () => ({ column: column }),
     collect: monitor => ({
