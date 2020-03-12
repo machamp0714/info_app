@@ -3,11 +3,36 @@ import clsx from "clsx";
 import TaskMenu from "../../containers/Task/TaskMenu";
 import { diffCreatedAt } from "../../utils/timestamp";
 import DashboardContext from "../../contexts/DashboardContext";
+import { ItemTypes } from "../../config/dragTypes";
+import { useDrag } from "react-dnd";
 
-const TaskDetails = ({ task }) => {
+const TaskDetails = ({ task, editTask }) => {
   const { setOpen, setDrawerTask, setClickedWorkspace } = useContext(
     DashboardContext
   );
+
+  const [, drag] = useDrag({
+    item: { type: ItemTypes.TASK, task: task },
+    end: (item, monitor) => {
+      const result = monitor.getDropResult();
+
+      if (result !== null) {
+        handleDroped(item.task, result.column);
+      }
+    },
+    collect: monitor => ({
+      isDragging: !!monitor.isDragging()
+    })
+  });
+
+  const handleDroped = (dragedTask, column) => {
+    const params = {
+      task: {
+        column_id: column.id
+      }
+    };
+    editTask(dragedTask.id, params);
+  };
 
   const handleTaskOpen = () => {
     setOpen(true);
@@ -16,7 +41,7 @@ const TaskDetails = ({ task }) => {
   };
 
   return (
-    <article className="task-card">
+    <article ref={drag} className="task-card">
       <div className="d-flex flex-row">
         <div className="flex-auto min-width-0 position-relative">
           <div className="pl-5 p-1">

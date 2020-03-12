@@ -1,14 +1,8 @@
-# アプリ名
-
-まだ決まってない
-
 # 概要
 
-Qiita、Evernote、はてなブックマークといったサービスで
-ストックした記事を一元管理出来るアプリケーション。
-また、自身で作成したタスクを登録することも出来る。
+記事の一元管理を QiitaAPI と OGP と組み合わせてサポートするサービス。
 
-# 使用したい技術
+# 使用技術
 
 - Rails API
 - React
@@ -18,7 +12,7 @@ Qiita、Evernote、はてなブックマークといったサービスで
   - RDS
   - Route53
   - S3
-  - CloudF
+  - CloudFront
 - Terraform
 - Capistrano
 - CircleCI

@@ -3,6 +3,8 @@ import AddIcon from "@material-ui/icons/Add";
 import AddTask from "../../containers/Task/AddTask";
 import ColumnMenu from "../../containers/Column/ColumnMenu";
 import TaskList from "../../containers/Task/TaskList";
+import { useDrop } from "react-dnd";
+import { ItemTypes } from "../../config/dragTypes";
 
 const iconStyle = {
   color: "#24292e",
@@ -17,12 +19,20 @@ const iconStyle = {
 const ColumnDetails = ({ column }) => {
   const [open, setOpen] = useState(false);
 
+  const [, drop] = useDrop({
+    accept: ItemTypes.TASK,
+    drop: () => ({ column: column }),
+    collect: monitor => ({
+      isOver: !!monitor.isOver()
+    })
+  });
+
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
 
   return (
-    <li className="column-box d-flex flex-column flex-auto">
+    <li ref={drop} className="column-box d-flex flex-column flex-auto">
       <div className="column-header">
         <div className="column-name">{column.name}</div>
         <div className="column-menu">

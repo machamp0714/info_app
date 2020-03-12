@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TaskDetails from "./TaskDetails";
+import TaskDetails from "../../containers/Task/TaskDetails";
 import ProgressBar from "../Layout/ProgressBar";
 import { http } from "../../config/axios";
 
