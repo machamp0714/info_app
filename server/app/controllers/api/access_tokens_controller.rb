@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class Api::AccessTokensController < ApplicationController
+  include RenderHtml
+
   def qiita_token
     authorized_url = "https://qiita.com/api/v2/oauth/authorize?client_id=#{ENV['QIITA_KEY']}&scope=read_qiita&state=#{ENV['QIITA_STATE']}"
-
+    redis.set(:user_id, current_api_user.id)
     render json: authorized_url, status: :ok
   end
 
@@ -35,22 +37,24 @@ class Api::AccessTokensController < ApplicationController
     result = JSON.parse(response.body)
     user_id = result["id"]
 
-    page = 1
-    items = []
+    user = User.find(redis.get(:user_id).to_i)
+    redirect_to "http://localhost:3000/#{user.name}/settings"
+    # page = 1
+    # items = []
 
-    loop do
-      stocks_uri = URI.parse("https://qiita.com/api/v2/users/#{user_id}/stocks?page=#{page}&per_page=100")
+    # loop do
+    #   stocks_uri = URI.parse("https://qiita.com/api/v2/users/#{user_id}/stocks?page=#{page}&per_page=100")
 
-      https = https_client(stocks_uri)
-      response = https.get(stocks_uri)
-      stocks = JSON.parse(response.body)
+    #   https = https_client(stocks_uri)
+    #   response = https.get(stocks_uri)
+    #   stocks = JSON.parse(response.body)
 
-      break if stocks.length.zero?
+    #   break if stocks.length.zero?
 
-      items << stocks
-      page += 1
-    end
+    #   items << stocks
+    #   page += 1
+    # end
 
-    render json: items.flatten, status: :ok
+    # render json: items.flatten, status: :ok
   end
 end

@@ -11,8 +11,9 @@ export const getAuthorizeURL = () => {
     http
       .get("/api/qiita_token")
       .then(response => {
-        const window = openWindow(response.data, "Qiita");
-        window.focus();
+        window.location.href = response.data;
+        // const window = openWindow(response.data, "Qiita");
+        // window.focus();
       })
       .catch(error => dispatch(getURLError(error)));
   };
