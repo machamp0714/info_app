@@ -32,9 +32,23 @@ class Api::QiitaStocksController < ApplicationController
     qiita_stocks_form = QiitaStocksForm.new(user_id)
     job = qiita_stocks_form.async
 
-    cookies[:job_id] = job.id
+    cookies[:job_id] = { value: job.id, expires: 1.day }
 
     user = User.find(redis.get(:user_id).to_i)
     redirect_to "http://localhost:3000/#{user.name}/settings"
+  end
+
+  def check_async
+    if asyncing?
+      render json: { isAsync: "waiting" }, status: :ok
+    else
+      render json: { isAsync: "success" }, status: :ok
+    end
+  end
+
+  private
+
+  def asyncing?
+    Delayed::Job.exists? params[:job_id]
   end
 end
