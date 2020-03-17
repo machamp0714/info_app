@@ -49,6 +49,12 @@ const App = ({ isAsync, checkAsync }) => {
     document.cookie = "job_id=; domain=localhost; path=/; max-age=0";
   }
 
+  if (isAsync === "failed") {
+    clearInterval(intervalRef.current);
+
+    document.cookie = "job_id=; domain=localhost; path=/; max-age=0";
+  }
+
   return (
     <BrowserRouter>
       <Switch>
