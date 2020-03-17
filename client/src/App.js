@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import RequiredSignin from "./containers/Auth/RequiredSignin";
 import Top from "./containers/Auth/Top";
@@ -12,14 +12,42 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
+import { checkAsync } from "./actions/stockActions";
+import { connect } from "react-redux";
 import { http } from "./config/axios";
 
 library.add(fab, fas, far);
 
-const App = () => {
+const App = ({ isAsync, checkAsync }) => {
+  console.log(isAsync);
+  const intervalRef = useRef();
+
   useEffect(() => {
     http.get("/csrf_token", { withCredentials: true });
+
+    let jobId;
+    document.cookie.split(";").forEach(name => {
+      if (name.indexOf("job_id") !== -1) {
+        jobId = parseInt(name.split("=")[1], 10);
+      }
+    });
+
+    if (jobId !== undefined) {
+      intervalRef.current = setInterval(() => {
+        checkAsync(jobId);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
   });
+
+  if (isAsync === "success") {
+    clearInterval(intervalRef.current);
+
+    document.cookie = "job_id=; domain=localhost; path=/; max-age=0";
+  }
 
   return (
     <BrowserRouter>
@@ -48,4 +76,12 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = state => ({
+  isAsync: state.stock.isAsync
+});
+
+const mapDispatchToProps = dispatch => ({
+  checkAsync: jobId => dispatch(checkAsync(jobId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

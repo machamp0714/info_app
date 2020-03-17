@@ -5,6 +5,16 @@ const getURLError = error => ({
   payload: error
 });
 
+const getIsAsync = response => ({
+  type: "CHECK_ASYNC",
+  payload: response.data.isAsync
+});
+
+const getIsAsyncError = error => ({
+  type: "CHECK_ASYNC_ERROR",
+  payload: error
+});
+
 export const getAuthorizeURL = () => {
   return dispatch => {
     http
@@ -13,5 +23,14 @@ export const getAuthorizeURL = () => {
         window.location.href = response.data;
       })
       .catch(error => dispatch(getURLError(error)));
+  };
+};
+
+export const checkAsync = jobId => {
+  return dispatch => {
+    http
+      .get(`/api/check_async?job_id=${jobId}`)
+      .then(response => dispatch(getIsAsync(response)))
+      .catch(error => dispatch(getIsAsyncError(error)));
   };
 };
