@@ -30,10 +30,14 @@ class Api::QiitaStocksController < ApplicationController
   end
 
   def check_async
-    if asyncing?
-      render json: { isAsync: "waiting" }, status: :ok
-    else
+    job = Delayed::Job.find_by(id: params[:job_id])
+
+    if job.nil?
       render json: { isAsync: "success" }, status: :ok
+    elsif !job.last_error.nil?
+      render json: { isAsync: "failed" }, status: :ok
+    else
+      render json: { isAsync: "waiting" }, status: :ok
     end
   end
 
@@ -45,9 +49,5 @@ class Api::QiitaStocksController < ApplicationController
       client_secret: ENV["QIITA_SECRET"],
       code: code
     }.to_json
-  end
-
-  def asyncing?
-    Delayed::Job.exists? params[:job_id]
   end
 end
