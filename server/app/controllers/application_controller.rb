@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
 
-  protect_from_forgery with: :exception if Rails.env.production?
+  protect_from_forgery with: :exception unless Rails.env.test?
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   def csrf_token
@@ -36,15 +36,15 @@ class ApplicationController < ActionController::Base
     render json: { status: 404, message: "Not found" }, status: :not_found
   end
 
-  def session_clear
-    request.session_options[:skip] = true
-  end
-
   def https_client(uri)
     https = Net::HTTP.new(uri.host, uri.port)
     https.use_ssl = true
     https.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    return https
+    https
+  end
+
+  def redis
+    Redis.new(url: ENV["REDIS_URI"])
   end
 end

@@ -28,6 +28,11 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.session_store :redis_store,
+                       servers: %w[redis://redis:6379/0/session],
+                       expire_after: 1.week,
+                       key: "_#{Rails.application.class.module_parent_name.downcase}_session"
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
