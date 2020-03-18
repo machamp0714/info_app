@@ -19,7 +19,6 @@ import { http } from "./config/axios";
 library.add(fab, fas, far);
 
 const App = ({ isAsync, checkAsync }) => {
-  console.log(isAsync);
   const intervalRef = useRef();
 
   useEffect(() => {
