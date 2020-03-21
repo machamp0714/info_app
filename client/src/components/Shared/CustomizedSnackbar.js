@@ -7,19 +7,13 @@ const Alert = props => {
 };
 
 const CustomizedSnackbar = ({ isAsync }) => {
-  const [state, setState] = useState({
-    open: false,
-    vertical: "bottom",
-    horizontal: "left"
-  });
-
-  const { open, vertical, horizontal } = state;
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (isAsync !== "") {
-      setState({ ...state, open: true });
+      setOpen(true);
     }
-  }, [isAsync, setState]);
+  }, [isAsync]);
 
   const handleSeverity = () => {
     switch (isAsync) {
@@ -48,14 +42,14 @@ const CustomizedSnackbar = ({ isAsync }) => {
   };
 
   const handleClose = () => {
-    setState({ ...state, open: false });
+    setOpen(false);
   };
 
   return (
     <Snackbar
       open={open}
-      anchorOrigin={{ vertical, horizontal }}
-      key={`${vertical},${horizontal}`}
+      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      key={"bottom,left"}
     >
       <Alert onClose={handleClose} severity={handleSeverity()}>
         {setMessage()}
