@@ -20,8 +20,7 @@ class Api::QiitaStocksController < ApplicationController
     json = JSON.parse(response.body)
     user_id = json["id"]
 
-    qiita_stocks_form = QiitaStocksForm.new(user_id)
-    job = qiita_stocks_form.async
+    job = Delayed::Job.enqueue QiitaStocks::FetchStocksJob.new(user_id)
 
     cookies[:job_id] = { value: job.id, expires: 1.day }
 
