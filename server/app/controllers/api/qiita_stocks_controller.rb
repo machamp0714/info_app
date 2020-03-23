@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Api::QiitaStocksController < ApplicationController
+  before_action :authenticate_api_user!, only: %i[index]
+
+  def index; end
+
   def callback
     render_permission_error unless ENV["QIITA_STATE"] == params[:state]
 
