@@ -4,9 +4,10 @@ require "rails_helper"
 
 RSpec.describe "QiitaStocks", type: :request do
   describe "GET /qiita_stocks" do
-    it "works! (now write some real specs)" do
-      get qiita_stocks_index_path
-      expect(response).to have_http_status(200)
+    context "when no authorized" do
+      subject(:get_unauthorized) { get api_qiita_stocks_path }
+
+      it_behaves_like "unauthorized_error"
     end
   end
 end
