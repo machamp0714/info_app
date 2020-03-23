@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 const Sidebar = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const { open, drawerTask, clickedWorkspace, handleDrawerClose } = useContext(
+  const { open, drawerTask, workspacesOpen, handleDrawerClose } = useContext(
     DashboardContext
   );
 
@@ -79,9 +79,9 @@ const Sidebar = () => {
         </IconButton>
       </div>
       <Divider />
-      {clickedWorkspace && <WorkspaceItem />}
+      {workspacesOpen && <WorkspaceItem />}
       {drawerTask !== null && <SidebarTask />}
-      {!clickedWorkspace && drawerTask === null && <DrawerMenu />}
+      {!workspacesOpen && drawerTask === null && <DrawerMenu />}
     </Drawer>
   );
 };
