@@ -18,9 +18,10 @@ class Api::QiitaStocksController < ApplicationController
     )
     response = conn.get("/api/v2/authenticated_user")
     json = JSON.parse(response.body)
-    user_id = json["id"]
+    account_id = json["id"]
 
-    job = Delayed::Job.enqueue QiitaStocks::FetchStocksJob.new(user_id)
+    current_user = User.find(redis.get(:user_id))
+    job = Delayed::Job.enqueue QiitaStocks::FetchStocksJob.new(account_id, current_user)
 
     cookies[:job_id] = { value: job.id, expires: 1.day }
 
