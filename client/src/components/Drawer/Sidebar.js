@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import WorkspaceItem from "../../containers/Drawer/WorkspaceItem";
+import DrawerWorkspaces from "../../containers/Drawer/DrawerWorkspaces";
 import SidebarTask from "./SidebarTask";
 import DrawerMenu from "./DrawerMenu";
 import Drawer from "@material-ui/core/Drawer";
@@ -79,7 +79,7 @@ const Sidebar = () => {
         </IconButton>
       </div>
       <Divider />
-      {workspacesOpen && <WorkspaceItem />}
+      {workspacesOpen && <DrawerWorkspaces />}
       {drawerTask !== null && <SidebarTask />}
       {!workspacesOpen && drawerTask === null && <DrawerMenu />}
     </Drawer>

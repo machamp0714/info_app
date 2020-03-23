@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const WorkspaceItem = ({ createWorkspace }) => {
+const DrawerWorkspaces = ({ createWorkspace }) => {
   const classes = useStyles();
   const { workspaces, handleWorkspaceBack } = useContext(DashboardContext);
   const [name, setName] = useState("");
@@ -86,4 +86,4 @@ const WorkspaceItem = ({ createWorkspace }) => {
   );
 };
 
-export default WorkspaceItem;
+export default DrawerWorkspaces;

@@ -62,6 +62,7 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     user,
     drawerTask,
     workspacesOpen,
+    stocksOpen,
     handleDrawerOpen,
     handleDrawerClose,
     handleSelectWorkspace,
