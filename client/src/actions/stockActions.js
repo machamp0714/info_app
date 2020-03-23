@@ -29,7 +29,7 @@ export const getAuthorizeURL = () => {
 export const checkAsync = jobId => {
   return dispatch => {
     http
-      .get(`/api/check_async?job_id=${jobId}`)
+      .get(`/api/qiita_stocks/check_async?job_id=${jobId}`)
       .then(response => dispatch(getIsAsync(response)))
       .catch(error => dispatch(getIsAsyncError(error)));
   };

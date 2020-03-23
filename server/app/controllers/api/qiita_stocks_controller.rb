@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::QiitaStocksController < ApplicationController
-  def qiita
+  def callback
     render_permission_error unless ENV["QIITA_STATE"] == params[:state]
 
     response = Faraday.post(
