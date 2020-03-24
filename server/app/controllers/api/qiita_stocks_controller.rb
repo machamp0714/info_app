@@ -4,7 +4,7 @@ class Api::QiitaStocksController < ApplicationController
   before_action :authenticate_api_user!, only: %i[index]
 
   def index
-    stocks = current_api_user.qiita_stocks
+    stocks = current_api_user.qiita_stocks.page(params[:page] || 1).per(20)
 
     render json: stocks, status: :ok
   end

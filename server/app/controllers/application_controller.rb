@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
 
+  protect_from_forgery with: :exception if Rails.env.test?
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   def csrf_token
