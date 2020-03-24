@@ -26,6 +26,9 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     if (workspacesOpen) {
       setState({ ...state, workspacesOpen: false });
     }
+    if (stocksOpen) {
+      setState({ ...state, stocksOpen: false });
+    }
     if (drawerTask !== null) {
       setState({ ...state, drawerTask: null });
     }
@@ -38,6 +41,11 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   const handleWorkspaceClick = () => {
     setOpen(true);
     setState({ ...state, workspacesOpen: true });
+  };
+
+  const handleStocksClick = () => {
+    setOpen(true);
+    setState({ ...state, stocksOpen: true });
   };
 
   const handleWorkspaceBack = () => {
@@ -67,6 +75,7 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     handleDrawerClose,
     handleSelectWorkspace,
     handleWorkspaceClick,
+    handleStocksClick,
     handleWorkspaceBack,
     setState,
     setOpen

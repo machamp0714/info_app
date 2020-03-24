@@ -4,7 +4,9 @@ import qiitaIcon from "../../images/qiita.png";
 import DashboardContext from "../../contexts/DashboardContext";
 
 const DrawerMenu = () => {
-  const { open, handleWorkspaceClick } = useContext(DashboardContext);
+  const { open, handleWorkspaceClick, handleStocksClick } = useContext(
+    DashboardContext
+  );
 
   return (
     <ul className="mt-1">
@@ -18,6 +20,7 @@ const DrawerMenu = () => {
         {open && <div className="sidebar-item-content">Workspace</div>}
       </li>
       <li
+        onClick={handleStocksClick}
         className={clsx("sidebar-item d-flex mb-2", {
           "sidebar-item-open": open
         })}

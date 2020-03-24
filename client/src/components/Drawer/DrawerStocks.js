@@ -1,5 +1,7 @@
 import React from "react";
 
-const DrawerStocks = () => {};
+const DrawerStocks = () => {
+  return <div id="stocks">stocks</div>;
+};
 
 export default DrawerStocks;
