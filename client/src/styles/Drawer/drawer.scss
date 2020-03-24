@@ -4,8 +4,13 @@
   font-size: 14px;
 }
 .item-card {
+  background-color: #fff;
   border: 1px solid $border-color;
-  border-radius: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.drag-item {
+  cursor: move;
 }
 .timestamp {
   font-size: 12px;
