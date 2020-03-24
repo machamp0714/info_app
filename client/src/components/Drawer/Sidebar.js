@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import DrawerWorkspaces from "../../containers/Drawer/DrawerWorkspaces";
-import DrawerStocks from "./DrawerStocks";
+import DrawerStocks from "../../containers/Drawer/DrawerStocks";
 import SidebarTask from "./SidebarTask";
 import DrawerMenu from "./DrawerMenu";
 import Drawer from "@material-ui/core/Drawer";
