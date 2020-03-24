@@ -77,6 +77,7 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     handleWorkspaceClick,
     handleStocksClick,
     handleWorkspaceBack,
+    state,
     setState,
     setOpen
   };

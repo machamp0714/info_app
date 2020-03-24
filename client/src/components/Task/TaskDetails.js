@@ -7,9 +7,7 @@ import { ItemTypes } from "../../config/dragTypes";
 import { useDrag } from "react-dnd";
 
 const TaskDetails = ({ task, editTask }) => {
-  const { setOpen, setDrawerTask, setClickedWorkspace } = useContext(
-    DashboardContext
-  );
+  const { setOpen, state, setState } = useContext(DashboardContext);
 
   const [, drag] = useDrag({
     item: { type: ItemTypes.TASK, task: task },
@@ -36,8 +34,11 @@ const TaskDetails = ({ task, editTask }) => {
 
   const handleTaskOpen = () => {
     setOpen(true);
-    setClickedWorkspace(false);
-    setDrawerTask(task);
+    setState({
+      workspacesOpen: false,
+      stocksOpen: false,
+      drawerTask: task
+    });
   };
 
   return (
