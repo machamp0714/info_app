@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 class Api::QiitaStocksController < ApplicationController
-  def qiita
+  before_action :authenticate_api_user!, only: %i[index]
+
+  def index
+    stocks = current_api_user.qiita_stocks
+
+    render json: stocks, status: :ok
+  end
+
+  def callback
     render_permission_error unless ENV["QIITA_STATE"] == params[:state]
 
     response = Faraday.post(

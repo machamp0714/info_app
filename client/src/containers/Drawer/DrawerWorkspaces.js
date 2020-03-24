@@ -1,6 +1,6 @@
 import { getWorkspaces, createWorkspace } from "../../actions/workspaceActions";
 import { connect } from "react-redux";
-import WorkspaceItem from "../../components/Drawer/WorkspaceItem";
+import DrawerWorkspaces from "../../components/Drawer/DrawerWorkspaces";
 
 const mapStateToProps = state => ({
   workspaces: state.workspace.workspaces
@@ -11,4 +11,4 @@ const mapDispatchToProps = dispatch => ({
   createWorkspace: param => dispatch(createWorkspace(param))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkspaceItem);
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerWorkspaces);

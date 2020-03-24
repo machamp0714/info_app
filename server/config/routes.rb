@@ -13,10 +13,14 @@ Rails.application.routes.draw do
         resources :tasks, only: %i[index create update destroy]
       end
     end
+
+    resources :qiita_stocks, only: %i[index] do
+      get "callback", on: :collection
+      get "check_async", on: :collection
+    end
+
     get "github_oauth_url", to: "auth/omniauth_callbacks#github"
     get "qiita_token", to: "access_tokens#qiita_token"
-    get "qiita_callback", to: "qiita_stocks#qiita"
-    get "check_async", to: "qiita_stocks#check_async"
     get "current_user", to: "users#currentuser"
     get "default_workspace", to: "workspaces#default_workspace"
     post "ogp", to: "ogp#ogp"

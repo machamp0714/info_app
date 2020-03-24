@@ -15,6 +15,20 @@ const getIsAsyncError = error => ({
   payload: error
 });
 
+const getStocksLoading = () => ({
+  type: "GET_STOCKS_LOADING"
+});
+
+const getStocksSuccess = response => ({
+  type: "GET_STOCKS_SUCCESS",
+  payload: response.data
+});
+
+const getStocksError = error => ({
+  type: "GET_STOCKS_ERROR",
+  payload: error.response.data
+});
+
 export const getAuthorizeURL = () => {
   return dispatch => {
     http
@@ -29,8 +43,18 @@ export const getAuthorizeURL = () => {
 export const checkAsync = jobId => {
   return dispatch => {
     http
-      .get(`/api/check_async?job_id=${jobId}`)
+      .get(`/api/qiita_stocks/check_async?job_id=${jobId}`)
       .then(response => dispatch(getIsAsync(response)))
       .catch(error => dispatch(getIsAsyncError(error)));
+  };
+};
+
+export const getStocks = () => {
+  return dispatch => {
+    dispatch(getStocksLoading());
+    http
+      .get("/api/qiita_stocks")
+      .then(response => dispatch(getStocksSuccess(response)))
+      .catch(error => dispatch(getStocksError(error)));
   };
 };

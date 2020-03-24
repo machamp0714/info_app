@@ -8,9 +8,14 @@ import DashboardContext from "../../contexts/DashboardContext";
 
 const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
   const [open, setOpen] = useState(false);
-  const [drawerTask, setDrawerTask] = useState(null);
-  const [clickedWorkspace, setClickedWorkspace] = useState(false);
   const [workspace, setWorkspace] = useState(null);
+  const [state, setState] = useState({
+    workspacesOpen: false,
+    stocksOpen: false,
+    drawerTask: null
+  });
+
+  const { workspacesOpen, stocksOpen, drawerTask } = state;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -18,11 +23,14 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
 
   const handleDrawerClose = () => {
     setOpen(false);
-    if (clickedWorkspace) {
-      setClickedWorkspace(false);
+    if (workspacesOpen) {
+      setState({ ...state, workspacesOpen: false });
+    }
+    if (stocksOpen) {
+      setState({ ...state, stocksOpen: false });
     }
     if (drawerTask !== null) {
-      setDrawerTask(null);
+      setState({ ...state, drawerTask: null });
     }
   };
 
@@ -32,11 +40,20 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
 
   const handleWorkspaceClick = () => {
     setOpen(true);
-    setClickedWorkspace(true);
+    setState({ ...state, workspacesOpen: true });
+  };
+
+  const handleStocksClick = () => {
+    setOpen(true);
+    setState({ ...state, stocksOpen: true });
   };
 
   const handleWorkspaceBack = () => {
-    setClickedWorkspace(false);
+    setState({ ...state, workspacesOpen: false });
+  };
+
+  const handleStocksBack = () => {
+    setState({ ...state, stocksOpen: false });
   };
 
   useEffect(() => {
@@ -56,14 +73,17 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     isLoading,
     user,
     drawerTask,
-    clickedWorkspace,
+    workspacesOpen,
+    stocksOpen,
     handleDrawerOpen,
     handleDrawerClose,
     handleSelectWorkspace,
     handleWorkspaceClick,
+    handleStocksClick,
     handleWorkspaceBack,
-    setDrawerTask,
-    setClickedWorkspace,
+    handleStocksBack,
+    state,
+    setState,
     setOpen
   };
 

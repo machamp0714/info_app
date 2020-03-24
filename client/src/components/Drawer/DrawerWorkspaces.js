@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const WorkspaceItem = ({ createWorkspace }) => {
+const DrawerWorkspaces = ({ createWorkspace }) => {
   const classes = useStyles();
   const { workspaces, handleWorkspaceBack } = useContext(DashboardContext);
   const [name, setName] = useState("");
@@ -49,7 +49,7 @@ const WorkspaceItem = ({ createWorkspace }) => {
 
   return (
     <>
-      <div className="mt-1 mb-1 p-1">
+      <div className="mb-1 p-1">
         <span
           onClick={handleWorkspaceBack}
           className="text-gray under-decoration mb-1 d-inline-block back-link"
@@ -74,8 +74,7 @@ const WorkspaceItem = ({ createWorkspace }) => {
         </form>
       </div>
       <Divider />
-      <div className="p-1">
-        <div className="text-gray drawer-menu-head">workspaces</div>
+      <div className="p-1 overflow-y">
         <ul className="mt-1">
           {workspaces.map(workspace => (
             <WorkspaceDetails key={workspace.id} workspace={workspace} />
@@ -86,4 +85,4 @@ const WorkspaceItem = ({ createWorkspace }) => {
   );
 };
 
-export default WorkspaceItem;
+export default DrawerWorkspaces;
