@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import StocksDetails from "./StockDetails";
+import ProgressBar from "../Layout/ProgressBar";
 import DashboardContext from "../../contexts/DashboardContext";
 
 const DrawerStocks = ({ isLoading, stocks, getStocks }) => {
@@ -12,7 +13,9 @@ const DrawerStocks = ({ isLoading, stocks, getStocks }) => {
   return (
     <>
       {isLoading ? (
-        <div>loading</div>
+        <div className="mt-2 center">
+          <ProgressBar />
+        </div>
       ) : (
         <ul className="mb-1 p-1 overflow-y">
           <span
