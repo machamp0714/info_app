@@ -17,17 +17,21 @@ const DrawerStocks = ({ isLoading, stocks, getStocks }) => {
           <ProgressBar />
         </div>
       ) : (
-        <ul className="mb-1 p-1 overflow-y">
-          <span
-            onClick={handleStocksBack}
-            className="text-gray under-decoration mb-1 d-inline-block back-link"
-          >
-            Back
-          </span>
-          {stocks.map(stock => (
-            <StocksDetails key={stock.id} stock={stock} />
-          ))}
-        </ul>
+        <>
+          <div className="pl-1 pr-1 mt-1">
+            <span
+              onClick={handleStocksBack}
+              className="text-gray under-decoration mb-1 d-inline-block back-link"
+            >
+              Back
+            </span>
+          </div>
+          <ul className="overflow-y pl-1 pr-1">
+            {stocks.map(stock => (
+              <StocksDetails key={stock.id} stock={stock} />
+            ))}
+          </ul>
+        </>
       )}
     </>
   );
