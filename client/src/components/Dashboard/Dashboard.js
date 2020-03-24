@@ -52,6 +52,10 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     setState({ ...state, workspacesOpen: false });
   };
 
+  const handleStocksBack = () => {
+    setState({ ...state, stocksOpen: false });
+  };
+
   useEffect(() => {
     getWorkspaces();
   }, [getWorkspaces]);
@@ -77,6 +81,7 @@ const Dashboard = ({ workspaces, isLoading, user, getWorkspaces }) => {
     handleWorkspaceClick,
     handleStocksClick,
     handleWorkspaceBack,
+    handleStocksBack,
     state,
     setState,
     setOpen
