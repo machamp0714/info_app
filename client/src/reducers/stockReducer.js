@@ -1,6 +1,7 @@
 const initState = {
   url: "",
   isAsync: "",
+  isLoading: false,
   stocks: []
 };
 
@@ -15,6 +16,22 @@ const stockReducer = (state = initState, action) => {
       };
     case "CHECK_ASYNC_ERROR":
       return state;
+    case "GET_STOCKS_LOADING":
+      return {
+        ...state,
+        isLoading: true
+      };
+    case "GET_STOCKS_SUCCESS":
+      return {
+        ...state,
+        isLoading: false,
+        stocks: action.payload
+      };
+    case "GET_STOCKS_ERROR":
+      return {
+        ...state,
+        isLoading: false
+      };
     default:
       return state;
   }
