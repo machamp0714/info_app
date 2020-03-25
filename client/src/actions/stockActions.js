@@ -21,12 +21,13 @@ const getStocksLoading = () => ({
 
 const getStocksSuccess = response => ({
   type: "GET_STOCKS_SUCCESS",
-  payload: response.data
+  payload: response.data.qiita_stocks,
+  meta: response.data.meta.pagination
 });
 
 const getStocksError = error => ({
   type: "GET_STOCKS_ERROR",
-  payload: error.response.data
+  payload: error
 });
 
 export const getAuthorizeURL = () => {

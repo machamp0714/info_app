@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
   isLoading: state.stock.isLoading,
-  stocks: state.stock.stocks
+  stocks: state.stock.stocks,
+  pagination: state.stock.pagination
 });
 
 const mapDispatchToProps = dispatch => ({

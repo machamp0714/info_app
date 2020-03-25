@@ -2,7 +2,8 @@ const initState = {
   url: "",
   isAsync: "",
   isLoading: false,
-  stocks: []
+  stocks: [],
+  pagination: {}
 };
 
 const stockReducer = (state = initState, action) => {
@@ -25,7 +26,8 @@ const stockReducer = (state = initState, action) => {
       return {
         ...state,
         isLoading: false,
-        stocks: action.payload
+        stocks: action.payload,
+        pagination: action.meta
       };
     case "GET_STOCKS_ERROR":
       return {
