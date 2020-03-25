@@ -6,7 +6,7 @@ class Api::QiitaStocksController < ApplicationController
   def index
     stocks = current_api_user.qiita_stocks.page(params[:page] || 1).per(20)
 
-    render json: stocks, status: :ok
+    render json: stocks, meta: pagination(stocks), adapter: :json, status: :ok
   end
 
   def callback

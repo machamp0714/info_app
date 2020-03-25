@@ -14,6 +14,19 @@ class ApplicationController < ActionController::Base
     head :no_content
   end
 
+  protected
+
+  def pagination(records)
+    {
+      pagination: {
+        total_pages: records.total_pages,
+        current_page: records.current_page,
+        next_page: records.next_page,
+        prev_page: records.prev_page
+      }
+    }
+  end
+
   private
 
   def render_errors(model, data = nil)
