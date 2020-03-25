@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
     {
       pagination: {
         total_pages: records.total_pages,
+        total_count: records.total_count,
         current_page: records.current_page,
         next_page: records.next_page,
         prev_page: records.prev_page
