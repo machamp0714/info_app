@@ -5,12 +5,27 @@ class ApplicationController < ActionController::Base
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
 
+  protect_from_forgery with: :exception if Rails.env.test?
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   def csrf_token
     cookies["CSRF_TOKEN"] = form_authenticity_token
 
     head :no_content
+  end
+
+  protected
+
+  def pagination(records)
+    {
+      pagination: {
+        total_pages: records.total_pages,
+        total_count: records.total_count,
+        current_page: records.current_page,
+        next_page: records.next_page,
+        prev_page: records.prev_page
+      }
+    }
   end
 
   private
