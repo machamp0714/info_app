@@ -26,10 +26,24 @@ RSpec.describe "QiitaStocks", type: :request do
       it "returns proper json body" do
         get_stocks
 
-        expect(json).to include(
+        expect(json["qiita_stocks"]).to include(
           "id" => stocks[0]["id"],
           "title" => stocks[0]["title"],
           "url" => stocks[0]["url"]
+        )
+      end
+
+      it "returns pagination meta" do
+        get_stocks
+
+        expect(json["meta"]).to eq(
+          "pagination" => {
+            "total_pages" => 1,
+            "total_count" => 10,
+            "current_page" => 1,
+            "next_page" => nil,
+            "prev_page" => nil
+          }
         )
       end
     end
