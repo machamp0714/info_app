@@ -15,10 +15,11 @@ const DrawerStocks = () => {
     currentPage: 1,
     nextPage: null,
     prevPage: null,
-    totalCount: null
+    totalCount: null,
+    totalPages: null
   });
 
-  const { currentPage, nextPage, prevPage, totalCount } = pagination;
+  const { currentPage, nextPage, prevPage, totalCount, totalPages } = pagination;
 
   useEffect(() => {
     const getStocks = async () => {
@@ -30,7 +31,8 @@ const DrawerStocks = () => {
         currentPage: response.data.meta.pagination.current_page,
         nextPage: response.data.meta.pagination.next_page,
         prevPage: response.data.meta.pagination.prev_page,
-        totalCount: response.data.meta.pagination.total_count
+        totalCount: response.data.meta.pagination.total_count,
+        totalPages: response.data.meta.pagination.total_pages
       });
     };
 
@@ -60,6 +62,8 @@ const DrawerStocks = () => {
     } else {
       if (currentPage === 1) {
         return `${total} 1~20 のストックを表示しています`;
+      } else if (currentPage === totalPages) {
+        return `${total} ${totalCount - stocks.length + 1}~${totalCount} のストックを表示しています`
       } else {
         const start = (currentPage - 1) * 20 + 1;
         const end = start + 20 - 1;
