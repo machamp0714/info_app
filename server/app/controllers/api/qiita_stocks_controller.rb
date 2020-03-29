@@ -12,24 +12,14 @@ class Api::QiitaStocksController < ApplicationController
   def callback
     render_permission_error unless ENV["QIITA_STATE"] == params[:state]
 
-    response = Faraday.post(
-      "https://qiita.com/api/v2/access_tokens",
-      data(params[:code]).to_s,
-      "Content-Type" => "application/json"
-    )
-    json = JSON.parse(response.body)
-    token = json["token"]
+    response = client.get_token(data(params[:code]).to_s)
+    token = parse(response.body, "token")
 
-    conn = Faraday.new(
-      "https://qiita.com",
-      headers: { "Authorization" => "Bearer #{token}" }
-    )
-    response = conn.get("/api/v2/authenticated_user")
-    json = JSON.parse(response.body)
-    account_id = json["id"]
+    response = client(token).get_user
+    account_id = parse(response.body, "id")
 
     current_user = User.find(redis.get(:user_id))
-    job = Delayed::Job.enqueue QiitaStocks::FetchStocksJob.new(account_id, current_user)
+    job = Delayed::Job.enqueue fetch_stocks_job(account_id, current_user)
 
     cookies[:job_id] = { value: job.id, expires: 1.day }
 
@@ -50,6 +40,18 @@ class Api::QiitaStocksController < ApplicationController
   end
 
   private
+
+  def client(token = nil)
+    Api::Client::Qiita.new(token)
+  end
+
+  def fetch_stocks_job(account_id, user)
+    QiitaStocks::FetchStocksJob.new(account_id, user)
+  end
+
+  def parse(body, key)
+    JSON.parse(body)[key]
+  end
 
   def data(code)
     {
