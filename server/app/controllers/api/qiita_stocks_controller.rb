@@ -12,19 +12,11 @@ class Api::QiitaStocksController < ApplicationController
   def callback
     render_permission_error unless ENV["QIITA_STATE"] == params[:state]
 
-    response = Faraday.post(
-      "https://qiita.com/api/v2/access_tokens",
-      data(params[:code]).to_s,
-      "Content-Type" => "application/json"
-    )
+    response = client.get_token(data(params[:code]).to_s)
     json = JSON.parse(response.body)
     token = json["token"]
 
-    conn = Faraday.new(
-      "https://qiita.com",
-      headers: { "Authorization" => "Bearer #{token}" }
-    )
-    response = conn.get("/api/v2/authenticated_user")
+    response = client(token).get_user
     json = JSON.parse(response.body)
     account_id = json["id"]
 
@@ -50,6 +42,10 @@ class Api::QiitaStocksController < ApplicationController
   end
 
   private
+
+  def client(token = nil)
+    Api::Client::Qiita.new(token)
+  end
 
   def data(code)
     {
