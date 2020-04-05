@@ -12,19 +12,15 @@ class Api::QiitaStocksController < ApplicationController
   def callback
     render_permission_error unless ENV["QIITA_STATE"] == params[:state]
 
-    response = client.get_token(data(params[:code]).to_s)
-    token = parse(response.body, "token")
-
-    response = client(token).get_user
-    account_id = parse(response.body, "id")
+    token = client.get_token(data(params[:code]).to_s).body.fetch("token")
+    account_id = client(token).get_user.body.fetch("id")
 
     current_user = User.find(redis.get(:user_id))
     job = Delayed::Job.enqueue fetch_stocks_job(account_id, current_user)
 
     cookies[:job_id] = { value: job.id, expires: 1.day }
 
-    user = User.find(redis.get(:user_id).to_i)
-    redirect_to "#{ENV['SERVER_HOST']}/#{user.name}/settings"
+    redirect_to "#{ENV['SERVER_HOST']}/#{current_user.name}/settings"
   end
 
   def check_async
@@ -47,10 +43,6 @@ class Api::QiitaStocksController < ApplicationController
 
   def fetch_stocks_job(account_id, user)
     QiitaStocks::FetchStocksJob.new(account_id, user)
-  end
-
-  def parse(body, key)
-    JSON.parse(body)[key]
   end
 
   def data(code)
