@@ -13,11 +13,17 @@ module QiitaStocks
         break if stocks.length.zero?
 
         stocks.each do |stock|
-          items << user.qiita_stocks.build(title: stock["title"], url: stock["url"])
+          next if qiita_stocks.exists?(title: stock["title"])
+
+          items << qiita_stocks.build(title: stock["title"], url: stock["url"])
         end
         page += 1
       end
       QiitaStock.import items
+    end
+
+    def qiita_stocks
+      user.qiita_stocks
     end
   end
 end
