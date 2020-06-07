@@ -9,7 +9,7 @@ const DrawerMenu = () => {
   );
 
   return (
-    <ul className="mt-1">
+    <ul>
       <li
         onClick={handleWorkspaceClick}
         className={clsx("sidebar-item d-flex mb-2", {
