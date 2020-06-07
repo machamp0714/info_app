@@ -38,11 +38,10 @@ const useStyles = makeStyles(theme => ({
   },
   toolbar: {
     display: "flex",
-    height: 70,
+    minHeight: 40,
     alignItems: "center",
     justifyContent: "flex-end",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar
+    padding: theme.spacing(0, 1)
   }
 }));
 
@@ -83,7 +82,6 @@ const Sidebar = () => {
           )}
         </IconButton>
       </div>
-      <Divider />
       {workspacesOpen && <DrawerWorkspaces />}
       {stocksOpen && <DrawerStocks />}
       {drawerTask !== null && <SidebarTask />}

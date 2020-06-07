@@ -14,7 +14,7 @@ const drawerWidth = 400;
 const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    height: 70,
+    height: 40,
     backgroundColor: "#172b4d",
     boxShadow: "none",
     transition: theme.transitions.create(["width", "margin"], {
@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme => ({
     })
   },
   navItem: {
-    paddingRight: 30
+    paddingRight: 30,
+    minHeight: 40
   },
   appBarShift: {
     marginLeft: drawerWidth,

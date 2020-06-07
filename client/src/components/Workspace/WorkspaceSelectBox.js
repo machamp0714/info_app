@@ -7,7 +7,7 @@ const CssTextField = withStyles({
   root: {
     backgroundColor: "#fff",
     borderRadius: 4,
-    minWidth: 250,
+    minWidth: 200,
     "& .MuiFilledInput-root": {
       backgroundColor: "#fff",
       borderRadius: 4,
@@ -16,7 +16,7 @@ const CssTextField = withStyles({
       }
     },
     "& .MuiFilledInput-input": {
-      padding: 12
+      padding: 12,
     },
     "& .MuiFilledInput-underline": {
       "&:before": {
